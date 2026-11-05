@@ -164,9 +164,12 @@ body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-a
 .hero-roof path { fill: none; stroke: rgb(90 162 234 / .35); stroke-width: 1.5; stroke-dasharray: 2600; stroke-dashoffset: 2600; animation: draw 2.4s cubic-bezier(.6,.1,.2,1) .3s forwards; }
 @keyframes draw { to { stroke-dashoffset: 0; } }
 .hero .wrap { position: relative; z-index: 2; padding-block: clamp(80px, 12vw, 168px) clamp(120px, 14vw, 190px); }
-.hero-copy { display: grid; gap: 26px; max-width: 44rem; }
+.hero-copy { display: grid; gap: 26px; max-width: 58rem; }
+.hero h1 { font-size: clamp(2.3rem, 4.6vw, 3.7rem); }
+.hero-lead { max-width: 40rem !important; }
 .hero h1 .blue, .hero h1 .hl { display: block; }
 .hero h1 .kicker { display: flex; margin-bottom: 26px; line-height: 1.4; }
+.hero-sub { font-family: var(--font-head); font-weight: 700; font-size: clamp(1.15rem, 1.8vw, 1.4rem); color: #fff; margin-bottom: -10px; }
 .hero-lead { font-size: clamp(1.1rem, 1.6vw, 1.3rem); color: #d4deea; max-width: 34rem; }
 .promises { list-style: none; padding: 0; display: flex; flex-wrap: wrap; gap: 10px 28px; font-family: var(--font-head); font-weight: 600; font-size: .95rem; }
 .promises li { display: flex; align-items: center; gap: 10px; }
@@ -189,7 +192,7 @@ body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-a
 .trustcard .inner { background: #fff; border-radius: var(--r); box-shadow: var(--shadow); display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); }
 .tc { padding: 26px 28px; display: grid; grid-template-columns: 48px minmax(0, 1fr); gap: 16px; align-items: center; border-right: 1px solid var(--line); min-width: 0; }
 .tc:last-child { border-right: 0; }
-.tc b { font-family: var(--font-head); font-size: 1.02rem; line-height: 1.3; display: block; color: var(--navy); margin-bottom: 2px; white-space: nowrap; }
+.tc b { font-family: var(--font-head); font-size: 1.02rem; line-height: 1.3; display: block; color: var(--navy); margin-bottom: 2px; }
 .tc span { color: var(--muted); font-size: .92rem; line-height: 1.4; display: block; }
 .tci { width: 48px; height: 48px; border-radius: 50%; background: var(--blue-pale); display: grid !important; place-items: center; }
 .tci svg { width: 24px; height: 24px; stroke: var(--blue); fill: none; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
@@ -205,6 +208,7 @@ body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-a
 .statement > * { min-width: 0; }
 .statement blockquote { margin: 0; font-family: var(--font-head); font-weight: 700; font-size: clamp(1.45rem, 3vw, 2.35rem); line-height: 1.3; letter-spacing: -.01em; text-wrap: balance; }
 .statement blockquote em { font-style: normal; color: var(--blue); background: linear-gradient(transparent 62%, var(--blue-pale) 62%); }
+.statement-text { margin-top: 22px; color: var(--muted); font-size: 1.1rem; max-width: 46rem; }
 .statement .sig { margin-top: 26px; display: flex; gap: 14px; align-items: center; color: var(--muted); font-size: .95rem; }
 .statement .sig .ph-sig { width: 56px; height: 56px; border-radius: 50%; border: 1px dashed var(--ph); background: var(--ph-bg); flex: none; display: grid; place-items: center; font-size: .6rem; color: var(--ph); text-align: center; }
 .statement .sig b { color: var(--ink); font-family: var(--font-head); display: block; }
@@ -226,7 +230,8 @@ body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-a
 .tile .roofline path { fill: none; stroke: var(--blue-light); stroke-width: 3; }
 .tile:hover .roofline { opacity: 1; }
 @media (max-width: 1100px) { .tiles { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
-@media (max-width: 620px) { .tiles { grid-template-columns: 1fr; } .tile { padding: 24px 20px; grid-template-columns: 48px minmax(0, 1fr); } .tile .ico { width: 44px; height: 44px; } }
+@media (max-width: 820px) { .tiles { grid-template-columns: 1fr; } }
+@media (max-width: 620px) { .tile { padding: 24px 20px; grid-template-columns: 48px minmax(0, 1fr); } .tile .ico { width: 44px; height: 44px; } }
 
 /* Foto-Text-Wechsel mit Maßkette und Messpunkten */
 .zig { display: grid; gap: clamp(72px, 10vw, 140px); }
@@ -262,9 +267,14 @@ body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-a
 /* Leistungs- und Ortsseiten */
 .reach { display: inline-flex; align-items: center; gap: 8px; font-family: var(--font-head); font-weight: 600; font-size: .9rem !important; color: var(--blue-light) !important; letter-spacing: .02em; }
 .reach svg { width: 16px; height: 16px; stroke: currentColor; fill: none; stroke-width: 2; }
-.intro-grid { display: grid; grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr); gap: clamp(32px, 6vw, 96px); align-items: start; }
+.intro-grid { display: grid; grid-template-columns: minmax(0, 1.7fr) minmax(0, 1fr); gap: clamp(32px, 6vw, 96px); align-items: start; }
 .intro-text { display: grid; gap: 18px; }
 .intro-text p { color: #2f3d50; font-size: 1.1rem; }
+.intro-text .isec { display: grid; gap: 14px; padding-bottom: 28px; border-bottom: 1px solid var(--line); }
+.intro-text .isec:last-child { border-bottom: 0; padding-bottom: 0; }
+.intro-text .isec h2 { font-size: clamp(1.3rem, 2.2vw, 1.7rem); }
+.intro-text .isec:not(:first-child) { padding-top: 10px; }
+.tagline { font-family: var(--font-head); font-weight: 700; font-size: clamp(1.1rem, 1.8vw, 1.35rem) !important; color: #fff !important; margin-top: -6px; }
 .intro-text p.first { font-family: var(--font-head); font-weight: 600; font-size: clamp(1.2rem, 2vw, 1.45rem); line-height: 1.45; color: var(--ink); }
 .facts-box { background: var(--navy); color: #fff; border-radius: var(--r); padding: 28px; display: grid; gap: 18px; position: sticky; top: 110px; }
 .facts-box h3 { font-size: 1.05rem; }
@@ -299,7 +309,7 @@ body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-a
 .proto-top b { font-family: var(--font-head); font-size: 1.05rem; }
 .proto-top small { grid-column: 1 / -1; color: var(--on-navy-muted); font-size: .8rem; margin-top: 2px; }
 .proto-list { list-style: none; padding: 6px 26px; margin: 0; }
-.proto-list li { display: grid; grid-template-columns: 34px minmax(0, 1fr) auto; gap: 16px; align-items: center; padding: 16px 0; border-bottom: 1px dashed var(--line); }
+.proto-list li { display: grid; grid-template-columns: 34px minmax(0, 1fr); gap: 16px; align-items: center; padding: 16px 0; border-bottom: 1px dashed var(--line); }
 .proto-list li:last-child { border-bottom: 0; }
 .proto-list .box { width: 30px; height: 30px; border: 2px solid var(--navy); border-radius: 4px; display: grid; place-items: center; transition: background .25s; }
 .proto-list .box svg { width: 20px; height: 20px; stroke: var(--blue); fill: none; stroke-width: 3; }
@@ -360,9 +370,9 @@ body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-a
 
 /* Unterseiten */
 .page-hero { background: var(--navy); color: #fff; position: relative; overflow: hidden; }
-.page-hero .wrap { display: grid; grid-template-columns: 1.25fr 1fr; gap: clamp(32px, 5vw, 72px); align-items: center; padding-block: clamp(48px, 7vw, 96px); position: relative; }
+.page-hero .wrap { display: grid; grid-template-columns: 1.45fr 1fr; gap: clamp(32px, 5vw, 72px); align-items: center; padding-block: clamp(48px, 7vw, 96px); position: relative; }
 .page-hero .wrap > * { min-width: 0; }
-.page-hero h1 { font-size: clamp(2rem, 4.2vw, 3.1rem); }
+.page-hero h1 { font-size: clamp(1.9rem, 3.6vw, 2.8rem); }
 .page-hero-copy { display: grid; gap: 20px; }
 .page-hero-copy p { color: #d4deea; font-size: 1.15rem; }
 .page-hero .zmedia::after { border-color: rgb(90 162 234 / .6); }
@@ -497,7 +507,7 @@ main { overflow-x: clip; }
       </div>
       <a href="#ueber-mich" data-nav="ueber-mich">Über mich</a>
       <a href="#kontakt" data-nav="kontakt">Kontakt</a>
-      <a class="header-phone" href="tel:+4915112778858"><svg aria-hidden="true"><use href="#i-phone"/></svg>0151 12778858</a>
+      <a class="header-phone" href="tel:+491796933684"><svg aria-hidden="true"><use href="#i-phone"/></svg>0179 6933684</a>
       <a class="btn btn--primary" href="#kontakt">Termin vereinbaren</a>
     </nav>
     <button class="burger" type="button" id="burger" aria-label="Menü öffnen" aria-expanded="false"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 7h18M3 12h18M9 17h12"/></svg></button>
@@ -516,7 +526,7 @@ main { overflow-x: clip; }
     <a href="#kontakt">Kontakt</a>
   </nav>
   <div class="mnav-cta">
-    <a class="btn btn--outline-light" href="tel:+4915112778858"><svg aria-hidden="true"><use href="#i-phone"/></svg>Anrufen</a>
+    <a class="btn btn--outline-light" href="tel:+491796933684"><svg aria-hidden="true"><use href="#i-phone"/></svg>Anrufen</a>
     <a class="btn btn--primary" href="#kontakt"><svg aria-hidden="true"><use href="#i-cal"/></svg>Termin</a>
   </div>
 </div>
@@ -533,8 +543,9 @@ main { overflow-x: clip; }
       <svg class="hero-roof" viewBox="0 0 1440 800" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><path d="M720 640 L1100 400 L1480 640"/></svg>
       <div class="wrap">
         <div class="hero-copy">
-          <h1><span class="kicker">Bausachverständiger für das Münsterland</span> <span class="hl">Jeder Schaden hat eine Ursache.</span> <span class="blue">Ich finde sie.</span></h1>
-          <p class="hero-lead">Unabhängige Gutachten, Hauskaufberatung und Schadensanalyse in Borken, Bocholt, Ahaus, Coesfeld und dem ganzen Münsterland. Von einem Maurer- und Stahlbetonbaumeister, der Gebäude von der Baustelle aus kennt.</p>
+          <h1><span class="kicker">Bausachverständiger für Münsterland und Ruhrgebiet</span> <span class="hl">Der Sache auf den Grund.</span> <span class="blue">Für Sie auf den Punkt.</span></h1>
+          <p class="hero-sub">Gebäudeschäden verstehen. Fundierte Entscheidungen treffen.</p>
+          <p class="hero-lead">Unabhängige Gutachten, Haus- und Wohnungskaufberatung, Schadensanalyse, Baubegleitung und Bauberatung, verständlich erklärt und fachlich fundiert.</p>
           <ul class="promises">
             <li><svg aria-hidden="true"><use href="#i-check"/></svg>Unabhängig</li>
             <li><svg aria-hidden="true"><use href="#i-check"/></svg>TÜV-zertifiziert</li>
@@ -554,9 +565,9 @@ main { overflow-x: clip; }
       <div class="wrap">
         <div class="inner">
           <div class="tc tc--seal"><span class="seal-ph">TÜV-Siegel</span><div><b>TÜV-zertifiziert</b><span>persCert TÜV Rheinland</span></div></div>
-          <div class="tc"><span class="tci"><svg aria-hidden="true"><use href="#i-meister"/></svg></span><div><b>Meister vom Bau</b><span>Maurer und Stahlbeton</span></div></div>
+          <div class="tc"><span class="tci"><svg aria-hidden="true"><use href="#i-meister"/></svg></span><div><b>Meisterbrief</b><span>Maurer und Stahlbeton</span></div></div>
           <div class="tc"><span class="tci"><svg aria-hidden="true"><use href="#i-clock"/></svg></span><div><b>Schnell vor Ort</b><span>Termin in 48 Std.</span></div></div>
-          <div class="tc"><span class="tci"><svg aria-hidden="true"><use href="#i-pin"/></svg></span><div><b>Ganzes Münsterland</b><span>ab Borken</span></div></div>
+          <div class="tc"><span class="tci"><svg aria-hidden="true"><use href="#i-pin"/></svg></span><div><b>Münsterland und Ruhrgebiet</b><span>Sitz in Borken</span></div></div>
         </div>
       </div>
     </div>
@@ -565,8 +576,9 @@ main { overflow-x: clip; }
       <div class="wrap statement">
         <span class="kicker">Mein Anspruch</span>
         <div>
-          <blockquote>Ich habe das Bauen selbst gelernt. Deshalb weiß ich, <em>wo Gebäude Schaden nehmen</em>, und erkläre Ihnen verständlich, was zu tun ist.</blockquote>
-          <div class="sig"><span class="ph-sig">Foto</span><div><b>André Niewerth</b>Maurer- und Stahlbetonbaumeister, Sachverständiger für Schäden an Gebäuden</div></div>
+          <blockquote>Mit fundiertem Fachwissen und langjähriger Baupraxis <em>gehe ich Schäden auf den Grund</em>. Ich erläutere Ihnen die Zusammenhänge verständlich und zeige auf, welche Maßnahmen sinnvoll und erforderlich sind.</blockquote>
+          <p class="statement-text">Als Maurer- und Stahlbetonbaumeister und Sachverständiger für Schäden an Gebäuden verbinde ich fachliche Kompetenz mit langjähriger Praxis als Bauleiter im Hochbau, im schlüsselfertigen Wohnungsbau und beim Bauen im Bestand.</p>
+          <div class="sig"><span class="ph-sig">Foto</span><div><b>André Niewerth</b>TÜV-zertifizierter Sachverständiger für Schäden an Gebäuden · Geprüfter Betriebswirt (HwO) · Maurer- und Stahlbetonbaumeister</div></div>
         </div>
       </div>
     </section>
@@ -668,8 +680,8 @@ main { overflow-x: clip; }
       <div class="wrap area">
         <div class="area-copy">
           <span class="kicker">Einsatzgebiet</span>
-          <h2>Bausachverständiger für das Münsterland und den Kreis Borken</h2>
-          <p>Mein Büro liegt in Borken. Von hier aus bin ich schnell bei Ihnen vor Ort, ob in Bocholt, Rhede, Ahaus oder Coesfeld. Für Gutachten bei Bauschäden, Hauskaufberatung und Baubegleitung komme ich auch ins übrige Münsterland und nach Absprache in ganz NRW. <span class="ph">[Umfang bestätigen]</span></p>
+          <h2>Bausachverständiger für das Münsterland und das Ruhrgebiet</h2>
+          <p>Mein Büro liegt in Borken. Von hier aus bin ich schnell bei Ihnen vor Ort, ob in Bocholt, Ahaus und Coesfeld oder in Dorsten, Bottrop und Gelsenkirchen. Das Münsterland und das Ruhrgebiet liegen direkt vor meiner Haustür. <span class="ph">[Umfang bestätigen]</span></p>
           <a class="btn btn--outline" href="#kontakt">Ortstermin anfragen <span class="arrow">→</span></a>
         </div>
         <ul class="towns" id="towns" aria-label="Orte im Einsatzgebiet"></ul>
@@ -714,9 +726,9 @@ main { overflow-x: clip; }
           <p><span class="ph">[Text über mich: Werdegang, wie lange auf dem Bau, warum Sachverständiger, was Ihnen bei der Arbeit wichtig ist. Schreiben Sie selbst.]</span></p>
           <div class="quals">
             <div class="qual"><span class="qi"><svg aria-hidden="true"><use href="#i-cert"/></svg></span><div><b>Sachverständiger für Schäden an Gebäuden</b><small>zertifiziert durch persCert TÜV Rheinland</small></div></div>
-            <div class="qual"><span class="qi"><svg aria-hidden="true"><use href="#i-meister"/></svg></span><div><b>Maurer- und Stahlbetonbaumeister</b><small>Meisterbrief der Handwerkskammer</small></div></div>
             <div class="qual"><span class="qi"><svg aria-hidden="true"><use href="#i-bw"/></svg></span><div><b>Geprüfter Betriebswirt (HwO)</b><small>nach der Handwerksordnung</small></div></div>
-            <div class="qual"><span class="qi"><svg aria-hidden="true"><use href="#i-site"/></svg></span><div><b>Bauleitung</b><small>Praxis in der Leitung von Bauvorhaben</small></div></div>
+            <div class="qual"><span class="qi"><svg aria-hidden="true"><use href="#i-meister"/></svg></span><div><b>Maurer- und Stahlbetonbaumeister</b><small>Meisterbrief der Handwerkskammer</small></div></div>
+            <div class="qual"><span class="qi"><svg aria-hidden="true"><use href="#i-site"/></svg></span><div><b>Bauleitung</b><small>Hochbau, schlüsselfertiger Wohnungsbau und Bauen im Bestand</small></div></div>
           </div>
           <div class="seal-ph seal-big">Original-Prüfzeichen persCert TÜV Rheinland (mit QR-Code)</div>
         </div>
@@ -737,7 +749,7 @@ main { overflow-x: clip; }
     <section class="section section--soft">
       <div class="wrap contact-grid">
         <div class="ccards">
-          <div class="ccard"><span class="qi"><svg aria-hidden="true"><use href="#i-phone"/></svg></span><div><small>Telefon</small><b>0151 12778858</b></div></div>
+          <div class="ccard"><span class="qi"><svg aria-hidden="true"><use href="#i-phone"/></svg></span><div><small>Telefon</small><b>0179 6933684</b></div></div>
           <div class="ccard"><span class="qi"><svg aria-hidden="true"><use href="#i-mail"/></svg></span><div><small>E-Mail</small><b><span class="ph">info@bsv-niewerth.de</span></b></div></div>
           <div class="ccard"><span class="qi"><svg aria-hidden="true"><use href="#i-pin"/></svg></span><div><small>Büro</small><b>Propst-Pricking-Str. 16, 46325 Borken</b></div></div>
           <div class="ccard"><span class="qi"><svg aria-hidden="true"><use href="#i-clock"/></svg></span><div><small>Erreichbarkeit</small><b><span class="ph">[z. B. Mo–Fr 8–18 Uhr]</span></b></div></div>
@@ -772,7 +784,7 @@ main { overflow-x: clip; }
       <h2>Angaben gemäß § 5 DDG</h2>
       <p>BSV Niewerth – Bau-Sachverständigenbüro<br>Inhaber: André Niewerth<br>Propst-Pricking-Str. 16<br>46325 Borken</p>
       <h2>Kontakt</h2>
-      <p>Telefon: 0151 12778858<br>E-Mail: <span class="ph">info@bsv-niewerth.de</span></p>
+      <p>Telefon: 0179 6933684<br>E-Mail: <span class="ph">info@bsv-niewerth.de</span></p>
       <h2>Umsatzsteuer</h2>
       <p>Umsatzsteuer-Identifikations&shy;nummer gemäß § 27a UStG: <span class="ph">[DE …, falls vorhanden, sonst Abschnitt streichen]</span></p>
       <h2>Berufsbezeichnung und berufsrechtliche Regelungen</h2>
@@ -793,7 +805,7 @@ main { overflow-x: clip; }
     <section class="section"><div class="wrap prose">
       <p class="note">Gliederung und Mustertext für eine Seite ohne Tracking und ohne Cookies, mit Kontaktformular und Hosting bei IONOS. Vor der Veröffentlichung mit einem Datenschutz-Generator vervollständigen oder rechtlich prüfen lassen, insbesondere sobald Plugins, Karten oder Videos von Drittanbietern dazukommen.</p>
       <h2>1. Verantwortlicher</h2>
-      <p>André Niewerth, BSV Niewerth – Bau-Sachverständigenbüro, Propst-Pricking-Str. 16, 46325 Borken, Telefon 0151 12778858, E-Mail <span class="ph">info@bsv-niewerth.de</span>.</p>
+      <p>André Niewerth, BSV Niewerth – Bau-Sachverständigenbüro, Propst-Pricking-Str. 16, 46325 Borken, Telefon 0179 6933684, E-Mail <span class="ph">info@bsv-niewerth.de</span>.</p>
       <h2>2. Hosting</h2>
       <p>Diese Website wird bei der IONOS SE, Elgendorfer Str. 57, 56410 Montabaur gehostet. Beim Aufruf der Seite verarbeitet der Hoster technisch notwendige Daten wie IP-Adresse, Datum und Uhrzeit, aufgerufene Seite und Browsertyp in Server-Logfiles. Rechtsgrundlage ist Art. 6 Abs. 1 lit. f DSGVO. Mit IONOS besteht ein Vertrag zur Auftragsverarbeitung. <span class="ph">[nach Vertragsabschluss bestätigen]</span></p>
       <h2>3. Kontaktformular, E-Mail und Telefon</h2>
@@ -814,7 +826,7 @@ main { overflow-x: clip; }
   <div class="wrap">
     <div><h2>Klarheit beginnt mit einem Gespräch.</h2><p>Schildern Sie mir Ihr Anliegen. Ich freue mich auf Ihre Anfrage.</p></div>
     <div class="cboxes">
-      <a class="cbox" href="tel:+4915112778858"><svg aria-hidden="true"><use href="#i-phone"/></svg><div><b>0151 12778858</b><small>Persönlich für Sie da</small></div></a>
+      <a class="cbox" href="tel:+491796933684"><svg aria-hidden="true"><use href="#i-phone"/></svg><div><b>0179 6933684</b><small>Persönlich für Sie da</small></div></a>
       <a class="cbox" href="#kontakt"><svg aria-hidden="true"><use href="#i-mail"/></svg><div><b>Anfrage senden</b><small><span class="ph">info@bsv-niewerth.de</span></small></div></a>
     </div>
   </div>
@@ -833,19 +845,19 @@ main { overflow-x: clip; }
       <p>Sachverständiger für Schäden an Gebäuden (persCert TÜV Rheinland) in Borken und im Westmünsterland.</p>
     </div>
     <div><h4>Leistungen</h4><ul class="flist" id="f-list"></ul></div>
-    <div><h4>Kontakt</h4><ul class="flist"><li>Propst-Pricking-Str. 16<br>46325 Borken</li><li>0151 12778858</li><li><span class="ph">info@bsv-niewerth.de</span></li></ul></div>
+    <div><h4>Kontakt</h4><ul class="flist"><li>Propst-Pricking-Str. 16<br>46325 Borken</li><li>0179 6933684</li><li><span class="ph">info@bsv-niewerth.de</span></li></ul></div>
     <div><h4>Büro</h4><ul class="flist"><li><a href="#ueber-mich">Über mich</a></li><li><a href="#kontakt">Kontakt</a></li><li><a href="#impressum">Impressum</a></li><li><a href="#datenschutz">Datenschutz</a></li></ul></div>
   </div>
   <div class="fbottom"><div class="wrap"><span>© 2026 BSV Niewerth · André Niewerth</span><span>bsv-niewerth.de</span></div></div>
 </footer>
 
 <div class="callbar">
-  <a class="btn btn--outline-light" href="tel:+4915112778858"><svg aria-hidden="true"><use href="#i-phone"/></svg>Anrufen</a>
+  <a class="btn btn--outline-light" href="tel:+491796933684"><svg aria-hidden="true"><use href="#i-phone"/></svg>Anrufen</a>
   <a class="btn btn--primary" href="#kontakt"><svg aria-hidden="true"><use href="#i-cal"/></svg>Termin</a>
 </div>
 
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"ProfessionalService","@id":"https://bsv-niewerth.de/#buero","name":"BSV Niewerth – Bau-Sachverständigenbüro","alternateName":"BSV Niewerth","url":"https://bsv-niewerth.de/","telephone":"+49 151 12778858","email":"info@bsv-niewerth.de","priceRange":"€€","description":"TÜV-zertifizierter Bausachverständiger in Borken für Gutachten bei Gebäudeschäden, Hauskaufberatung, Baubegleitung, Wertermittlung, Leckageortung und Thermografie.","address":{"@type":"PostalAddress","streetAddress":"Propst-Pricking-Str. 16","postalCode":"46325","addressLocality":"Borken","addressRegion":"Nordrhein-Westfalen","addressCountry":"DE"},"areaServed":[{"@type":"AdministrativeArea","name":"Kreis Borken"},{"@type":"AdministrativeArea","name":"Westmünsterland"},{"@type":"AdministrativeArea","name":"Münsterland"}],"founder":{"@type":"Person","name":"André Niewerth","jobTitle":"Sachverständiger für Schäden an Gebäuden","hasCredential":[{"@type":"EducationalOccupationalCredential","name":"Sachverständiger für Schäden an Gebäuden (persCert TÜV Rheinland)"},{"@type":"EducationalOccupationalCredential","name":"Maurer- und Stahlbetonbaumeister"},{"@type":"EducationalOccupationalCredential","name":"Geprüfter Betriebswirt (HwO)"}]},"knowsAbout":["Bauschäden","Feuchteschäden","Schimmel","Hauskaufberatung","Baubegleitung","Immobilienbewertung","Leckageortung","Bau-Thermografie"]}
+{"@context":"https://schema.org","@type":"ProfessionalService","@id":"https://bsv-niewerth.de/#buero","name":"BSV Niewerth – Bau-Sachverständigenbüro","alternateName":"BSV Niewerth","url":"https://bsv-niewerth.de/","telephone":"+49 179 6933684","email":"info@bsv-niewerth.de","priceRange":"€€","description":"TÜV-zertifizierter Bausachverständiger in Borken für Gutachten bei Gebäudeschäden, Hauskaufberatung, Baubegleitung, Wertermittlung, Leckageortung und Thermografie.","address":{"@type":"PostalAddress","streetAddress":"Propst-Pricking-Str. 16","postalCode":"46325","addressLocality":"Borken","addressRegion":"Nordrhein-Westfalen","addressCountry":"DE"},"areaServed":[{"@type":"AdministrativeArea","name":"Kreis Borken"},{"@type":"AdministrativeArea","name":"Westmünsterland"},{"@type":"AdministrativeArea","name":"Münsterland"},{"@type":"AdministrativeArea","name":"Ruhrgebiet"}],"founder":{"@type":"Person","name":"André Niewerth","jobTitle":"Sachverständiger für Schäden an Gebäuden","hasCredential":[{"@type":"EducationalOccupationalCredential","name":"Sachverständiger für Schäden an Gebäuden (persCert TÜV Rheinland)"},{"@type":"EducationalOccupationalCredential","name":"Maurer- und Stahlbetonbaumeister"},{"@type":"EducationalOccupationalCredential","name":"Geprüfter Betriebswirt (HwO)"}]},"knowsAbout":["Bauschäden","Feuchteschäden","Schimmel","Haus- und Wohnungskaufberatung","Baubegleitung","Immobilienbewertung","Leckageortung","Bau-Thermografie"]}
 </script>
 <script>
 document.documentElement.lang = "de";
@@ -868,18 +880,18 @@ const ROOF = '<svg class="roofline" viewBox="0 0 100 18" preserveAspectRatio="no
 const LEISTUNGEN = [
   { slug: "gebaeudeschaeden", icon: "schaden", title: "Gebäude\u00adschäden", short: "Risse, Feuchte, Schimmel: Ursache feststellen und den richtigen Sanierungsweg finden.",
     foto: "Foto: Riss im Mauerwerk oder feuchte Kellerwand",
-    lead: "Risse in der Wand, feuchte Kellerwände oder Schimmel: Ich finde die Ursache, bewerte das Ausmaß und zeige Ihnen, wie der Schaden fachgerecht behoben wird.",
+    lead: "Wie ernst ist ein Riss, woher kommt die Feuchtigkeit und was ist jetzt zu tun? Ich gehe Gebäudeschäden auf den Grund, damit Sie die Ursache verstehen und wissen, welche Maßnahmen sinnvoll sind.",
     anlaesse: ["Risse in Mauerwerk, Putz oder Beton", "Feuchte Wände, nasser Keller, Ausblühungen", "Schimmel in Wohnräumen", "Schäden nach Sturm, Leitungswasser oder Brand", "Mängel nach einer Sanierung oder am Neubau"],
     vorgehen: [["Erstgespräch", "Sie schildern den Schaden am Telefon oder schicken Fotos. Ich sage Ihnen, ob ein Ortstermin sinnvoll ist."], ["Ortstermin", "Ich untersuche den Schaden, messe Feuchte und Temperaturen und dokumentiere alles mit Fotos."], ["Ursachenanalyse", "Ich werte die Messungen aus und ermittle, wodurch der Schaden entstanden ist."], ["Empfehlung", "Sie erhalten eine Einschätzung mit Sanierungsweg, auf Wunsch als Bericht oder Gutachten."]],
     ergebnis: [["i-shield", "Klare Ursache", "Sie wissen, woher der Schaden kommt, und behandeln nicht nur die Symptome."], ["i-euro", "Kostenrahmen", "Eine realistische Einschätzung, was die Sanierung kosten wird."], ["i-doc", "Dokumentation", "Fotos und Messwerte, die Sie gegenüber Versicherung oder Handwerker verwenden können."]],
     faq: [["Was kostet die Begutachtung eines Schadens?", "Das hängt vom Umfang ab. Nach dem Erstgespräch nenne ich Ihnen einen festen Preis oder einen Kostenrahmen. " + ph("[Preisangaben ergänzen, z. B. Ortstermin ab … €]")], ["Übernimmt die Versicherung die Kosten?", "Bei versicherten Schäden werden die Gutachterkosten häufig ganz oder teilweise erstattet. Klären Sie das am besten vorab mit Ihrer Versicherung."], ["Wie schnell können Sie kommen?", "In der Regel bin ich innerhalb von 48 Stunden bei Ihnen vor Ort."]] },
 
-  { slug: "hauskaufberatung", icon: "kauf", title: "Hauskauf\u00adberatung", short: "Besichtigung mit Fachblick, damit Sie Mängel kennen, bevor Sie beim Notar unterschreiben.",
+  { slug: "hauskaufberatung", icon: "kauf", title: "Haus- und Wohnungs\u00adkauf\u00adberatung", short: "Ob Haus oder Eigentumswohnung, Bestand oder Neubau: Ich prüfe den baulichen Zustand und mögliche Mängel, damit Sie Ihre Kaufentscheidung auf einer fundierten Grundlage treffen.",
     foto: "Foto: Besichtigung eines Hauses, Blick auf Dach oder Keller",
-    lead: "Bevor Sie kaufen, sehe ich mir das Haus mit Ihnen an. Sie erfahren, in welchem Zustand Dach, Keller, Fassade und Haustechnik wirklich sind, und können sicher entscheiden und verhandeln.",
-    anlaesse: ["Kauf eines gebrauchten Hauses oder einer Wohnung", "Altbau mit unklarem Sanierungsstand", "Hinweise auf Feuchte oder Risse bei der Besichtigung", "Übergabe einer neu gebauten Immobilie vom Bauträger", "Verhandlung über den Kaufpreis"],
+    lead: "Ein Immobilienkauf bindet Sie oft über Jahrzehnte. Ich begleite Sie zur Besichtigung, beurteile den erkennbaren baulichen Zustand und zeige mögliche Risiken sowie Sanierungsbedarf auf. So gewinnen Sie Klarheit vor dem Kauf und eine fundierte Grundlage für Ihre Kaufentscheidung und Preisverhandlung.",
+    anlaesse: ["Kauf eines Hauses oder einer Wohnung, egal ob neu oder gebraucht", "Altbau mit unklarem Sanierungsstand", "Hinweise auf Feuchte oder Risse bei der Besichtigung", "Übergabe einer neu gebauten Immobilie vom Bauträger", "Sachliche Argumente für die Preisverhandlung"],
     vorgehen: [["Termin abstimmen", "Wir legen den Termin gemeinsam mit Verkäufer oder Makler fest."], ["Gemeinsame Begehung", "Wir gehen das Haus vom Keller bis zum Dach durch. Sie können jederzeit nachfragen."], ["Einschätzung vor Ort", "Ich erkläre Ihnen direkt, was ich sehe und wie schwer die Mängel wiegen."], ["Kurzbericht", "Auf Wunsch fasse ich die Ergebnisse schriftlich mit Fotos zusammen."]],
-    ergebnis: [["i-doc", "Mängelliste", "Alle Auffälligkeiten, sortiert nach Dringlichkeit."], ["i-euro", "Sanierungskosten", "Eine grobe Schätzung, was in den nächsten Jahren auf Sie zukommt."], ["i-shield", "Verhandlungsbasis", "Sachliche Argumente für das Gespräch über den Kaufpreis."]],
+    ergebnis: [["i-doc", "Mängelliste", "Alle Auffälligkeiten, sortiert nach Dringlichkeit."], ["i-shield", "Sanierungsbedarf", "Welche Maßnahmen in den nächsten Jahren anstehen und wie dringend sie sind."], ["i-shield", "Verhandlungsbasis", "Sachliche Argumente für das Gespräch über den Kaufpreis."]],
     faq: [["Wie lange dauert eine Begehung?", "Bei einem Einfamilienhaus meist 1,5 bis 3 Stunden, je nach Größe und Zustand."], ["Kann ich bei der Begehung dabei sein?", "Ja, ausdrücklich. Ich erkläre Ihnen vor Ort, was ich sehe."], ["Lohnt sich das auch bei einem Neubau?", "Ja. Gerade bei der Abnahme lohnt sich ein zweiter Blick, denn danach müssen Sie Mängel in der Regel selbst nachweisen."]] },
 
   { slug: "gutachten", icon: "gutachten", title: "Bau\u00adgutachten", short: "Schriftliche Gutachten für Versicherung, Gewährleistung oder Gericht, nachvollziehbar dokumentiert.",
@@ -949,7 +961,7 @@ const MEHR = {
   hauskaufberatung: {
     intro: ["Ein Hauskauf ist für die meisten die größte Investition ihres Lebens. Bei einer normalen Besichtigung bleiben viele Mängel unentdeckt, weil sie hinter frischer Farbe, Möbeln oder Verkleidungen liegen. Nach dem Notartermin tragen Sie das Risiko meist allein.", "Ich begleite Sie zur Besichtigung und sehe mir das Haus mit dem Blick eines Baumeisters an. Sie erfahren, welche Mängel es gibt, was in den nächsten Jahren auf Sie zukommt und welche Argumente Sie für die Preisverhandlung haben."],
     pruefe: [["Dach und Dachstuhl", "Eindeckung, Holz, Dämmung und Anschlüsse"], ["Fassade und Mauerwerk", "Risse, Fugen, Feuchte und Putzschäden"], ["Keller und Abdichtung", "Feuchte, Salze und Zustand der Abdichtung"], ["Fenster und Türen", "Alter, Anschlüsse und Dichtigkeit"], ["Feuchte und Schimmel", "Gemessen statt nur gerochen"], ["Umbauten", "Anbauten, Umbauten und Auffälligkeiten an Baustoffen"]],
-    kosten: "Eine Hauskaufberatung kostet meist nur einen Bruchteil dessen, was ein übersehener Mangel kosten kann. Der Preis hängt von Größe und Alter des Hauses ab.",
+    kosten: "Eine Haus- oder Wohnungskaufberatung kostet meist nur einen Bruchteil dessen, was ein übersehener Mangel kosten kann. Der Preis hängt von Größe und Alter des Hauses ab.",
     eck: ["Begehung ca. 1,5–3 Std.", "Mängelliste mit Kostenschätzung"] },
   gutachten: {
     intro: ["Ob Versicherung, Bauträger oder Handwerker: Wenn es um Geld und Verantwortung geht, zählen belastbare Fakten. Ein Gutachten hält fest, was vorgefunden wurde, wodurch der Schaden entstanden ist und wie er technisch zu bewerten ist.", "Ich erstelle Kurzgutachten für schnelle Entscheidungen und ausführliche Gutachten, wenn ein Streit droht. Jede Aussage ist mit Fotos und Messwerten belegt und so geschrieben, dass auch Laien sie verstehen."],
@@ -988,26 +1000,40 @@ const MEHR = {
     eck: ["Aufnahme ca. 1–2 Std.", "Wärmebilder mit Auswertung"] }
 };
 
+/* Gegliederte Texte für einzelne Leistungen (Andrés Fassung) */
+MEHR.gebaeudeschaeden.sections = [
+  ["Schäden an Gebäuden – Ursachen klären, Lösungen entwickeln", ["Risse im Mauerwerk, Feuchtigkeit, Setzungen oder Korrosion können unterschiedliche Ursachen haben. Auch Undichtigkeiten an der Gebäudehülle und Ausführungsmängel können die Funktion und den Zustand eines Gebäudes beeinträchtigen. Für Eigentümer stellt sich dann die Frage: Wie schwerwiegend ist der Schaden, besteht Handlungsbedarf und welche Maßnahmen sind sinnvoll?", "Als Sachverständiger für Schäden an Gebäuden untersuche ich Schäden und Mängel systematisch, dokumentiere die Befunde und bewerte sie anhand der anerkannten Regeln der Technik. Dabei gehe ich den Ursachen auf den Grund und ordne Ausmaß sowie Dringlichkeit ein. Sie erhalten eine nachvollziehbare Grundlage für Ihre weiteren Entscheidungen."]],
+  ["Individuelle Sanierungskonzepte – technisch fundiert und wirtschaftlich sinnvoll", ["Auf Grundlage der Untersuchung entwickle ich ein auf Ihren Schadensfall abgestimmtes Sanierungskonzept. Dabei berücksichtige ich die technischen Anforderungen, die Wirtschaftlichkeit und die Dauerhaftigkeit der vorgesehenen Maßnahmen.", "Das Konzept beschreibt, welche Arbeiten erforderlich sind, in welcher Reihenfolge sie erfolgen sollten und worauf bei der fachgerechten Umsetzung zu achten ist. Eine darauf abgestimmte Kostenschätzung unterstützt Sie bei der finanziellen Planung."]],
+  ["Auf Wunsch: Begleitung der Sanierung", ["Auch bei der Umsetzung des Sanierungskonzepts stehe ich Ihnen zur Seite. Im Rahmen der vereinbarten Bauüberwachung prüfe ich die Ausführung auf Übereinstimmung mit der Planung und den anerkannten Regeln der Technik. So lassen sich Abweichungen frühzeitig erkennen und fachgerecht korrigieren."]]
+];
+MEHR.gebaeudeschaeden.eck = ["Ortstermin ca. 1–3 Std.", "Einschätzung, Bericht oder Gutachten. Optional: Sanierungskonzept und Begleitung der Sanierung"];
+MEHR.hauskaufberatung.sections = [
+  ["Haus- und Wohnungskaufberatung vom Sachverständigen", ["Ob bestehendes Haus, Eigentumswohnung oder Neubau: Wer eine Immobilie kauft oder bauen lässt, übernimmt langfristige Verantwortung, häufig mit einer Finanzierung über Jahrzehnte. Eine unabhängige fachliche Einschätzung hilft Ihnen, Risiken frühzeitig zu erkennen und mögliche Folgekosten besser einzuschätzen.", "Als Sachverständiger mit langjähriger Baupraxis begleite ich Sie zur Besichtigung und beurteile den erkennbaren baulichen Zustand. Ich erläutere Ihnen festgestellte Mängel, möglichen Sanierungsbedarf und deren Bedeutung für Ihre Kaufentscheidung. So wissen Sie, worauf Sie achten sollten, und erhalten sachliche Argumente für die Preisverhandlung."]],
+  ["Begleitung beim Neubau", ["Auch während der Bauphase sowie bei Teilabnahmen und der abschließenden Bauabnahme stehe ich Ihnen fachkundig zur Seite. Sie erhalten verständliche Antworten und klare Empfehlungen für die nächsten Schritte, damit Sie Ihre Entscheidungen gut informiert und mit mehr Sicherheit treffen."]]
+];
+MEHR.hauskaufberatung.tagline = "Fachkundig begleitet. Fundiert entscheiden.";
+MEHR.hauskaufberatung.eck = ["ca. 1,5–3 Std., abhängig von Größe und Zustand der Immobilie", "Übersichtliche Dokumentation der festgestellten Mängel mit fachlicher Einschätzung und Empfehlungen zum weiteren Vorgehen"];
+
 /* Suchmaschinen: Seitentitel, Beschreibung und Überschrift je Seite (in WordPress im SEO-Plugin gepflegt) */
 const SEO = {
-  start: ["Bausachverständiger Münsterland & Kreis Borken | BSV Niewerth", "TÜV-zertifizierter Bausachverständiger für Borken, Bocholt, Ahaus, Coesfeld und das Münsterland: Gutachten bei Bauschäden, Hauskaufberatung, Baubegleitung."],
-  leistungen: ["Leistungen des Bausachverständigen | Münsterland | BSV Niewerth", "Gutachten bei Gebäudeschäden, Hauskaufberatung, Bauüberwachung, Wertermittlung, Leckageortung und Thermografie im Kreis Borken und im Münsterland."],
+  start: ["Bausachverständiger Münsterland & Ruhrgebiet | BSV Niewerth", "TÜV-zertifizierter Bausachverständiger aus Borken für Münsterland und Ruhrgebiet: Gutachten bei Bauschäden, Haus- und Wohnungskaufberatung, Baubegleitung."],
+  leistungen: ["Leistungen des Bausachverständigen | Münsterland | BSV Niewerth", "Gutachten bei Gebäudeschäden, Haus- und Wohnungskaufberatung, Bauüberwachung, Wertermittlung, Leckageortung und Thermografie im Münsterland und Ruhrgebiet."],
   "ueber-mich": ["André Niewerth – TÜV-zertifizierter Bausachverständiger", "Maurer- und Stahlbetonbaumeister und persCert-zertifizierter Sachverständiger für Schäden an Gebäuden. Ihr unabhängiger Gutachter im Münsterland."],
-  kontakt: ["Kontakt & Ortstermin | Bausachverständiger Münsterland", "Rufen Sie an unter 0151 12778858 oder senden Sie Ihre Anfrage. Ortstermin im Kreis Borken und Münsterland in der Regel innerhalb von 48 Stunden."],
+  kontakt: ["Kontakt & Ortstermin | Bausachverständiger Münsterland", "Rufen Sie an unter 0179 6933684 oder senden Sie Ihre Anfrage. Ortstermin im Münsterland und Ruhrgebiet in der Regel innerhalb von 48 Stunden."],
   impressum: ["Impressum | BSV Niewerth", "Impressum des Bau-Sachverständigenbüros BSV Niewerth, Borken."],
   datenschutz: ["Datenschutz | BSV Niewerth", "Datenschutzerklärung des Bau-Sachverständigenbüros BSV Niewerth, Borken."],
-  gebaeudeschaeden: ["Gutachter für Bauschäden | Feuchte, Risse, Schimmel | Münsterland", "Risse, nasser Keller oder Schimmel? TÜV-zertifizierter Gutachter für Gebäudeschäden in Borken, Bocholt, Coesfeld und dem Münsterland. Ortstermin in 48 Std.", "Gutachter für Gebäude­schäden"],
-  hauskaufberatung: ["Hauskaufberatung & Gutachter für den Hauskauf | Münsterland", "Bausachverständiger begleitet Ihre Hausbesichtigung im Kreis Borken und Münsterland: Mängel, Sanierungskosten und Verhandlungsbasis vor dem Notartermin.", "Hauskauf­beratung vom Gutachter"],
-  gutachten: ["Bauschadensgutachten & Baugutachten | Kreis Borken & Münsterland", "Belastbare Gutachten für Versicherung, Gewährleistung und Anwalt. TÜV-zertifizierter Sachverständiger für Schäden an Gebäuden im Münsterland.", "Gutachten bei Bau­schäden und Bau­mängeln"],
-  bauueberwachung: ["Baubegleitung & Bauüberwachung Neubau | Münsterland", "Unabhängige Baubegleitung für Neubau und Sanierung im Kreis Borken und Münsterland: Kontrolle der Bauphasen, Protokolle und Bauabnahme.", "Bau­begleitung und Bau­überwachung"],
-  wertermittlung: ["Immobilienbewertung & Wertgutachten | Kreis Borken & Münsterland", "Was ist Ihr Haus wert? Nachvollziehbare Immobilienbewertung für Verkauf, Erbe oder Trennung, mit Blick auf den Bauzustand.", "Wert­gutachten für Ihre Immobilie"],
+  gebaeudeschaeden: ["Gutachter für Bauschäden | Feuchte, Risse, Schimmel | Münsterland", "Risse, nasser Keller oder Schimmel? TÜV-zertifizierter Gutachter für Gebäudeschäden in Borken, Bocholt, Coesfeld und dem Münsterland. Ortstermin in 48 Std.", "Gebäude­schäden"],
+  hauskaufberatung: ["Haus- & Wohnungskaufberatung | Gutachter Münsterland & Ruhrgebiet", "Ob Haus oder Eigentumswohnung, Bestand oder Neubau: Der Bausachverständige begleitet Ihre Besichtigung und beurteilt den baulichen Zustand vor dem Kauf.", "Haus- und Wohnungs­kauf­beratung"],
+  gutachten: ["Bauschadensgutachten & Baugutachten | Münsterland & Ruhrgebiet", "Belastbare Gutachten für Versicherung, Gewährleistung und Anwalt. TÜV-zertifizierter Sachverständiger für Schäden an Gebäuden im Münsterland.", "Gutachten bei Bau­schäden und Bau­mängeln"],
+  bauueberwachung: ["Baubegleitung & Bauüberwachung Neubau | Münsterland", "Unabhängige Baubegleitung für Neubau und Sanierung im Münsterland und Ruhrgebiet: Kontrolle der Bauphasen, Protokolle und Bauabnahme.", "Bau­begleitung und Bau­überwachung"],
+  wertermittlung: ["Immobilienbewertung & Wertgutachten | Münsterland & Ruhrgebiet", "Was ist Ihr Haus wert? Nachvollziehbare Immobilienbewertung für Verkauf, Erbe oder Trennung, mit Blick auf den Bauzustand.", "Wert­gutachten für Ihre Immobilie"],
   schlichtung: ["Schlichtung bei Baustreitigkeiten | Bausachverständiger Münsterland", "Streit über Baumängel? Neutrale Bewertung durch einen unabhängigen Bausachverständigen, damit sich Bauherr und Firma ohne Prozess einigen.", "Schlichtung bei Bau­streitigkeiten"],
-  energieberatung: ["Energieberatung für Wohngebäude | Kreis Borken & Münsterland", "Schwachstellen der Gebäudehülle erkennen und die Sanierung sinnvoll planen: Energieberatung mit Thermografie im Münsterland.", "Energie­beratung für Ihr Haus"],
-  leckageortung: ["Leckageortung & Wasserschaden | Kreis Borken & Münsterland", "Wasserfleck oder Druckverlust? Gezielte Leckageortung mit Bericht für die Versicherung. Ortstermin in der Regel innerhalb von 48 Std.", "Leckage­ortung bei Wasser­schäden"],
-  thermografie: ["Bau-Thermografie & Wärmebild vom Haus | Münsterland", "Wärmebilder zeigen Wärmebrücken, fehlende Dämmung und Feuchte. Bau-Thermografie im Kreis Borken und Münsterland mit verständlicher Auswertung.", "Bau-Thermo­grafie und Wärme­bilder"]
+  energieberatung: ["Energieberatung für Wohngebäude | Münsterland & Ruhrgebiet", "Schwachstellen der Gebäudehülle erkennen und die Sanierung sinnvoll planen: Energieberatung mit Thermografie im Münsterland.", "Energie­beratung für Ihr Haus"],
+  leckageortung: ["Leckageortung & Wasserschaden | Münsterland & Ruhrgebiet", "Wasserfleck oder Druckverlust? Gezielte Leckageortung mit Bericht für die Versicherung. Ortstermin in der Regel innerhalb von 48 Std.", "Leckage­ortung bei Wasser­schäden"],
+  thermografie: ["Bau-Thermografie & Wärmebild vom Haus | Münsterland", "Wärmebilder zeigen Wärmebrücken, fehlende Dämmung und Feuchte. Bau-Thermografie im Münsterland und Ruhrgebiet mit verständlicher Auswertung.", "Bau-Thermo­grafie und Wärme­bilder"]
 };
 
-const TOWNS = ["Borken", "Bocholt", "Rhede", "Isselburg", "Raesfeld", "Heiden", "Reken", "Velen", "Gescher", "Stadtlohn", "Südlohn", "Vreden", "Ahaus", "Legden", "Gronau", "Coesfeld", "Dülmen", "Dorsten", "Hamminkeln"];
+const TOWNS = ["Borken", "Bocholt", "Rhede", "Isselburg", "Raesfeld", "Heiden", "Reken", "Velen", "Gescher", "Stadtlohn", "Südlohn", "Vreden", "Ahaus", "Legden", "Gronau", "Coesfeld", "Dülmen", "Hamminkeln", "Dorsten", "Haltern am See", "Marl", "Gladbeck", "Bottrop", "Gelsenkirchen"];
 const PIN = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-7-6.2-7-11.5A7 7 0 0119 9.5C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg>';
 const townChip = (t, i) => `<li${i === 0 ? ' class="home"' : ""}>${PIN}${t}</li>`;
 document.getElementById("towns").innerHTML = TOWNS.map(townChip).join("");
@@ -1040,9 +1066,10 @@ function leistungPage(l) {
       <div class="page-hero-copy">
         <div class="crumbs"><a href="#start">Start</a><span>/</span><a href="#leistungen">Leistungen</a><span>/</span><span>${l.title}</span></div>
         <h1>${SEO[l.slug][2]}</h1>
-        <p class="reach">${PIN}Kreis Borken, Westmünsterland und Münsterland</p>
+        ${x.tagline ? `<p class="tagline">${x.tagline}</p>` : ""}
+        <p class="reach">${PIN}Kreis Borken, Münsterland und Ruhrgebiet</p>
         <p>${l.lead}</p>
-        <div class="hero-actions"><a class="btn btn--primary" href="#kontakt">${use("i-cal")}Termin vereinbaren</a><a class="btn btn--outline-light" href="tel:+4915112778858">${use("i-phone")}0151 12778858</a></div>
+        <div class="hero-actions"><a class="btn btn--primary" href="#kontakt">${use("i-cal")}Termin vereinbaren</a><a class="btn btn--outline-light" href="tel:+491796933684">${use("i-phone")}0179 6933684</a></div>
       </div>
       <div class="zmedia">
         <div class="dim"><i></i><span>${l.title}</span><i></i></div>
@@ -1051,14 +1078,16 @@ function leistungPage(l) {
     </div>
   </section>
   <section class="section"><div class="wrap intro-grid">
-    <div class="intro-text"><span class="kicker">Worum es geht</span>${x.intro.map((p, i) => i === 0 ? `<p class="first">${p}</p>` : `<p>${p}</p>`).join("")}</div>
+    <div class="intro-text">${x.sections
+      ? x.sections.map(([h, ps]) => `<div class="isec"><h2>${h}</h2>${ps.map(p => `<p>${p}</p>`).join("")}</div>`).join("")
+      : `<span class="kicker">Worum es geht</span>${x.intro.map((p, i) => i === 0 ? `<p class="first">${p}</p>` : `<p>${p}</p>`).join("")}`}</div>
     <aside class="facts-box" aria-label="Auf einen Blick">
       <h3>Auf einen Blick</h3>
       <dl>
         <dt>Dauer</dt><dd>${x.eck[0]}</dd>
         <dt>Ergebnis</dt><dd>${x.eck[1]}</dd>
         <dt>Ortstermin</dt><dd>in der Regel innerhalb von 48 Std.</dd>
-        <dt>Einsatzgebiet</dt><dd>Kreis Borken und Münsterland</dd>
+        <dt>Einsatzgebiet</dt><dd>Kreis Borken, Münsterland und Ruhrgebiet</dd>
       </dl>
       <a class="btn btn--primary" href="#kontakt">Anfrage senden</a>
     </aside>
@@ -1067,8 +1096,7 @@ function leistungPage(l) {
     <div class="head proto-head"><span class="kicker">Was ich prüfe</span><h2>Darauf achte ich</h2><p>Bei jedem Ortstermin arbeite ich die wichtigen Punkte systematisch ab und halte sie im Protokoll fest. So geht nichts verloren, und Sie können jeden Befund nachvollziehen.</p></div>
     <div class="proto">
       <div class="proto-top"><span>Prüfprotokoll</span><b>${l.title}</b><small>BSV Niewerth · Bau-Sachverständigenbüro</small></div>
-      <ol class="proto-list">${x.pruefe.map(([t, d], i) => `<li><span class="box">${use("i-check")}</span><div><b>${t}</b><span>${d}</span></div><em>Pos. ${String(i + 1).padStart(2, "0")}</em></li>`).join("")}</ol>
-      <div class="proto-foot"><span>Ort, Datum</span><span>Sachverständiger</span></div>
+      <ol class="proto-list">${x.pruefe.map(([t, d], i) => `<li><span class="box">${use("i-check")}</span><div><b>${t}</b><span>${d}</span></div></li>`).join("")}</ol>
     </div>
   </div></section>
   <section class="section"><div class="wrap zig"><div class="zrow">
@@ -1086,14 +1114,14 @@ function leistungPage(l) {
   </div></section>
   <section class="section"><div class="wrap cost">
     <div><span class="kicker">Kosten</span><h2>Was kostet das?</h2></div>
-    <div class="cost-text"><p>${x.kosten}</p><p>${ph("[Preisangabe ergänzen, z. B. „ab … € inkl. MwSt.“ oder Hinweis auf ein kostenloses Erstgespräch]")}</p><a class="btn btn--outline" href="#kontakt">Unverbindlich anfragen <span class="arrow">→</span></a></div>
+    <div class="cost-text"><p>${x.kosten}</p><a class="btn btn--outline" href="#kontakt">Unverbindlich anfragen <span class="arrow">→</span></a></div>
   </div></section>
   <section class="section section--soft"><div class="wrap faq-grid">
     <div class="head" style="margin:0;align-content:start"><span class="kicker">Häufige Fragen</span><h2>Gut zu wissen</h2><p>Ihre Frage ist nicht dabei? Rufen Sie mich einfach an.</p></div>
     <div class="faq">${l.faq.map(([q, a], i) => `<details${i === 0 ? " open" : ""}><summary>${q}</summary><p>${a}</p></details>`).join("")}</div>
   </div></section>
   <section class="section" style="padding-block:64px"><div class="wrap more-grid">
-    <div><h3>Einsatzgebiet</h3><p class="area-line">${TOWNS.join(" · ")} und das übrige Münsterland</p></div>
+    <div><h3>Einsatzgebiet</h3><p class="area-line">${TOWNS.join(" · ")}, das übrige Münsterland und das Ruhrgebiet</p></div>
     <div><h3>Weitere Leistungen</h3><div class="other">${others}</div></div>
   </div></section>`;
 }
