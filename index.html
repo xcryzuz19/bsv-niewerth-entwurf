@@ -255,7 +255,7 @@ body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-a
 .spot .lbl { position: absolute; left: 18px; top: -16px; white-space: nowrap; background: #fff; color: var(--navy); border-radius: 3px; padding: 6px 10px; font-family: var(--font-head); font-weight: 700; font-size: .78rem; box-shadow: 0 6px 18px rgb(15 29 46 / .18); }
 .spot .lbl small { display: block; font-weight: 500; color: var(--muted); font-size: .68rem; letter-spacing: .04em; }
 .spot--left .lbl { left: auto; right: 18px; }
-@media (max-width: 620px) { .spot .lbl { white-space: normal; width: max-content; max-width: 40vw; font-size: .72rem; } }
+@media (max-width: 620px) { .spot .lbl { white-space: normal; width: max-content; max-width: 40vw; font-size: .72rem; } .spot--left .lbl { left: 18px; right: auto; } }
 @keyframes ping { 0% { box-shadow: 0 0 0 0 rgb(90 162 234 / .7); } 70%, 100% { box-shadow: 0 0 0 16px rgb(90 162 234 / 0); } }
 @media (prefers-reduced-motion: reduce) { .spot .dot { animation: none; } }
 @media (max-width: 860px) {
