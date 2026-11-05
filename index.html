@@ -159,7 +159,7 @@ body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-a
 .hero { position: relative; overflow: hidden; background: var(--navy-3); color: #fff; isolation: isolate; }
 .hero-stage { position: absolute; inset: 0; z-index: -2; }
 .hero-stage canvas, .hero-stage video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; }
-.hero-veil { position: absolute; inset: 0; z-index: -1; background: linear-gradient(95deg, rgb(10 21 34 / .94) 0%, rgb(15 29 46 / .84) 42%, rgb(15 29 46 / .55) 100%); }
+.hero-veil { position: absolute; inset: 0; z-index: -1; background: linear-gradient(95deg, rgb(8 17 28 / .9) 0%, rgb(12 25 42 / .62) 40%, rgb(12 25 42 / .08) 72%, transparent 100%); }
 .hero-roof { position: absolute; left: 0; right: 0; top: 0; height: 100%; z-index: 0; pointer-events: none; }
 .hero-roof path { fill: none; stroke: rgb(90 162 234 / .35); stroke-width: 1.5; stroke-dasharray: 2600; stroke-dashoffset: 2600; animation: draw 2.4s cubic-bezier(.6,.1,.2,1) .3s forwards; }
 @keyframes draw { to { stroke-dashoffset: 0; } }
@@ -499,10 +499,10 @@ textarea { min-height: 140px; resize: vertical; }
 .curtain { position: fixed; inset: 0; z-index: 90; pointer-events: none; display: grid; place-items: center; background: var(--navy); transform: translateY(100%); }
 .curtain svg { width: 140px; height: auto; opacity: 0; }
 .curtain path { fill: none; stroke: var(--blue-light); stroke-width: 6; stroke-linejoin: miter; stroke-dasharray: 1; stroke-dashoffset: 1; }
-.curtain.cover { animation: cu-in .42s var(--ease-io) forwards; }
-.curtain.cover svg { animation: bi-fadein .2s ease .2s forwards; }
-.curtain.cover path { animation: bi-draw .45s var(--ease-io) .15s forwards; }
-.curtain.leave { transform: none; animation: cu-out .5s var(--ease-io) forwards; }
+.curtain.cover { animation: cu-in .7s var(--ease-io) forwards; }
+.curtain.cover svg { animation: bi-fadein .3s ease .35s forwards; }
+.curtain.cover path { animation: bi-draw .7s var(--ease-io) .3s forwards; }
+.curtain.leave { transform: none; animation: cu-out .8s var(--ease-io) .15s forwards; }
 .curtain.leave svg { opacity: 1; }
 .curtain.leave path { stroke-dashoffset: 0; }
 @keyframes cu-in { from { transform: translateY(100%); } to { transform: translateY(0); } }
@@ -581,6 +581,59 @@ textarea { min-height: 140px; resize: vertical; }
   .finder.in .house .scan { animation: none; }
 }
 
+/* Hero-Landschaft */
+.hero-stage svg.scene { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+.scene .star { fill: #dfe8f5; opacity: .7; animation: twinkle 4.5s ease-in-out infinite; }
+.scene .sails { animation: spin 38s linear infinite; }
+.scene .smoke { animation: smoke 9s ease-in-out infinite; transform-box: fill-box; }
+.scene .lay { transition: transform 1.4s var(--ease-out); }
+.scene #win rect { fill: #1d3a5f; }
+.scene #win rect.lit { fill: #ffcf8a; filter: drop-shadow(0 0 4px rgb(255 190 110 / .8)); opacity: 0; }
+.hero-go .scene #win rect.lit { animation: win-on .9s ease var(--d, 0s) forwards; }
+.scene .region-tags { opacity: 0; }
+.hero-go .scene .region-tags { opacity: 1; transition: opacity 1s ease 1.6s; }
+@media (max-width: 900px) { .scene .region-tags { display: none; } }
+@keyframes twinkle { 0%, 100% { opacity: .25; } 50% { opacity: .9; } }
+@keyframes spin { to { transform: rotate(360deg); } }
+@keyframes smoke { 0%, 100% { transform: translate(0, 0); opacity: .18; } 50% { transform: translate(14px, -10px); opacity: .08; } }
+@keyframes win-on { 0% { opacity: 0; } 40% { opacity: .9; } 55% { opacity: .35; } 100% { opacity: 1; } }
+
+/* Einsatzgebiet mit Karte */
+.area-sec { background: var(--navy); color: #fff; }
+.area-sec .blue, .area-sec .kicker { color: var(--blue-light); }
+.area2 { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: clamp(32px, 6vw, 96px); align-items: center; }
+.area-sec .area-copy p { color: var(--on-navy-muted); }
+.regions { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; width: 100%; margin-block: 6px 10px; }
+.regions h3 { font-size: .8rem; letter-spacing: .16em; text-transform: uppercase; color: var(--blue-light); margin-bottom: 10px; }
+.regions ul { list-style: none; padding: 0; columns: 2; column-gap: 16px; font-size: .95rem; color: #d4deea; }
+.regions li { padding: 3px 0; break-inside: avoid; }
+.regions li:first-child { color: #fff; font-weight: 700; }
+.area-sec .btn--outline { border-color: rgb(255 255 255 / .5); color: #fff; }
+.area-sec .btn--outline:hover { background: #fff; color: var(--navy); border-color: #fff; }
+.map-wrap { margin: 0; display: grid; gap: 10px; }
+.map { width: 100%; height: auto; display: block; }
+.map figcaption, .map-wrap figcaption { font-size: .82rem; color: var(--on-navy-muted); text-align: center; }
+.map .m-ring { fill: none; stroke: rgb(90 162 234 / .45); stroke-width: .35; stroke-dasharray: 1; stroke-dashoffset: 1; transform: rotate(-90deg); }
+.map .m-km { font: 600 2.4px var(--font-head); fill: rgb(159 196 238 / .8); text-anchor: middle; letter-spacing: .3px; }
+.map .m-reg { font: 700 3.2px var(--font-head); fill: #9fc4ee; letter-spacing: 1px; text-anchor: middle; }
+.map .m-dot circle { fill: #9fc4ee; }
+.map .m-dot.ruhr circle { fill: #f2b27a; }
+.map .m-dot text { font: 600 2.7px var(--font-body); fill: #e2e9f1; }
+.map .m-dot { opacity: 0; }
+.map .m-home circle { fill: var(--blue-light); }
+.map .m-home .m-pulse { fill: none; stroke: var(--blue-light); stroke-width: .5; transform-box: fill-box; transform-origin: center; animation: m-pulse 2.4s ease-out infinite; }
+.map .m-home text { font: 700 3.2px var(--font-head); fill: #fff; letter-spacing: .4px; }
+.map-wrap.in .m-ring { stroke-dashoffset: 0; transition: stroke-dashoffset 1.4s var(--ease-io) var(--d, 0s); }
+.map-wrap.in .m-dot { opacity: 1; transition: opacity .4s ease calc(.6s + var(--i) * .04s); }
+@keyframes m-pulse { from { transform: scale(1); opacity: .9; } to { transform: scale(3); opacity: 0; } }
+@media (max-width: 900px) { .area2 { grid-template-columns: minmax(0, 1fr); } }
+@media (max-width: 480px) { .regions ul { columns: 1; } }
+@media (prefers-reduced-motion: reduce) {
+  .scene .star, .scene .sails, .scene .smoke, .map .m-pulse { animation: none; }
+  .scene #win rect.lit, .scene .region-tags, .map .m-dot { opacity: 1; }
+  .map .m-ring { stroke-dashoffset: 0; }
+}
+
 main { overflow-x: clip; }
 [data-page] { display: none; }
 [data-page].is-active { display: block; }
@@ -607,17 +660,12 @@ main { overflow-x: clip; }
 </svg>
 
 <script>
-/* Logo-Intro: einmal je Sitzung, danach 30 Minuten Pause; nicht bei „Bewegung reduzieren“ */
+/* Logo-Intro: bei jedem Aufruf der Startseite; nicht bei „Bewegung reduzieren“ */
 (function () {
-  var d = document.documentElement;
-  try {
-    if (matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-    var now = Date.now(), last = Number(localStorage.getItem("bsv-intro-t")) || 0, seen = sessionStorage.getItem("bsv-intro") === "1";
-    localStorage.setItem("bsv-intro-t", String(now));
-    if (seen || now - last < 30 * 60 * 1000) return;
-    sessionStorage.setItem("bsv-intro", "1");
-  } catch (e) {}
-  d.classList.add("intro-on");
+  var h = location.hash.replace("#", "");
+  if (h && h !== "start") return;
+  if (window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+  document.documentElement.classList.add("intro-on");
 })();
 </script>
 <div class="bsv-intro" id="bsv-intro" aria-hidden="true">
@@ -686,11 +734,58 @@ main { overflow-x: clip; }
   <div data-page="start" class="is-active">
     <section class="hero" id="hero">
       <div class="hero-stage" aria-hidden="true">
-        <canvas id="stage"></canvas>
+        <svg class="scene" id="scene" viewBox="0 0 1600 720" preserveAspectRatio="xMaxYMax slice" aria-hidden="true">
+          <defs>
+            <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0" stop-color="#08131f"/><stop offset=".45" stop-color="#13294a"/><stop offset=".72" stop-color="#2a4c78"/><stop offset=".84" stop-color="#4c6f9a"/>
+            </linearGradient>
+            <radialGradient id="dusk" cx=".78" cy=".78" r=".55"><stop offset="0" stop-color="#f2b27a" stop-opacity=".38"/><stop offset=".45" stop-color="#7d8fc0" stop-opacity=".18"/><stop offset="1" stop-color="#4c6f9a" stop-opacity="0"/></radialGradient>
+            <linearGradient id="mist" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#9fb8d6" stop-opacity="0"/><stop offset=".5" stop-color="#9fb8d6" stop-opacity=".12"/><stop offset="1" stop-color="#9fb8d6" stop-opacity="0"/></linearGradient>
+          </defs>
+          <rect width="1600" height="720" fill="url(#sky)"/>
+          <rect width="1600" height="720" fill="url(#dusk)"/>
+          <g id="stars"></g>
+          <radialGradient id="moonGlow"><stop offset="0" stop-color="#fff6e6" stop-opacity=".9"/><stop offset=".25" stop-color="#ffe2b8" stop-opacity=".35"/><stop offset="1" stop-color="#ffe2b8" stop-opacity="0"/></radialGradient>
+          <circle cx="1460" cy="170" r="120" fill="url(#moonGlow)" opacity=".55"/>
+          <circle cx="1460" cy="170" r="17" fill="#fff4e0"/>
+          <g transform="translate(0 -78)">
+
+          <!-- Ruhrgebiet in der Ferne: Tetraeder, Förderturm, Gasometer, Schlot, Kühlturm -->
+          <g class="lay lay-far" fill="#30527f" stroke="#30527f">
+            <path d="M0 560 C180 530 380 548 600 532 S1000 512 1200 524 S1480 506 1600 516 V720 H0Z" stroke="none"/>
+            <g fill="none" stroke-width="4"><path d="M1088 524 L1140 438 L1192 524 Z M1114 481 H1166 M1140 438 V524 M1101 503 L1179 503"/></g>
+            <g fill="none" stroke-width="6" stroke-linejoin="round"><path d="M1262 524 L1286 404 M1314 524 L1292 404 M1272 470 H1306 M1278 440 H1300 M1292 414 L1366 524"/></g>
+            <g fill="none" stroke-width="4"><circle cx="1281" cy="400" r="14"/><circle cx="1301" cy="400" r="14"/></g>
+            <g class="wheel" fill="none" stroke-width="2"><path d="M1281 386 V414 M1267 400 H1295 M1301 386 V414 M1287 400 H1315"/></g>
+            <rect x="1398" y="410" width="74" height="114" stroke="none"/><path d="M1398 410 Q1435 392 1472 410" stroke="none"/>
+            <g stroke="#284670" stroke-width="2"><path d="M1410 412 V524 M1424 410 V524 M1438 408 V524 M1452 410 V524 M1464 412 V524"/></g>
+            <rect x="1500" y="372" width="14" height="152" stroke="none"/>
+            <path d="M1540 524 C1556 486 1552 452 1560 426 H1620 V524 Z" stroke="none"/>
+            <g class="smoke" fill="#9fb8d6" stroke="none" opacity=".18"><circle cx="1507" cy="356" r="10"/><circle cx="1522" cy="338" r="14"/><circle cx="1546" cy="318" r="18"/></g>
+          </g>
+
+          <!-- Münsterland: Hof, Kirchturm, Windmühle, Bäume -->
+          <g class="lay lay-mid" fill="#1f3c63">
+            <path d="M0 600 C160 572 320 586 520 570 S920 552 1120 566 S1440 548 1600 560 V720 H0Z"/>
+            <circle cx="560" cy="560" r="30"/><circle cx="596" cy="552" r="38"/><circle cx="636" cy="566" r="26"/>
+            <path d="M660 572 V528 L716 470 L772 528 V572 Z"/><path d="M700 528 h20 v22 h-20z" fill="#2a4a74"/>
+            <path d="M836 572 V452 H862 V572 Z M836 452 L849 380 L862 452 Z"/><path d="M862 572 V514 L912 486 L962 514 V572 Z"/>
+            <circle cx="849" cy="470" r="6" fill="#2a4a74"/>
+            <path d="M1022 572 L1030 472 H1050 L1058 572 Z"/><path d="M1026 472 Q1040 456 1054 472 Z"/>
+            <g class="sails" style="transform-origin: 1040px 468px"><path d="M1037 468 V392 H1043 V468 Z M1040 465 H1116 V471 H1040 Z M1043 468 V544 H1037 V468 Z M1040 471 H964 V465 H1040 Z"/><path d="M1043 400 h14 v60 h-14z M1048 471 h60 v14 h-60z M1023 476 h14 v60 h-14z M972 451 h60 v14 h-60z" opacity=".75"/></g>
+            <circle cx="1150" cy="566" r="24"/><circle cx="1182" cy="556" r="32"/><circle cx="1218" cy="568" r="22"/>
+          </g>
+
+          <rect y="520" width="1600" height="110" fill="url(#mist)"/>
+
+          <!-- Vorne: Giebelhäuser wie in der Borkener Innenstadt -->
+          <g class="lay lay-front" fill="#132946"><path id="front-row"/><g id="win"></g></g>
+          <rect y="716" width="1600" height="90" fill="#132946"/>
+          </g>
+        </svg>
         <!-- In WordPress: <video autoplay muted loop playsinline poster="…"><source src="…/hero.mp4" type="video/mp4"></video> -->
       </div>
       <div class="hero-veil" aria-hidden="true"></div>
-      <svg class="hero-roof" viewBox="0 0 1440 800" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><path d="M720 640 L1100 400 L1480 640"/></svg>
       <div class="wrap">
         <div class="hero-copy">
           <h1><span class="kicker">Bausachverständiger für Münsterland und Ruhrgebiet</span> <span class="hl">Der Sache auf den Grund.</span> <span class="blue">Für Sie auf den Punkt.</span></h1>
@@ -707,7 +802,6 @@ main { overflow-x: clip; }
           </div>
         </div>
       </div>
-      <span class="hero-note">Platzhalter: hier läuft später Andrés eigenes Video</span>
       <span class="scroll-hint" aria-hidden="true"></span>
     </section>
 
@@ -867,15 +961,22 @@ main { overflow-x: clip; }
       </div>
     </section>
 
-    <section class="section section--soft" id="einsatzgebiet">
-      <div class="wrap area">
+    <section class="section area-sec" id="einsatzgebiet">
+      <div class="wrap area2">
         <div class="area-copy">
           <span class="kicker">Einsatzgebiet</span>
-          <h2>Bausachverständiger für das Münsterland und das Ruhrgebiet</h2>
-          <p>Mein Büro liegt in Borken. Von hier aus bin ich schnell bei Ihnen vor Ort, ob in Bocholt, Ahaus und Coesfeld oder in Dorsten, Bottrop und Gelsenkirchen. Das Münsterland und das Ruhrgebiet liegen direkt vor meiner Haustür. <span class="ph">[Umfang bestätigen]</span></p>
+          <h2>Mittendrin zwischen <span class="blue">Münsterland und Ruhrgebiet</span></h2>
+          <p>Borken liegt genau zwischen zwei Regionen. Nach Bocholt sind es rund 20 Minuten, nach Coesfeld, Dorsten oder Bottrop etwa eine halbe Stunde. Und wenn es weiter sein darf: Ich fahre gern auch ein Stück. <span class="ph">[Umfang bestätigen]</span></p>
+          <div class="regions">
+            <div><h3>Münsterland</h3><ul id="list-ms"></ul></div>
+            <div><h3>Ruhrgebiet</h3><ul id="list-ruhr"></ul></div>
+          </div>
           <a class="btn btn--outline" href="#kontakt">Ortstermin anfragen <span class="arrow">→</span></a>
         </div>
-        <ul class="towns" id="towns" aria-label="Orte im Einsatzgebiet"></ul>
+        <figure class="map-wrap">
+          <svg class="map" id="map" viewBox="-70 -70 140 140" role="img" aria-label="Karte des Einsatzgebiets rund um Borken mit Entfernungsringen von 20, 40 und 60 Kilometern"></svg>
+          <figcaption>Luftlinie ab Borken · Ringe in 20, 40 und 60 km</figcaption>
+        </figure>
       </div>
     </section>
   </div>
@@ -1224,10 +1325,27 @@ const SEO = {
   thermografie: ["Bau-Thermografie & Wärmebild vom Haus | Münsterland", "Wärmebilder zeigen Wärmebrücken, fehlende Dämmung und Feuchte. Bau-Thermografie im Münsterland und Ruhrgebiet mit verständlicher Auswertung.", "Bau-Thermo­grafie und Wärme­bilder"]
 };
 
-const TOWNS = ["Borken", "Bocholt", "Rhede", "Isselburg", "Raesfeld", "Heiden", "Reken", "Velen", "Gescher", "Stadtlohn", "Südlohn", "Vreden", "Ahaus", "Legden", "Gronau", "Coesfeld", "Dülmen", "Hamminkeln", "Dorsten", "Haltern am See", "Marl", "Gladbeck", "Bottrop", "Gelsenkirchen"];
+/* Einsatzgebiet: Karte rund um Borken (ungefähre Lage nach Koordinaten, Luftlinie) */
+const ORTE_MS = [["Bocholt", 51.838, 6.615], ["Rhede", 51.836, 6.697], ["Raesfeld", 51.767, 6.844], ["Heiden", 51.826, 6.935], ["Reken", 51.795, 7.045], ["Velen", 51.894, 6.99], ["Gescher", 51.954, 7.006], ["Stadtlohn", 51.993, 6.917], ["Südlohn", 51.944, 6.864], ["Vreden", 52.035, 6.828], ["Ahaus", 52.076, 7.008], ["Legden", 52.032, 7.101], ["Gronau", 52.212, 7.025], ["Coesfeld", 51.946, 7.168], ["Dülmen", 51.831, 7.28], ["Münster", 51.962, 7.626], ["Isselburg", 51.832, 6.463]];
+const ORTE_RUHR = [["Dorsten", 51.661, 6.965], ["Haltern am See", 51.743, 7.184], ["Marl", 51.656, 7.09], ["Gladbeck", 51.571, 6.987], ["Bottrop", 51.524, 6.929], ["Gelsenkirchen", 51.517, 7.1], ["Recklinghausen", 51.614, 7.198], ["Oberhausen", 51.47, 6.852], ["Essen", 51.455, 7.012], ["Bochum", 51.482, 7.216], ["Wesel", 51.658, 6.618], ["Hamminkeln", 51.73, 6.59]];
+const LABEL = { Bocholt: "b", Ahaus: "r", Gronau: "r", Coesfeld: "r", "Münster": "l", Dorsten: "l", "Haltern am See": "r", Bottrop: "l", Gelsenkirchen: "r", Essen: "r", Recklinghausen: "r", Wesel: "l", Stadtlohn: "l", "Dülmen": "r" };
+(function () {
+  const map = document.getElementById("map"); if (!map) return;
+  const B = [51.844, 6.858], kx = 68.9, ky = 111.2;
+  const pos = ([, la, lo]) => [(lo - B[1]) * kx, -(la - B[0]) * ky];
+  let h = `<circle class="m-ring" pathLength="1" r="60" style="--d:.1s"/><circle class="m-ring" pathLength="1" r="40" style="--d:.25s"/><circle class="m-ring" pathLength="1" r="20" style="--d:.4s"/>`;
+  h += [20, 40, 60].map(r => { const c = (-r * .707 - 1).toFixed(1); return `<text class="m-km" x="${c}" y="${c}" transform="rotate(-45 ${c} ${c})">${r} km</text>`; }).join("");
+  h += `<text class="m-reg" x="36" y="-50">MÜNSTERLAND</text><text class="m-reg" x="-34" y="58">RUHRGEBIET</text>`;
+  const dot = (o, cls, i) => { const [x, y] = pos(o), side = LABEL[o[0]];
+    return `<g class="m-dot ${cls}" style="--i:${i}"><circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="${side ? 1.6 : 1.1}"/>${side ? `<text x="${(x + (side === "r" ? 2.8 : side === "l" ? -2.8 : 0)).toFixed(1)}" y="${(y + (side === "b" ? 4.6 : 1.1)).toFixed(1)}" text-anchor="${side === "r" ? "start" : side === "l" ? "end" : "middle"}">${o[0]}</text>` : ""}</g>`; };
+  h += ORTE_MS.map((o, i) => dot(o, "ms", i)).join("") + ORTE_RUHR.map((o, i) => dot(o, "ruhr", i + ORTE_MS.length)).join("");
+  h += `<g class="m-home"><circle class="m-pulse" r="4"/><circle r="2.6"/><text x="0" y="-5" text-anchor="middle">Borken</text></g>`;
+  map.innerHTML = h;
+  document.getElementById("list-ms").innerHTML = ["Borken", ...ORTE_MS.map(o => o[0])].map(t => `<li>${t}</li>`).join("");
+  document.getElementById("list-ruhr").innerHTML = ORTE_RUHR.map(o => `<li>${o[0]}</li>`).join("");
+})();
+const TOWNS = ["Borken", ...ORTE_MS.map(o => o[0]), ...ORTE_RUHR.map(o => o[0])];
 const PIN = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-7-6.2-7-11.5A7 7 0 0119 9.5C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg>';
-const townChip = (t, i) => `<li${i === 0 ? ' class="home"' : ""}>${PIN}${t}</li>`;
-document.getElementById("towns").innerHTML = TOWNS.map(townChip).join("");
 
 function setMeta(key, l) {
   const d = SEO[key] || SEO.start;
@@ -1358,7 +1476,7 @@ const REDUCED = matchMedia("(prefers-reduced-motion: reduce)").matches;
 })();
 
 /* Abschnitte beim Scrollen einblenden */
-const REVEAL = ".head, .tile, .zcopy, .tape li, .result, .proto, .faq details, .checks li, .facts-box, .intro-text .isec, .intro-text > p, .statement blockquote, .statement-text, .statement .sig, .towns li, .area-copy, .qual, .ccard, .cost > div, .more-grid > div, .contact-band .wrap > *, .finder-copy > *, .prose > *";
+const REVEAL = ".head, .tile, .zcopy, .tape li, .result, .proto, .faq details, .checks li, .facts-box, .intro-text .isec, .intro-text > p, .statement blockquote, .statement-text, .statement .sig, .towns li, .area-copy, .regions, .qual, .ccard, .cost > div, .more-grid > div, .contact-band .wrap > *, .finder-copy > *, .prose > *";
 const io = "IntersectionObserver" in window ? new IntersectionObserver(es => es.forEach(e => {
   if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); }
 }), { rootMargin: "0px 0px -8% 0px", threshold: .08 }) : null;
@@ -1371,9 +1489,9 @@ function applyReveal(scope) {
     el.classList.add("reveal"); io.observe(el);
   });
   scope.querySelectorAll(".zmedia .photo").forEach(el => { if (!el.classList.contains("reveal-img")) { el.classList.add("reveal-img"); io.observe(el.parentElement); } });
-  scope.querySelectorAll(".finder").forEach(el => io.observe(el));
+  scope.querySelectorAll(".finder, .map-wrap").forEach(el => io.observe(el));
 }
-if (REDUCED || !io) document.querySelectorAll(".finder").forEach(el => el.classList.add("in"));
+if (REDUCED || !io) document.querySelectorAll(".finder, .map-wrap").forEach(el => el.classList.add("in"));
 
 /* Kopfzeile beim Scrollen */
 (function () {
@@ -1426,8 +1544,8 @@ function route() {
   setTimeout(() => {
     swapPage(); applyReveal(document);
     c.classList.remove("cover"); c.classList.add("leave");
-    setTimeout(() => c.classList.remove("leave"), 520);
-  }, 440);
+    setTimeout(() => c.classList.remove("leave"), 1000);
+  }, 950);
 }
 window.addEventListener("hashchange", route);
 route();
@@ -1437,68 +1555,41 @@ document.getElementById("kontaktformular").addEventListener("submit", e => {
   document.getElementById("form-msg").textContent = "Vorschau: Es wurde nichts gesendet. Das echte Formular kommt mit dem WordPress-Theme.";
 });
 
-/* ---------- Hero: Platzhalter-Szene (Klinkerfassade, langsame Kamerafahrt) ----------
-   In WordPress ersetzt Andrés Video diese Szene. */
+/* ---------- Hero: gezeichnete Abendlandschaft vom Münsterland bis ins Ruhrgebiet ----------
+   Bis Andrés Video fertig ist. Danach ersetzt das Video die Szene. */
 (function () {
-  const hero = document.getElementById("hero"), stage = document.getElementById("stage");
-    const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
-  const W = 2400, H = 1400, src = document.createElement("canvas"); src.width = W; src.height = H;
-  const g = src.getContext("2d");
-  let seed = 7; const rnd = () => (seed = (seed * 16807) % 2147483647) / 2147483647;
-  g.fillStyle = "#b7b0a6"; g.fillRect(0, 0, W, H);
-  const bw = 96, bh = 30, j = 9;
-  for (let r = 0, y = 0; y < H; r++, y += bh + j) {
-    for (let x = (r % 2) * -(bw / 2) - 20; x < W; x += bw + j) {
-      const t = rnd(); const base = [[122, 48, 38], [104, 40, 34], [140, 62, 46], [88, 36, 34], [116, 56, 48]][Math.floor(t * 5)];
-      const k = .85 + rnd() * .3;
-      g.fillStyle = `rgb(${base[0] * k | 0},${base[1] * k | 0},${base[2] * k | 0})`;
-      g.fillRect(x, y, bw, bh);
-      g.fillStyle = "rgba(255,255,255,.05)"; g.fillRect(x, y, bw, 3);
-      g.fillStyle = "rgba(0,0,0,.12)"; g.fillRect(x, y + bh - 4, bw, 4);
+  const svg = document.getElementById("scene"); if (!svg) return;
+  const NS = "http://www.w3.org/2000/svg";
+  let seed = 11; const rnd = () => (seed = (seed * 16807) % 2147483647) / 2147483647;
+  const stars = document.getElementById("stars");
+  for (let i = 0; i < 70; i++) {
+    const c = document.createElementNS(NS, "circle");
+    c.setAttribute("cx", (rnd() * 1600).toFixed(1)); c.setAttribute("cy", (rnd() * 330).toFixed(1));
+    c.setAttribute("r", (rnd() * 1.3 + .4).toFixed(2)); c.setAttribute("class", "star");
+    c.style.animationDelay = (rnd() * 5).toFixed(2) + "s"; stars.appendChild(c);
+  }
+  let d = "", wins = "", x = -10, n = 0;
+  while (x < 1610) {
+    const w = 46 + Math.round(rnd() * 34), eave = 646 + Math.round(rnd() * 24), apex = eave - 34 - Math.round(rnd() * 22);
+    d += `M${x} 720 V${eave} L${x + w / 2} ${apex} L${x + w} ${eave} V720 Z `;
+    const cols = w > 64 ? 3 : 2, gap = w / (cols + 1);
+    for (let r = 0; r < 2; r++) for (let k = 1; k <= cols; k++) {
+      const lit = rnd() < .38;
+      wins += `<rect x="${(x + gap * k - 4).toFixed(1)}" y="${eave + 12 + r * 24}" width="8" height="11" rx="1"${lit ? ` class="lit" style="--d:${(.6 + rnd() * 2.4).toFixed(2)}s"` : ""}/>`;
+      n++;
     }
+    if (rnd() < .5) { const wx = x + w / 2 - 4; wins += `<rect x="${wx}" y="${apex + 16}" width="8" height="10" rx="1"${rnd() < .4 ? ` class="lit" style="--d:${(1 + rnd() * 2).toFixed(2)}s"` : ""}/>`; }
+    x += w + 2;
   }
-  // Fenster mit Laibung und Fensterbank
-  const fx = 1240, fy = 170, fw = 600, fh = 560;
-  g.fillStyle = "#2b3138"; g.fillRect(fx - 26, fy - 26, fw + 52, fh + 52);
-  const sky = g.createLinearGradient(0, fy, 0, fy + fh); sky.addColorStop(0, "#c9d6e2"); sky.addColorStop(1, "#7e8fa0");
-  g.fillStyle = sky; g.fillRect(fx, fy, fw, fh);
-  g.fillStyle = "rgba(255,255,255,.18)"; g.beginPath(); g.moveTo(fx + 80, fy); g.lineTo(fx + 300, fy); g.lineTo(fx + 120, fy + fh); g.lineTo(fx - 100 + 100, fy + fh); g.fill();
-  g.fillStyle = "#2b3138"; g.fillRect(fx + fw / 2 - 12, fy, 24, fh);
-  g.fillStyle = "#565f69"; g.fillRect(fx - 60, fy + fh + 26, fw + 120, 34);
-  g.fillStyle = "rgba(0,0,0,.25)"; g.fillRect(fx - 60, fy + fh + 60, fw + 120, 26);
-  // Feuchtefleck und Riss am Sockel
-  const st = g.createRadialGradient(1880, 1130, 20, 1880, 1130, 300); st.addColorStop(0, "rgba(40,30,25,.55)"); st.addColorStop(1, "rgba(40,30,25,0)");
-  g.fillStyle = st; g.fillRect(1500, 800, 800, 600);
-  g.strokeStyle = "rgba(20,14,12,.85)"; g.lineWidth = 3; g.beginPath(); let cx = 1700, cy = 850; g.moveTo(cx, cy);
-  for (let i = 0; i < 26; i++) { cx += (rnd() - .35) * 26; cy += 14 + rnd() * 10; g.lineTo(cx, cy); } g.stroke();
-  const light = g.createLinearGradient(0, 0, W, H); light.addColorStop(0, "rgba(255,240,220,.18)"); light.addColorStop(1, "rgba(0,0,0,.3)");
-  g.fillStyle = light; g.fillRect(0, 0, W, H);
-
-  const sctx = stage.getContext("2d");
-  let vw = 0, vh = 0, dpr = 1;
-  function resize() {
-    const r = hero.getBoundingClientRect(); dpr = Math.min(devicePixelRatio || 1, 2);
-    vw = r.width; vh = r.height; stage.width = vw * dpr; stage.height = vh * dpr;
-  }
-  addEventListener("resize", () => { resize(); if (reduce) requestAnimationFrame(frame); }); resize();
-  addEventListener("hashchange", () => { setTimeout(() => { resize(); if (reduce) requestAnimationFrame(frame); }, 0); });
-
-  const t0 = performance.now();
-
-  function view(t) {
-    const zoom = reduce ? 1.06 : 1.06 + .05 * Math.sin(t / 9000);
-    const scale = Math.max(vw / W, vh / H) * zoom;
-    const ox = (vw - W * scale) / 2 + (reduce ? 0 : Math.sin(t / 11000) * 30);
-    const oy = (vh - H * scale) / 2 + (reduce ? 0 : Math.cos(t / 13000) * 18);
-    return { scale, ox, oy };
-  }
-  function frame(now) {
-    if (!hero.offsetParent) { if (!reduce) requestAnimationFrame(frame); return; }
-    const t = now - t0, v = view(t);
-    sctx.setTransform(dpr, 0, 0, dpr, 0, 0); sctx.drawImage(src, v.ox, v.oy, W * v.scale, H * v.scale);
-    if (!reduce) requestAnimationFrame(frame);
-  }
-  requestAnimationFrame(frame);
+  document.getElementById("front-row").setAttribute("d", d);
+  document.getElementById("win").innerHTML = wins;
+  /* leichte Tiefenwirkung mit der Maus */
+  const hero = document.getElementById("hero"), lays = [[".lay-far", 6], [".lay-mid", 12], [".lay-front", 20]].map(([s, f]) => [svg.querySelector(s), f]);
+  if (!matchMedia("(prefers-reduced-motion: reduce)").matches) hero.addEventListener("pointermove", e => {
+    if (e.pointerType !== "mouse") return;
+    const r = hero.getBoundingClientRect(), dx = (e.clientX - r.left) / r.width - .5;
+    lays.forEach(([el, f]) => { el.style.transform = `translateX(${(-dx * f).toFixed(1)}px)`; });
+  });
 })();
 </script>
 </body>
