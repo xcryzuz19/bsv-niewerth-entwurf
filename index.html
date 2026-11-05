@@ -159,7 +159,7 @@ body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-a
 .hero { position: relative; overflow: hidden; background: var(--navy-3); color: #fff; isolation: isolate; }
 .hero-stage { position: absolute; inset: 0; z-index: -2; }
 .hero-stage canvas, .hero-stage video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; }
-.hero-veil { position: absolute; inset: 0; z-index: -1; background: linear-gradient(95deg, rgb(8 17 28 / .9) 0%, rgb(12 25 42 / .62) 40%, rgb(12 25 42 / .08) 72%, transparent 100%); }
+.hero-veil { position: absolute; inset: 0; z-index: -1; background: linear-gradient(95deg, rgb(8 17 28 / .94) 0%, rgb(12 25 42 / .82) 38%, rgb(12 25 42 / .35) 70%, rgb(12 25 42 / .2) 100%), linear-gradient(0deg, rgb(8 17 28 / .55), transparent 35%); }
 .hero-roof { position: absolute; left: 0; right: 0; top: 0; height: 100%; z-index: 0; pointer-events: none; }
 .hero-roof path { fill: none; stroke: rgb(90 162 234 / .35); stroke-width: 1.5; stroke-dasharray: 2600; stroke-dashoffset: 2600; animation: draw 2.4s cubic-bezier(.6,.1,.2,1) .3s forwards; }
 @keyframes draw { to { stroke-dashoffset: 0; } }
@@ -634,6 +634,16 @@ textarea { min-height: 140px; resize: vertical; }
   .map .m-ring { stroke-dashoffset: 0; }
 }
 
+.hero-photo { position: absolute; inset: 0; background: #1a2a40 center 35% / cover no-repeat; transform: scale(1.08); animation: kenburns 22s ease-out forwards; }
+@keyframes kenburns { to { transform: scale(1); } }
+.photo.has-img { background-size: cover; background-position: center; background-repeat: no-repeat; }
+.photo.has-img .cap { display: none; }
+.credit, .hero-credit { position: absolute; z-index: 2; right: 10px; bottom: 10px; font: 500 .68rem/1.3 var(--font-body); color: #fff; background: rgb(8 17 28 / .6); padding: 3px 8px; border-radius: 3px; backdrop-filter: blur(4px); }
+.credit a, .hero-credit a { color: #fff; }
+.hero-credit { right: max(20px, env(safe-area-inset-right, 0px)); bottom: 100px; }
+@media (max-width: 760px) { .hero-credit { bottom: 84px; } }
+@media (prefers-reduced-motion: reduce) { .hero-photo { animation: none; transform: none; } }
+
 main { overflow-x: clip; }
 [data-page] { display: none; }
 [data-page].is-active { display: block; }
@@ -734,55 +744,7 @@ main { overflow-x: clip; }
   <div data-page="start" class="is-active">
     <section class="hero" id="hero">
       <div class="hero-stage" aria-hidden="true">
-        <svg class="scene" id="scene" viewBox="0 0 1600 720" preserveAspectRatio="xMaxYMax slice" aria-hidden="true">
-          <defs>
-            <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0" stop-color="#08131f"/><stop offset=".45" stop-color="#13294a"/><stop offset=".72" stop-color="#2a4c78"/><stop offset=".84" stop-color="#4c6f9a"/>
-            </linearGradient>
-            <radialGradient id="dusk" cx=".78" cy=".78" r=".55"><stop offset="0" stop-color="#f2b27a" stop-opacity=".38"/><stop offset=".45" stop-color="#7d8fc0" stop-opacity=".18"/><stop offset="1" stop-color="#4c6f9a" stop-opacity="0"/></radialGradient>
-            <linearGradient id="mist" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#9fb8d6" stop-opacity="0"/><stop offset=".5" stop-color="#9fb8d6" stop-opacity=".12"/><stop offset="1" stop-color="#9fb8d6" stop-opacity="0"/></linearGradient>
-          </defs>
-          <rect width="1600" height="720" fill="url(#sky)"/>
-          <rect width="1600" height="720" fill="url(#dusk)"/>
-          <g id="stars"></g>
-          <radialGradient id="moonGlow"><stop offset="0" stop-color="#fff6e6" stop-opacity=".9"/><stop offset=".25" stop-color="#ffe2b8" stop-opacity=".35"/><stop offset="1" stop-color="#ffe2b8" stop-opacity="0"/></radialGradient>
-          <circle cx="1460" cy="170" r="120" fill="url(#moonGlow)" opacity=".55"/>
-          <circle cx="1460" cy="170" r="17" fill="#fff4e0"/>
-          <g transform="translate(0 -78)">
-
-          <!-- Ruhrgebiet in der Ferne: Tetraeder, Förderturm, Gasometer, Schlot, Kühlturm -->
-          <g class="lay lay-far" fill="#30527f" stroke="#30527f">
-            <path d="M0 560 C180 530 380 548 600 532 S1000 512 1200 524 S1480 506 1600 516 V720 H0Z" stroke="none"/>
-            <g fill="none" stroke-width="4"><path d="M1088 524 L1140 438 L1192 524 Z M1114 481 H1166 M1140 438 V524 M1101 503 L1179 503"/></g>
-            <g fill="none" stroke-width="6" stroke-linejoin="round"><path d="M1262 524 L1286 404 M1314 524 L1292 404 M1272 470 H1306 M1278 440 H1300 M1292 414 L1366 524"/></g>
-            <g fill="none" stroke-width="4"><circle cx="1281" cy="400" r="14"/><circle cx="1301" cy="400" r="14"/></g>
-            <g class="wheel" fill="none" stroke-width="2"><path d="M1281 386 V414 M1267 400 H1295 M1301 386 V414 M1287 400 H1315"/></g>
-            <rect x="1398" y="410" width="74" height="114" stroke="none"/><path d="M1398 410 Q1435 392 1472 410" stroke="none"/>
-            <g stroke="#284670" stroke-width="2"><path d="M1410 412 V524 M1424 410 V524 M1438 408 V524 M1452 410 V524 M1464 412 V524"/></g>
-            <rect x="1500" y="372" width="14" height="152" stroke="none"/>
-            <path d="M1540 524 C1556 486 1552 452 1560 426 H1620 V524 Z" stroke="none"/>
-            <g class="smoke" fill="#9fb8d6" stroke="none" opacity=".18"><circle cx="1507" cy="356" r="10"/><circle cx="1522" cy="338" r="14"/><circle cx="1546" cy="318" r="18"/></g>
-          </g>
-
-          <!-- Münsterland: Hof, Kirchturm, Windmühle, Bäume -->
-          <g class="lay lay-mid" fill="#1f3c63">
-            <path d="M0 600 C160 572 320 586 520 570 S920 552 1120 566 S1440 548 1600 560 V720 H0Z"/>
-            <circle cx="560" cy="560" r="30"/><circle cx="596" cy="552" r="38"/><circle cx="636" cy="566" r="26"/>
-            <path d="M660 572 V528 L716 470 L772 528 V572 Z"/><path d="M700 528 h20 v22 h-20z" fill="#2a4a74"/>
-            <path d="M836 572 V452 H862 V572 Z M836 452 L849 380 L862 452 Z"/><path d="M862 572 V514 L912 486 L962 514 V572 Z"/>
-            <circle cx="849" cy="470" r="6" fill="#2a4a74"/>
-            <path d="M1022 572 L1030 472 H1050 L1058 572 Z"/><path d="M1026 472 Q1040 456 1054 472 Z"/>
-            <g class="sails" style="transform-origin: 1040px 468px"><path d="M1037 468 V392 H1043 V468 Z M1040 465 H1116 V471 H1040 Z M1043 468 V544 H1037 V468 Z M1040 471 H964 V465 H1040 Z"/><path d="M1043 400 h14 v60 h-14z M1048 471 h60 v14 h-60z M1023 476 h14 v60 h-14z M972 451 h60 v14 h-60z" opacity=".75"/></g>
-            <circle cx="1150" cy="566" r="24"/><circle cx="1182" cy="556" r="32"/><circle cx="1218" cy="568" r="22"/>
-          </g>
-
-          <rect y="520" width="1600" height="110" fill="url(#mist)"/>
-
-          <!-- Vorne: Giebelhäuser wie in der Borkener Innenstadt -->
-          <g class="lay lay-front" fill="#132946"><path id="front-row"/><g id="win"></g></g>
-          <rect y="716" width="1600" height="90" fill="#132946"/>
-          </g>
-        </svg>
+        <div class="hero-photo" data-photo="hero" role="img" aria-label="Beispielfoto: Fachleute vermessen eine Mauerwerkswand mit dem Zollstock"></div>
         <!-- In WordPress: <video autoplay muted loop playsinline poster="…"><source src="…/hero.mp4" type="video/mp4"></video> -->
       </div>
       <div class="hero-veil" aria-hidden="true"></div>
@@ -802,6 +764,7 @@ main { overflow-x: clip; }
           </div>
         </div>
       </div>
+      <span class="hero-credit" id="hero-credit"></span>
       <span class="scroll-hint" aria-hidden="true"></span>
     </section>
 
@@ -884,7 +847,7 @@ main { overflow-x: clip; }
         <div class="zrow">
           <div class="zmedia">
             <div class="dim"><i></i><span>Ortstermin</span><i></i></div>
-            <div class="photo"><div class="cap"><svg aria-hidden="true"><use href="#i-photo"/></svg>Foto: André bei der Untersuchung einer Fassade oder eines Fensteranschlusses</div></div>
+            <div class="photo" data-photo="z-ortstermin"><div class="cap"><svg aria-hidden="true"><use href="#i-photo"/></svg>Foto: André bei der Untersuchung einer Fassade oder eines Fensteranschlusses</div></div>
             <div class="spot spot--left" style="--x:62%;--y:38%"><span class="dot"></span><span class="lbl">Fensteranschluss<small>Messpunkt 1</small></span></div>
             <div class="spot" style="--x:34%;--y:72%"><span class="dot"></span><span class="lbl">Sockel<small>Messpunkt 2</small></span></div>
           </div>
@@ -898,7 +861,7 @@ main { overflow-x: clip; }
         <div class="zrow">
           <div class="zmedia">
             <div class="dim"><i></i><span>Ursache</span><i></i></div>
-            <div class="photo"><div class="cap"><svg aria-hidden="true"><use href="#i-photo"/></svg>Foto: Feuchtemessung an einer Wand oder Schimmelstelle</div></div>
+            <div class="photo" data-photo="z-ursache"><div class="cap"><svg aria-hidden="true"><use href="#i-photo"/></svg>Foto: Feuchtemessung an einer Wand oder Schimmelstelle</div></div>
             <div class="spot" style="--x:48%;--y:34%"><span class="dot"></span><span class="lbl">4,8 M-%<small>Materialfeuchte, Beispiel</small></span></div>
           </div>
           <div class="zcopy">
@@ -911,7 +874,7 @@ main { overflow-x: clip; }
         <div class="zrow">
           <div class="zmedia">
             <div class="dim"><i></i><span>Baustelle</span><i></i></div>
-            <div class="photo"><div class="cap"><svg aria-hidden="true"><use href="#i-photo"/></svg>Foto: Baupläne mit Zollstock und Wasserwaage oder Kontrolle auf der Baustelle</div></div>
+            <div class="photo" data-photo="z-baustelle"><div class="cap"><svg aria-hidden="true"><use href="#i-photo"/></svg>Foto: Baupläne mit Zollstock und Wasserwaage oder Kontrolle auf der Baustelle</div></div>
             <div class="spot spot--left" style="--x:70%;--y:60%"><span class="dot"></span><span class="lbl">Abdichtung geprüft<small>Bauphase Rohbau</small></span></div>
           </div>
           <div class="zcopy">
@@ -955,7 +918,7 @@ main { overflow-x: clip; }
           </div>
           <div class="zmedia">
             <div class="dim"><i></i><span>Ausrüstung</span><i></i></div>
-            <div class="photo"><div class="cap"><svg aria-hidden="true"><use href="#i-photo"/></svg>Foto: Messkoffer und Geräte, ordentlich ausgelegt</div></div>
+            <div class="photo" data-photo="z-mess"><div class="cap"><svg aria-hidden="true"><use href="#i-photo"/></svg>Foto: Messkoffer und Geräte, ordentlich ausgelegt</div></div>
           </div>
         </div>
       </div>
@@ -1176,7 +1139,7 @@ const LEISTUNGEN = [
     anlaesse: ["Risse in Mauerwerk, Putz oder Beton", "Feuchte Wände, nasser Keller, Ausblühungen", "Schimmel in Wohnräumen", "Schäden nach Sturm, Leitungswasser oder Brand", "Mängel nach einer Sanierung oder am Neubau"],
     vorgehen: [["Erstgespräch", "Sie schildern den Schaden am Telefon oder schicken Fotos. Ich sage Ihnen, ob ein Ortstermin sinnvoll ist."], ["Ortstermin", "Ich untersuche den Schaden, messe Feuchte und Temperaturen und dokumentiere alles mit Fotos."], ["Ursachenanalyse", "Ich werte die Messungen aus und ermittle, wodurch der Schaden entstanden ist."], ["Empfehlung", "Sie erhalten eine Einschätzung mit Sanierungsweg, auf Wunsch als Bericht oder Gutachten."]],
     ergebnis: [["i-shield", "Klare Ursache", "Sie wissen, woher der Schaden kommt, und behandeln nicht nur die Symptome."], ["i-euro", "Kostenrahmen", "Eine realistische Einschätzung, was die Sanierung kosten wird."], ["i-doc", "Dokumentation", "Fotos und Messwerte, die Sie gegenüber Versicherung oder Handwerker verwenden können."]],
-    faq: [["Was kostet die Begutachtung eines Schadens?", "Das hängt vom Umfang ab. Nach dem Erstgespräch nenne ich Ihnen einen festen Preis oder einen Kostenrahmen. " + ph("[Preisangaben ergänzen, z. B. Ortstermin ab … €]")], ["Übernimmt die Versicherung die Kosten?", "Bei versicherten Schäden werden die Gutachterkosten häufig ganz oder teilweise erstattet. Klären Sie das am besten vorab mit Ihrer Versicherung."], ["Wie schnell können Sie kommen?", "In der Regel bin ich innerhalb von 48 Stunden bei Ihnen vor Ort."]] },
+    faq: [["Was kostet die Begutachtung eines Schadens?", "Das hängt vom Umfang ab. Nach dem Erstgespräch nenne ich Ihnen einen festen Preis oder einen Kostenrahmen. "], ["Übernimmt die Versicherung die Kosten?", "Bei versicherten Schäden werden die Gutachterkosten häufig ganz oder teilweise erstattet. Klären Sie das am besten vorab mit Ihrer Versicherung."], ["Wie schnell können Sie kommen?", "In der Regel bin ich innerhalb von 48 Stunden bei Ihnen vor Ort."]] },
 
   { slug: "hauskaufberatung", icon: "kauf", title: "Haus- und Wohnungs\u00adkauf\u00adberatung", short: "Ob Haus oder Eigentumswohnung, Bestand oder Neubau: Ich prüfe den baulichen Zustand und mögliche Mängel, damit Sie Ihre Kaufentscheidung auf einer fundierten Grundlage treffen.",
     foto: "Foto: Besichtigung eines Hauses, Blick auf Dach oder Keller",
@@ -1382,7 +1345,7 @@ function leistungPage(l) {
       </div>
       <div class="zmedia">
         <div class="dim"><i></i><span>${l.title}</span><i></i></div>
-        <div class="photo photo--dark"><div class="cap">${use("i-photo")}${l.foto}</div></div>
+        <div class="photo photo--dark" data-photo="${l.slug}"><div class="cap">${use("i-photo")}${l.foto}</div></div>
       </div>
     </div>
   </section>
@@ -1411,7 +1374,7 @@ function leistungPage(l) {
   <section class="section"><div class="wrap zig"><div class="zrow">
     <div class="zcopy"><span class="kicker">Typische Anlässe</span><h2>Wann Sie mich brauchen</h2>
       <ul class="checks">${l.anlaesse.map(a => `<li>${use("i-check")}<span>${a}</span></li>`).join("")}</ul></div>
-    <div class="zmedia"><div class="dim"><i></i><span>Aus der Praxis</span><i></i></div><div class="photo"><div class="cap">${use("i-photo")}Zweites Foto aus der Praxis, z. B. eine Detailaufnahme</div></div></div>
+    <div class="zmedia"><div class="dim"><i></i><span>Aus der Praxis</span><i></i></div><div class="photo" data-photo="${l.slug}-2"><div class="cap">${use("i-photo")}Zweites Foto aus der Praxis, z. B. eine Detailaufnahme</div></div></div>
   </div></div></section>
   <section class="section section--navy"><div class="wrap">
     <div class="head"><span class="kicker">Ablauf</span><h2>So gehe ich vor</h2></div>
@@ -1520,6 +1483,22 @@ if (REDUCED || !io) document.querySelectorAll(".finder, .map-wrap").forEach(el =
   });
 })();
 
+/* Beispielfotos von Unsplash (bis Andrés eigene Fotos fertig sind) */
+const PHOTOS = {"hero": {"src": "img/b2955caf620b.jpg", "by": "Glenov Brankovic", "link": "https://unsplash.com/@glenovbrankovic?utm_source=bsv_niewerth_entwurf&utm_medium=referral", "people": true, "alt": "Three construction workers in high-visibility vests and hard hats measuring a concrete block wall"}, "z-ortstermin": {"src": "img/9a48df949067.jpg", "by": "Will Haddock", "link": "https://unsplash.com/@willhaddock?utm_source=bsv_niewerth_entwurf&utm_medium=referral", "people": true, "alt": "A man in a quilted jacket holding a tablet in a residential neighborhood"}, "z-ursache": {"src": "img/47dd17b6e9c9.jpg", "by": "Mick Haupt", "link": "https://unsplash.com/@rocinante_11?utm_source=bsv_niewerth_entwurf&utm_medium=referral", "people": false, "alt": "white and gray brick wall"}, "z-baustelle": {"src": "img/29572d8b29ae.jpg", "by": "Troy Mortier", "link": "https://unsplash.com/@troyscanon?utm_source=bsv_niewerth_entwurf&utm_medium=referral", "people": false, "alt": "Wooden house frame under construction behind a fence"}, "z-mess": {"src": "img/c576e5cd7bb2.jpg", "by": "Louis Hansel", "link": "https://unsplash.com/@louishansel?utm_source=bsv_niewerth_entwurf&utm_medium=referral", "people": false, "alt": "white spirit level on brown table"}, "gebaeudeschaeden": {"src": "img/37d9563c3d9b.jpg", "by": "Krakograff Textures", "link": "https://unsplash.com/@krakograff?utm_source=bsv_niewerth_entwurf&utm_medium=referral", "people": false, "alt": "map"}, "gebaeudeschaeden-2": {"src": "img/e3a9e8e6542a.jpg", "by": "Hydra 4x", "link": "https://unsplash.com/@hydra4x?utm_source=bsv_niewerth_entwurf&utm_medium=referral", "people": false, "alt": "a wall that has some dirt on it"}, "hauskaufberatung": {"src": "img/1599099f68d8.jpg", "by": "Chris Weiher", "link": "https://unsplash.com/@chrisvomradio?utm_source=bsv_niewerth_entwurf&utm_medium=referral", "people": false, "alt": "a house with a large hedge in front of it"}, "hauskaufberatung-2": {"src": "img/66efb4e2e9b6.jpg", "by": "Ibrahim Rifath", "link": "https://unsplash.com/@ripey__?utm_source=bsv_niewerth_entwurf&utm_medium=referral", "people": false, "alt": "white Volkswagen Jetta parked beside house"}, "gutachten": {"src": "img/e15cc288a957.jpg", "by": "Daniel McCullough", "link": "https://unsplash.com/@d_mccullough?utm_source=bsv_niewerth_entwurf&utm_medium=referral", "people": true, "alt": "An architect working on a draft with a pencil and ruler"}, "gutachten-2": {"src": "img/9032acd1a27f.jpg", "by": "Tierra Mallorca", "link": "https://unsplash.com/@tierramallorca?utm_source=bsv_niewerth_entwurf&utm_medium=referral", "people": false, "alt": "white and red wooden house beside grey framed magnifying glass"}, "bauueberwachung": {"src": "img/29572d8b29ae.jpg", "by": "Troy Mortier", "link": "https://unsplash.com/@troyscanon?utm_source=bsv_niewerth_entwurf&utm_medium=referral", "people": false, "alt": "Wooden house frame under construction behind a fence"}, "bauueberwachung-2": {"src": "img/3df24a8974e8.jpg", "by": "Iain", "link": "https://unsplash.com/@photoken123?utm_source=bsv_niewerth_entwurf&utm_medium=referral", "people": false, "alt": "an aerial view of a building being constructed"}, "wertermittlung": {"src": "img/751f1f069f33.jpg", "by": "Sebastian Puskeiler", "link": "https://unsplash.com/@keiler?utm_source=bsv_niewerth_entwurf&utm_medium=referral", "people": false, "alt": "Brick house with red tiled roof and green door"}, "wertermittlung-2": {"src": "img/cc1654a44235.jpg", "by": "Sasun Bughdaryan", "link": "https://unsplash.com/@sasun1990?utm_source=bsv_niewerth_entwurf&utm_medium=referral", "people": false, "alt": "Magnifying glass over a wooden house model"}, "schlichtung": {"src": "img/3f37f17bb66c.jpg", "by": "ThisisEngineering", "link": "https://unsplash.com/@thisisengineering?utm_source=bsv_niewerth_entwurf&utm_medium=referral", "people": true, "alt": "man in orange and white striped polo shirt beside woman in black and white floral dress"}, "schlichtung-2": {"src": "img/741b6ef6d20d.jpg", "by": "Marek Studzinski", "link": "https://unsplash.com/@jccards?utm_source=bsv_niewerth_entwurf&utm_medium=referral", "people": false, "alt": "A ruler and a pencil laying on the floor"}, "energieberatung": {"src": "img/5bcbfd9d4322.jpg", "by": "Troy Mortier", "link": "https://unsplash.com/@troyscanon?utm_source=bsv_niewerth_entwurf&utm_medium=referral", "people": false, "alt": "Construction debris piled in front of a brick house"}, "energieberatung-2": {"src": "img/959ed172179e.jpg", "by": "rawkkim", "link": "https://unsplash.com/@rawkkim?utm_source=bsv_niewerth_entwurf&utm_medium=referral", "people": false, "alt": "A camera is set up to take a picture of a house"}, "leckageortung": {"src": "img/fe15d994c9d2.jpg", "by": "Brett Jordan", "link": "https://unsplash.com/@brett_jordan?utm_source=bsv_niewerth_entwurf&utm_medium=referral", "people": false, "alt": "A room with a ceiling that has been torn off"}, "leckageortung-2": {"src": "img/07d289b6bffe.jpg", "by": "Krakograff Textures", "link": "https://unsplash.com/@krakograff?utm_source=bsv_niewerth_entwurf&utm_medium=referral", "people": false, "alt": "A wall that has some paint on it"}, "thermografie": {"src": "img/97c7f58af874.jpg", "by": "Egor Komarov", "link": "https://unsplash.com/@egorkomarov?utm_source=bsv_niewerth_entwurf&utm_medium=referral", "people": false, "alt": "Abstract colorful wavy lines with glitch effect"}, "thermografie-2": {"src": "img/fdb2bebe384c.jpg", "by": "Maksym Diachenko", "link": "https://unsplash.com/@photofixation?utm_source=bsv_niewerth_entwurf&utm_medium=referral", "people": false, "alt": "man in black jacket walking on sidewalk during night time"}};
+const UNSPLASH = "https://unsplash.com/?utm_source=bsv_niewerth_entwurf&utm_medium=referral";
+const creditHtml = f => `Beispielfoto · <a href="${f.link}" target="_blank" rel="noopener">${f.by}</a> / <a href="${UNSPLASH}" target="_blank" rel="noopener">Unsplash</a>`;
+function applyPhotos(scope) {
+  scope.querySelectorAll("[data-photo]").forEach(el => {
+    const f = PHOTOS[el.dataset.photo]; if (!f || el.dataset.done) return;
+    el.dataset.done = "1";
+    el.style.backgroundImage = `url("${f.src}")`;
+    if (el.classList.contains("hero-photo")) { document.getElementById("hero-credit").innerHTML = creditHtml(f); return; }
+    el.classList.add("has-img"); el.setAttribute("role", "img"); el.setAttribute("aria-label", "Beispielfoto: " + (f.alt || ""));
+    el.insertAdjacentHTML("beforeend", `<span class="credit">${creditHtml(f)}</span>`);
+  });
+}
+applyPhotos(document);
+
 /* Seitenwechsel (in WordPress echte Seiten) */
 function swapPage() {
   const id = location.hash.slice(1) || "start";
@@ -1539,10 +1518,10 @@ function swapPage() {
 let firstRoute = true;
 function route() {
   const c = document.getElementById("curtain");
-  if (firstRoute || REDUCED) { firstRoute = false; swapPage(); applyReveal(document); return; }
+  if (firstRoute || REDUCED) { firstRoute = false; swapPage(); applyPhotos(document); applyReveal(document); return; }
   c.classList.remove("leave"); c.classList.add("cover");
   setTimeout(() => {
-    swapPage(); applyReveal(document);
+    swapPage(); applyPhotos(document); applyReveal(document);
     c.classList.remove("cover"); c.classList.add("leave");
     setTimeout(() => c.classList.remove("leave"), 1000);
   }, 950);
