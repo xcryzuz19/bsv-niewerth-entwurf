@@ -364,6 +364,15 @@ body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-a
 .docs-note { grid-column: 2; font-size: .88rem !important; }
 @media (max-width: 620px) { .docs-mini, .docs-note { grid-column: 2; } }
 
+/* Spruch vom Meisterbrief */
+.saying { background: var(--soft); border-bottom: 1px solid var(--line); }
+.saying .wrap { padding-block: clamp(48px, 7vw, 88px); }
+.saying figure { margin: 0 auto; max-width: 52rem; text-align: center; display: grid; gap: 18px; justify-items: center; }
+.saying figure::before { content: "“"; display: block; font-family: Georgia, serif; font-size: 4.5rem; line-height: 1; height: 2.6rem; color: var(--blue); }
+.saying blockquote { margin: 0; font-family: var(--font-head); font-weight: 700; font-size: clamp(1.3rem, 2.6vw, 1.9rem); line-height: 1.4; color: var(--navy); text-wrap: balance; }
+.saying figcaption { font-size: .92rem; color: var(--muted); display: flex; align-items: center; gap: 12px; }
+.saying figcaption::before, .saying figcaption::after { content: ""; width: 28px; height: 2px; background: var(--blue); }
+
 /* Einsatzgebiet */
 .area { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(32px, 6vw, 96px); align-items: center; }
 .area > * { min-width: 0; }
@@ -1222,7 +1231,7 @@ const LEISTUNGEN = [
     anlaesse: ["Risse in Mauerwerk, Putz oder Beton", "Feuchte Wände, nasser Keller, Ausblühungen", "Schimmel in Wohnräumen", "Schäden nach Sturm, Leitungswasser oder Brand", "Mängel nach einer Sanierung oder am Neubau"],
     vorgehen: [["Erstgespräch", "Sie schildern den Schaden am Telefon oder schicken Fotos. Ich sage Ihnen, ob ein Ortstermin sinnvoll ist."], ["Ortstermin", "Ich untersuche den Schaden, messe Feuchte und Temperaturen und dokumentiere alles mit Fotos."], ["Ursachenanalyse", "Ich werte die Messungen aus und ermittle, wodurch der Schaden entstanden ist."], ["Empfehlung", "Sie erhalten eine Einschätzung mit Sanierungsweg, auf Wunsch als Bericht oder Gutachten."]],
     ergebnis: [["i-shield", "Ursache geklärt", "Sie wissen, wodurch der Schaden entstanden ist, statt nur die Symptome zu behandeln."], ["i-doc", "Nachvollziehbare Dokumentation", "Befunde mit Fotos und Messwerten, fachlich eingeordnet nach den anerkannten Regeln der Technik."], ["i-euro", "Optional: Sanierungskonzept", "Ein auf den Schaden abgestimmtes Konzept mit Kostenschätzung als Grundlage für Ihre Planung."]],
-    faq: [["Was kostet die Begutachtung eines Schadens?", "Das hängt von Art und Umfang des Schadens ab. Nach unserem ersten Gespräch nenne ich Ihnen einen Preis oder einen klaren Kostenrahmen."], ["Übernimmt die Versicherung die Kosten?", "Das hängt von Ihrem Vertrag und vom Schaden ab. Klären Sie das am besten vorab mit Ihrer Versicherung. Meine Dokumentation können Sie dort vorlegen."], ["Wie schnell können Sie kommen?", "In der Regel bin ich innerhalb von 48 Stunden bei Ihnen vor Ort."]] },
+    faq: [["Was kostet die Begutachtung eines Schadens?", "Das hängt von Art und Umfang des Schadens ab. Nach unserem ersten Gespräch nenne ich Ihnen einen Preis oder einen klaren Kostenrahmen."], ["Übernimmt die Versicherung die Kosten?", "Bei versicherten Schäden werden die Kosten häufig ganz oder teilweise übernommen. Gern helfe ich Ihnen bei der Klärung. Meine Dokumentation können Sie direkt bei Ihrer Versicherung vorlegen."], ["Wie schnell können Sie kommen?", "In der Regel bin ich innerhalb von 48 Stunden bei Ihnen vor Ort."]] },
 
   { slug: "hauskaufberatung", icon: "kauf", title: "Haus- und Wohnungs\u00adkauf\u00adberatung", short: "Ob Haus oder Eigentumswohnung, Bestand oder Neubau: Ich prüfe den baulichen Zustand und mögliche Mängel, damit Sie Ihre Kaufentscheidung auf einer fundierten Grundlage treffen.",
     foto: "Foto: Besichtigung eines Hauses, Blick auf Dach oder Keller",
@@ -1255,7 +1264,7 @@ const LEISTUNGEN = [
     anlaesse: ["Streit über die Qualität der Ausführung", "Uneinigkeit über Nachbesserung oder Minderung", "Rechnung wird wegen Mängeln nicht bezahlt", "Abnahme wird verweigert", "Beide Seiten wollen eine schnelle Lösung"],
     vorgehen: [["Strittige Punkte erfassen", "Ich lasse mir die Sicht der Beteiligten schildern und sichte relevante Bauunterlagen."], ["Gemeinsame Ortsbesichtigung", "Wir sehen uns die strittigen Punkte gemeinsam an. Ich dokumentiere den baulichen Zustand."], ["Fachliche Bewertung", "Ich bewerte, ob die beanstandete Ausführung fachlich begründet zu bemängeln ist."], ["Lösungswege", "Ich erläutere die Befunde und zeige technisch geeignete Lösungs- und Nachbesserungsvorschläge auf."]],
     ergebnis: [["i-shield", "Sachliche Grundlage", "Eine fachlich begründete Bewertung, für alle Beteiligten nachvollziehbar."], ["i-doc", "Schriftliche Dokumentation", "Technische Ergebnisse und vereinbarte Maßnahmen."], ["i-euro", "Chance auf Einigung", "Kann helfen, langwierige Auseinandersetzungen und zusätzliche Kosten zu vermeiden."]],
-    faq: [["Ist das Ergebnis verbindlich?", "Meine Tätigkeit dient der technischen Klärung und sachverständigen Vermittlung. Eine rechtliche Beratung oder eine verbindliche Entscheidung über Ansprüche ist damit nicht verbunden."], ["Wer trägt die Kosten?", "Das legen die Beteiligten vorab gemeinsam fest. Art und Umfang meiner Tätigkeit vereinbaren wir schriftlich."], ["Brauche ich einen Anwalt?", "Ich kläre die technischen Fragen. Für rechtliche Fragen ist eine anwaltliche Beratung der richtige Weg."]] },
+    faq: [["Ist das Ergebnis verbindlich?", "Meine Tätigkeit dient der technischen Klärung und sachverständigen Vermittlung. Eine rechtliche Beratung oder eine verbindliche Entscheidung über Ansprüche ist damit nicht verbunden."], ["Wer trägt die Kosten?", "In der Regel teilen sich beide Seiten die Kosten. Das ist fair und meist deutlich günstiger als ein langer Rechtsstreit. Den Umfang vereinbaren wir vorab schriftlich."], ["Brauche ich einen Anwalt?", "Für eine technische Klärung nicht. Ich kümmere mich um die bautechnischen Fragen. Geht es um rechtliche Ansprüche, ist eine anwaltliche Beratung der richtige Weg."]] },
 
   { slug: "energieberatung", icon: "energie", title: "Energie\u00adberatung", short: "Energieberatung, Energieausweise, Fördermittelberatung und individueller Sanierungsfahrplan (iSFP).",
     foto: "Foto: Fassade oder Dach mit Dämmarbeiten",
@@ -1271,7 +1280,7 @@ const LEISTUNGEN = [
     anlaesse: ["Feuchte Stellen an Decke, Wand oder Boden", "Wasserzähler läuft, obwohl nichts verbraucht wird", "Druckverlust in der Heizung", "Feuchter Estrich nach einem Wasserschaden", "Undichte Dusche oder undichtes Flachdach"],
     vorgehen: [["Schadensbild erfassen", "Ich prüfe, welche Leitungen, Anschlüsse oder Bauteile als Ursache infrage kommen."], ["Messung", "Je nach Befund grenzen geeignete Messverfahren die mögliche Leckstelle ein."], ["Eingrenzung", "Ist eine Öffnung nötig, kann sie auf den betroffenen Bereich beschränkt werden."], ["Dokumentation", "Ich erläutere die Befunde und welche weiteren Prüfungen oder Trocknungen sinnvoll sind."]],
     ergebnis: [["i-shield", "Gezielte Öffnung", "Unnötige Bauteilöffnungen werden vermieden."], ["i-doc", "Dokumentation", "Befunde nachvollziehbar festgehalten, zum Beispiel für Ihre Versicherung."], ["i-euro", "Folgeschäden begrenzt", "Je früher die Stelle gefunden wird, desto kleiner bleibt der Schaden."]],
-    faq: [["Zahlt die Versicherung die Leckageortung?", "Das hängt von Ihrem Vertrag ab. Fragen Sie am besten vorher bei Ihrer Versicherung nach. Meine Dokumentation können Sie dort vorlegen."], ["Welche Messverfahren setzen Sie ein?", "Je nach Befund setze ich geeignete Messverfahren ein, um die Feuchtigkeitsverteilung zu erfassen und die mögliche Leckstelle einzugrenzen, zum Beispiel Feuchtemessung und Wärmebild."], ["Wie schnell können Sie kommen?", "In der Regel innerhalb von 48 Stunden, bei akutem Wasseraustritt nach Absprache schneller."]] },
+    faq: [["Zahlt die Versicherung die Leckageortung?", "In vielen Fällen übernimmt die Leitungswasserversicherung die Kosten für die Suche. Ein kurzer Anruf bei Ihrer Versicherung schafft Sicherheit, meine Dokumentation können Sie dort direkt vorlegen."], ["Welche Messverfahren setzen Sie ein?", "Je nach Befund setze ich geeignete Messverfahren ein, um die Feuchtigkeitsverteilung zu erfassen und die mögliche Leckstelle einzugrenzen, zum Beispiel Feuchtemessung und Wärmebild."], ["Wie schnell können Sie kommen?", "In der Regel innerhalb von 48 Stunden, bei akutem Wasseraustritt nach Absprache schneller."]] },
 
   { slug: "thermografie", icon: "thermo", title: "Bau-Thermografie", short: "Wärmebrücken, Dämmlücken und Hinweise auf Feuchte sichtbar machen, zerstörungsfrei und fachlich ausgewertet.",
     foto: "Foto: Wärmebild einer Hausfassade",
@@ -1307,7 +1316,7 @@ const MEHR = {
   schlichtung: {
     intro: ["Wenn Bauherr und Handwerker sich über Mängel streiten, stehen schnell Rechnungen, Fristen und Anwälte im Raum. Ein Prozess dauert oft Jahre und kostet beide Seiten viel Geld und Nerven.", "Als unabhängiger Sachverständiger bewerte ich die strittigen Punkte technisch und neutral. Beide Seiten bekommen eine klare Einschätzung, auf deren Grundlage sie sich einigen können."],
     pruefe: [["Vereinbarte Leistung", "Was technisch geschuldet war"], ["Ausführung", "Was tatsächlich gebaut wurde"], ["Beanstandung", "Ob ein Mangel fachlich begründet ist und wie er wiegt"], ["Ursache", "Die technische Ursache des Problems"], ["Nachbesserung", "Technisch geeignete Lösungswege"], ["Umsetzung", "Kontrolle bei gesondert vereinbarten Folgeterminen"]],
-    kosten: "Art und Umfang meiner Tätigkeit legen wir vorab gemeinsam und schriftlich fest. Danach richtet sich auch der Preis.",
+    kosten: "In der Regel teilen sich beide Seiten die Kosten. Art und Umfang meiner Tätigkeit legen wir vorab gemeinsam und schriftlich fest, danach richtet sich auch der Preis.",
     eck: ["Gemeinsamer Ortstermin", "Neutrale Stellungnahme"] },
   energieberatung: {
     intro: ["Steigende Energiepreise und neue Vorgaben machen die energetische Sanierung für viele Hausbesitzer zum Thema. Doch welche Maßnahme lohnt sich zuerst, und in welcher Reihenfolge?", "Ich untersuche die Gebäudehülle, finde die größten Schwachstellen und zeige Ihnen einen sinnvollen Weg. So investieren Sie nicht in die falsche Maßnahme."],
@@ -1317,7 +1326,7 @@ const MEHR = {
   leckageortung: {
     intro: ["Ein Wasserfleck an der Decke, ein feuchter Boden oder ein Wasserzähler, der ständig läuft: Undichte Leitungen richten oft lange unbemerkt Schaden an. Je früher die Stelle gefunden wird, desto kleiner bleibt der Schaden.", "Ich grenze die Leckage mit Messtechnik ein, damit nur dort geöffnet wird, wo es nötig ist. Den Befund dokumentiere ich so, dass Sie ihn direkt bei Ihrer Versicherung einreichen können."],
     pruefe: [["Trinkwasserleitungen", "Kalt- und Warmwasser"], ["Heizungsleitungen", "Bei Druckverlust in der Anlage"], ["Fußbodenheizung", "Verlauf und undichte Stellen"], ["Abwasser", "Undichte Rohre und Anschlüsse"], ["Dusche und Bad", "Fugen, Abdichtung und Abläufe"], ["Flachdach und Terrasse", "Eindringendes Wasser von oben"]],
-    kosten: "Der Preis richtet sich nach Aufwand und eingesetzten Messverfahren. Ob Ihre Versicherung die Kosten übernimmt, klären Sie am besten vorab mit ihr.",
+    kosten: "Der Preis richtet sich nach Aufwand und eingesetzten Messverfahren. In vielen Fällen übernimmt die Leitungswasserversicherung die Kosten für die Suche.",
     eck: ["je nach Fall ca. 1–4 Std.", "Markierte Stelle und Bericht"] },
   thermografie: {
     intro: ["Wärme sucht sich ihren Weg nach draußen, und eine Wärmebildkamera macht diesen Weg sichtbar. Fehlende Dämmung, undichte Fenster oder Wärmebrücken werden auf einen Blick erkennbar.", "Ich erstelle die Aufnahmen bei passenden Bedingungen und werte sie fachlich aus. Denn nicht jede auffällige Farbe im Wärmebild ist ein Mangel. Entscheidend ist die richtige Deutung."],
@@ -1372,6 +1381,7 @@ MEHR.bauueberwachung.sections = [
 ];
 
 MEHR.schlichtung.tagline = "Sachverhalte klären. Lösungen ermöglichen.";
+MEHR.schlichtung.quote = ["Kommst du mit deinem Nächsten in Uneinigkeit, vergleiche dich mit ihm in der Billigkeit. Kannst du dich mit ihm allein vertragen, so wirst du dir und anderen viel Mühe ersparen.", "Alter Handwerkerspruch auf meinem Meisterbrief der Handwerkskammer Münster"];
 MEHR.schlichtung.sections = [
   [null, ["Ob Uneinigkeit über die Ausführungsqualität, strittige Baumängel oder unterschiedliche Auffassungen zu Schadensursachen: Wenn Bauprojekte zum Konflikt werden, braucht es eine sachliche Grundlage und einen unabhängigen Blick.", "Als Sachverständiger für Schäden an Gebäuden unterstütze ich die Beteiligten dabei, technische Streitfragen zu klären und nachvollziehbare Lösungswege zu entwickeln. Dafür verbinde ich fundiertes Fachwissen mit langjähriger Erfahrung aus Handwerk und Bauleitung."]],
   ["Unabhängig prüfen. Sachlich vermitteln.", ["Im Mittelpunkt stehen die bautechnischen Tatsachen. Ich untersuche die betroffenen Bauteile, dokumentiere die Feststellungen und bewerte, ob die beanstandete Ausführung fachlich begründet zu bemängeln ist. Ursachen, Auswirkungen und mögliche Maßnahmen werden nachvollziehbar eingeordnet.", "Wenn die Beteiligten eine gemeinsame Klärung wünschen, erläutere ich die Ergebnisse in einem moderierten Gespräch. Ziel ist es, unterschiedliche Standpunkte auf eine überprüfbare fachliche Grundlage zurückzuführen und Möglichkeiten für eine außergerichtliche Einigung aufzuzeigen.", "Je nach Fragestellung umfasst meine Unterstützung:", [
@@ -1501,6 +1511,7 @@ function leistungPage(l) {
       </div>
     </div>
   </section>
+  ${x.quote ? `<section class="saying"><div class="wrap"><figure><blockquote>${x.quote[0]}</blockquote><figcaption>${x.quote[1]}</figcaption></figure></div></section>` : ""}
   <section class="section"><div class="wrap intro-grid">
     <div class="intro-text">${(!x.sections || x.keepIntro) ? `<div class="isec"><span class="kicker">Worum es geht</span>${x.intro.map((p, i) => i === 0 ? `<p class="first">${p}</p>` : `<p>${p}</p>`).join("")}</div>` : ""}${(x.sections || []).map(([h, ps]) => `<div class="isec">${h ? `<h2>${h}</h2>` : ""}${ps.map(p => Array.isArray(p) ? `<ul class="checks">${p.map(li => `<li>${use("i-check")}<span>${li}</span></li>`).join("")}</ul>` : `<p>${p}</p>`).join("")}</div>`).join("")}</div>
     <aside class="facts-box" aria-label="Auf einen Blick">
