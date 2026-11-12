@@ -1717,6 +1717,14 @@ function route() {
   }, 950);
 }
 window.addEventListener("hashchange", route);
+/* Link auf die gerade offene Seite: nach oben scrollen statt nichts zu tun */
+document.addEventListener("click", e => {
+  const a = e.target.closest('a[href^="#"]'); if (!a) return;
+  const target = a.getAttribute("href").slice(1) || "start", current = location.hash.slice(1) || "start";
+  if (target !== current) return;
+  e.preventDefault();
+  window.scrollTo({ top: 0, behavior: REDUCED ? "auto" : "smooth" });
+});
 route();
 
 document.getElementById("f-file").addEventListener("change", e => {
