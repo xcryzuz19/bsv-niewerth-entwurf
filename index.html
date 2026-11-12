@@ -652,7 +652,14 @@ textarea { min-height: 140px; resize: vertical; }
 @media (max-width: 520px) { .hs .tx { font-size: .7rem; padding: 4px 8px; } .hs .pt { width: 18px; height: 18px; } }
 
 @media (prefers-reduced-motion: reduce) {
-  .intro-on .bsv-intro { display: none; }
+  /* Ruhige Fassung des Intros: Logo erscheint fertig und blendet aus, ohne Bewegung */
+  .bsv-intro *, .bsv-intro *::before { animation: none !important; transition: none !important; }
+  .bi-mark .im-roofline, .bsv-intro .bi-sweep { opacity: 0 !important; }
+  .bi-mark .im-roof, .bi-mark .im-bsv, .bi-mark .im-hdl, .bi-name span, .bi-sub { opacity: 1 !important; transform: none !important; }
+  .bi-mark .im-lens, .bi-mark .im-chk { stroke-dashoffset: 0 !important; }
+  .intro-on .bsv-intro { animation: bi-out .6s ease 1.6s forwards !important; }
+  .bi-inner { animation: bi-fadein-soft .5s ease both !important; }
+  @keyframes bi-fadein-soft { from { opacity: 0; } to { opacity: 1; } }
   .reveal, .reveal-img { opacity: 1; transform: none; clip-path: none; transition: none; }
   .hero h1 .w > span, .hero .hero-copy > :not(h1) { transform: none; opacity: 1; }
   .curtain { display: none; }
@@ -754,7 +761,6 @@ main { overflow-x: clip; }
 (function () {
   var h = location.hash.replace("#", "");
   if (h && h !== "start") return;
-  if (window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches) return;
   document.documentElement.classList.add("intro-on");
 })();
 </script>
