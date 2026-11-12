@@ -336,9 +336,9 @@ body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-a
 @media (max-width: 520px) { .proto-list { padding: 4px 18px; } .proto-top, .proto-foot { padding-left: 18px; padding-right: 18px; } .proto-list li { grid-template-columns: 30px minmax(0, 1fr); } .proto-list em { display: none; } }
 
 /* Ablauf-Listen, Unterlagen, Zertifikate */
-.tape-list { list-style: none; padding: 0; display: grid; gap: 4px; margin-top: 4px; }
-.tape-list li { position: relative; padding-left: 18px; color: #fff; font-size: .95rem; }
-.tape-list li::before { content: ""; position: absolute; left: 0; top: .55em; width: 8px; height: 8px; border-radius: 50%; background: var(--blue-light); }
+.tape-list { list-style: none; padding: 0; margin: 6px 0 0; display: flex; flex-wrap: wrap; gap: 8px; }
+.tape-list li { display: inline-flex; align-items: center; gap: 7px; padding: 6px 12px 6px 9px; border-radius: 999px; background: rgb(90 162 234 / .12); border: 1px solid rgb(90 162 234 / .3); color: #fff; font-size: .88rem; font-weight: 600; line-height: 1.25; }
+.tape-list li::before { content: ""; flex: none; width: 10px; height: 6px; border-left: 2px solid var(--blue-light); border-bottom: 2px solid var(--blue-light); transform: rotate(-45deg) translate(1px, -1px); }
 .docs { margin-top: clamp(40px, 6vw, 72px); border-top: 1px solid rgb(255 255 255 / .14); padding-top: clamp(28px, 4vw, 44px); display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: clamp(24px, 5vw, 72px); }
 .docs h3 { font-size: 1.3rem; margin-bottom: 10px; }
 .docs-head p { color: var(--on-navy-muted); }
@@ -401,17 +401,17 @@ body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-a
 .tape::before { content: ""; position: absolute; left: 0; right: 0; top: 34px; height: 14px; background:
   repeating-linear-gradient(90deg, rgb(255 255 255 / .55) 0 1px, transparent 1px 12px) bottom / 100% 6px no-repeat,
   repeating-linear-gradient(90deg, rgb(255 255 255 / .9) 0 2px, transparent 2px 60px) bottom / 100% 14px no-repeat; border-bottom: 2px solid rgb(255 255 255 / .9); }
-.tape li { position: relative; padding-right: 28px; display: grid; gap: 10px; align-content: start; }
-.tape li::before { content: ""; position: absolute; left: 0; top: -36px; width: 16px; height: 16px; border-radius: 50%; background: var(--blue-light); border: 4px solid var(--navy); box-shadow: 0 0 0 2px var(--blue-light); }
+.tape > li { position: relative; padding-right: 28px; display: grid; gap: 10px; align-content: start; }
+.tape > li::before { content: ""; position: absolute; left: 0; top: -36px; width: 16px; height: 16px; border-radius: 50%; background: var(--blue-light); border: 4px solid var(--navy); box-shadow: 0 0 0 2px var(--blue-light); }
 .tape .t { font-family: var(--font-head); font-weight: 800; font-size: 1.9rem; color: var(--blue-light); line-height: 1; letter-spacing: -.02em; }
 .tape .t small { font-size: .8rem; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; color: var(--on-navy-muted); margin-left: 6px; }
-.tape p { color: var(--on-navy-muted); }
+.tape p { color: var(--on-navy-muted); hyphens: manual !important; }
 @media (max-width: 860px) {
   .tape { grid-template-columns: 1fr; padding-top: 0; padding-left: 46px; gap: 34px; }
   .tape::before { left: 10px; right: auto; top: 0; bottom: 0; width: 14px; height: auto; background:
     repeating-linear-gradient(180deg, rgb(255 255 255 / .55) 0 1px, transparent 1px 12px) left / 6px 100% no-repeat,
     repeating-linear-gradient(180deg, rgb(255 255 255 / .9) 0 2px, transparent 2px 60px) left / 14px 100% no-repeat; border-bottom: 0; border-left: 2px solid rgb(255 255 255 / .9); }
-  .tape li::before { left: -44px; top: 4px; }
+  .tape > li::before { left: -44px; top: 4px; }
 }
 
 /* Kontaktband */
@@ -970,8 +970,8 @@ main { overflow-x: clip; }
         </div>
         <ol class="tape">
           <li><span class="t">0<small>Std.</small></span><h3>Anfrage</h3><p>Sie rufen an oder schreiben mir. Fotos vom Schaden helfen bei der ersten Einschätzung.</p></li>
-          <li><span class="t">48<small>Std.</small></span><h3>Kurzfristiger Vor-Ort-Termin</h3><p>Ich komme zu Ihnen, untersuche, messe und fotografiere alles Relevante.</p><ul class="tape-list"><li>Ursachenforschung</li><li>fachlich präzise und nachvollziehbar</li></ul></li>
-          <li><span class="t">✓<small>Ergebnis</small></span><h3>Einschätzung</h3><p>Mündlich vor Ort, als Kurzbericht oder als ausführliches Gutachten.</p><ul class="tape-list"><li>verständlich erklärt</li><li>Einschätzung des Sanierungsbedarfs</li><li>zertifiziert und unabhängig</li><li>neutrale Expertise ohne Interessenkonflikt</li></ul></li>
+          <li><span class="t">48<small>Std.</small></span><h3>Kurzfristiger Vor-Ort-Termin</h3><p>Ich komme zu Ihnen, untersuche, messe und fotografiere alles Relevante.</p><ul class="tape-list"><li>Ursachenforschung</li><li>Fachlich präzise und nachvollziehbar</li></ul></li>
+          <li><span class="t">✓<small>Ergebnis</small></span><h3>Einschätzung</h3><p>Mündlich vor Ort, als Kurzbericht oder als ausführliches Gutachten.</p><ul class="tape-list"><li>Verständlich erklärt</li><li>Einschätzung des Sanierungsbedarfs</li><li>Zertifiziert und unabhängig</li><li>Neutrale Expertise ohne Interessenkonflikt</li></ul></li>
           <li><span class="t">+<small>Optional</small></span><h3>Begleitung</h3><p>Auf Wunsch begleite ich Sie bei Ihrem Bauvorhaben oder Ihrer Sanierungsmaßnahme, unterstütze Sie bei den Abnahmen oder übernehme die komplette Bauleitung für Sie.</p></li>
         </ol>
         <div class="docs">
@@ -1633,7 +1633,7 @@ const REDUCED = matchMedia("(prefers-reduced-motion: reduce)").matches;
 })();
 
 /* Abschnitte beim Scrollen einblenden */
-const REVEAL = ".head, .tile, .zcopy, .tape li, .result, .proto, .faq details, .checks li, .facts-box, .intro-text .isec, .intro-text > p, .statement blockquote, .statement-text, .statement .sig, .towns li, .area-copy, .regions, .qual, .ccard, .cost > div, .more-grid > div, .contact-band .wrap > *, .finder-copy > *, .prose > *";
+const REVEAL = ".head, .tile, .zcopy, .tape > li, .result, .proto, .faq details, .checks li, .facts-box, .intro-text .isec, .intro-text > p, .statement blockquote, .statement-text, .statement .sig, .towns li, .area-copy, .regions, .qual, .ccard, .cost > div, .more-grid > div, .contact-band .wrap > *, .finder-copy > *, .prose > *";
 const io = "IntersectionObserver" in window ? new IntersectionObserver(es => es.forEach(e => {
   if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); }
 }), { rootMargin: "0px 0px -8% 0px", threshold: .08 }) : null;
