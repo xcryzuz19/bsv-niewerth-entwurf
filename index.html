@@ -201,7 +201,7 @@ body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-a
 .tc--seal:hover { background: var(--soft); }
 .seal-ph { width: 48px; height: 48px; font-size: .5rem !important; padding: 3px !important; line-height: 1.1 !important; border: 1px dashed var(--ph); background: var(--ph-bg); color: var(--ph); border-radius: 6px; display: grid; place-items: center; text-align: center; font-size: .66rem; line-height: 1.25; padding: 6px; font-weight: 600; }
 @media (max-width: 900px) { .trustcard .inner { grid-template-columns: 1fr 1fr; } .tc--seal { grid-column: span 2; border-right: 0 !important; border-bottom: 1px solid var(--line); } }
-@media (max-width: 520px) { .trustcard { margin-top: -64px; } .trustcard .inner { grid-template-columns: minmax(0, 1fr); } .tc { padding: 18px 20px; border-right: 0 !important; border-bottom: 1px solid var(--line); } .tc:last-child { border-bottom: 0; }  }
+@media (max-width: 520px) { .trustcard { margin-top: -64px; } .trustcard .inner { grid-template-columns: minmax(0, 1fr); } .tc { padding: 18px 20px; border-right: 0 !important; border-bottom: 1px solid var(--line); } .tc:last-child { border-bottom: 0; } .tc--seal { grid-column: auto; } }
 
 .seal-ph.seal-big { width: auto; height: 110px; font-size: .8rem !important; padding: 10px !important; line-height: 1.3 !important; }
 
@@ -359,6 +359,11 @@ body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-a
 .zoom-x { position: absolute; top: max(14px, env(safe-area-inset-top, 0px)); right: max(14px, env(safe-area-inset-right, 0px)); width: 44px; height: 44px; border-radius: 50%; border: 0; background: #fff; color: var(--navy); font-size: 1.6rem; line-height: 1; cursor: pointer; }
 .about-grid .intro-text .isec:first-child { padding-top: 0; }
 
+.tile--docs { grid-template-rows: auto auto auto 1fr; }
+.docs-mini { grid-column: 2; margin: 0; padding-left: 1.1em; color: var(--ink); font-size: .95rem; display: grid; gap: 2px; }
+.docs-note { grid-column: 2; font-size: .88rem !important; }
+@media (max-width: 620px) { .docs-mini, .docs-note { grid-column: 2; } }
+
 /* Einsatzgebiet */
 .area { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(32px, 6vw, 96px); align-items: center; }
 .area > * { min-width: 0; }
@@ -507,30 +512,34 @@ textarea { min-height: 140px; resize: vertical; }
 .intro-on .bsv-intro { display: grid; place-items: center; position: fixed; inset: 0; z-index: 100; overflow: hidden; cursor: pointer;
   background: radial-gradient(120% 85% at 50% 45%, #1b3657 0%, #0f1d2e 45%, #08111c 100%);
   animation: bi-out .5s var(--ease-io) 3.1s forwards; }
-.bsv-intro::before { content: ""; position: absolute; inset: 0; opacity: .08; mix-blend-mode: overlay; pointer-events: none;
+.bsv-intro::before { content: none; }
   background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>"); }
 .bi-inner { display: grid; justify-items: center; gap: 22px; position: relative; animation: bi-exit .45s cubic-bezier(.4, 0, 1, 1) 2.75s forwards; }
 .bi-mark { width: min(340px, 70vw); height: auto; overflow: visible; --logo-ink: #fff; --logo-accent: #5aa2ea; --logo-accent-2: #3f86d2; }
-.bi-mark .im-roofline { fill: none; stroke: #5aa2ea; stroke-width: 30; stroke-linejoin: miter; stroke-dasharray: 1; stroke-dashoffset: 1; filter: drop-shadow(0 0 14px rgb(90 162 234 / .7)); animation: bi-draw .9s var(--ease-io) .25s forwards, bi-fade .3s ease 1.15s forwards; }
+.bi-mark .im-roofline { fill: none; stroke: #5aa2ea; stroke-width: 30; stroke-linejoin: miter; stroke-dasharray: 1; stroke-dashoffset: 1; animation: bi-draw .9s var(--ease-io) .25s forwards, bi-fade .3s ease 1.15s forwards; }
 .bi-mark .im-roof { opacity: 0; animation: bi-fadein .35s ease 1s forwards; }
-.bi-mark .im-bsv { opacity: 0; transform: translateY(26px); transform-box: fill-box; filter: blur(8px); animation: bi-rise .7s var(--ease-out) .9s forwards; }
+.bi-mark .im-bsv { opacity: 0; transform: translateY(26px); transform-box: fill-box; animation: bi-rise .7s var(--ease-out) .9s forwards; }
 .bi-mark .im-lens { stroke-dasharray: 1; stroke-dashoffset: 1; animation: bi-draw .6s var(--ease-io) 1.35s forwards; }
 .bi-mark .im-hdl { opacity: 0; animation: bi-fadein .3s ease 1.8s forwards; }
 .bi-mark .im-chk { stroke-dasharray: 1; stroke-dashoffset: 1; animation: bi-draw .35s var(--ease-out) 1.95s forwards; }
 .bi-name { display: flex; gap: .02em; font-family: var(--font-head); font-weight: 600; letter-spacing: .42em; margin-right: -.42em; font-size: clamp(1.1rem, 3vw, 1.6rem); color: #fff; }
-.bi-name span { opacity: 0; filter: blur(6px); transform: translateY(8px); animation: bi-letter .5s var(--ease-out) calc(1.5s + var(--i) * .05s) forwards; }
+.bi-name span { display: inline-block; opacity: 0; transform: translateY(8px); will-change: transform, opacity; animation: bi-letter .5s var(--ease-out) calc(1.5s + var(--i) * .05s) forwards; }
 .bi-sub { font-family: var(--font-head); font-weight: 500; font-size: .7rem; letter-spacing: .3em; color: #b6c4d5; text-transform: uppercase; opacity: 0; animation: bi-fadein .5s ease 2.1s forwards; }
-.bi-sweep { position: absolute; inset: -20% -40%; pointer-events: none; background: linear-gradient(105deg, transparent 40%, rgb(255 255 255 / .28) 49%, rgb(90 162 234 / .35) 51%, transparent 60%); transform: translateX(-70%); opacity: 0; animation: bi-sweep .9s var(--ease-io) 2.15s forwards; mix-blend-mode: screen; }
+.bi-sweep { position: absolute; inset: -20% -40%; pointer-events: none; background: linear-gradient(105deg, transparent 40%, rgb(255 255 255 / .28) 49%, rgb(90 162 234 / .35) 51%, transparent 60%); transform: translateX(-70%); opacity: 0; animation: bi-sweep .9s var(--ease-io) 2.15s forwards; will-change: transform, opacity; }
 .bi-skip { position: absolute; right: max(20px, env(safe-area-inset-right, 0px)); bottom: calc(20px + env(safe-area-inset-bottom, 0px)); font: 600 .72rem var(--font-head); letter-spacing: .16em; text-transform: uppercase; color: #b6c4d5; background: transparent; border: 1px solid rgb(255 255 255 / .25); border-radius: 999px; padding: 8px 14px; cursor: pointer; }
 .bsv-intro.done { display: none !important; }
 @keyframes bi-draw { to { stroke-dashoffset: 0; } }
 @keyframes bi-fade { to { opacity: 0; } }
 @keyframes bi-fadein { to { opacity: 1; } }
-@keyframes bi-rise { to { opacity: 1; transform: none; filter: none; } }
-@keyframes bi-letter { to { opacity: 1; filter: none; transform: none; } }
+@keyframes bi-rise { to { opacity: 1; transform: none; } }
+@keyframes bi-letter { to { opacity: 1; transform: none; } }
 @keyframes bi-sweep { 0% { transform: translateX(-70%); opacity: 0; } 20%, 80% { opacity: 1; } 100% { transform: translateX(70%); opacity: 0; } }
-@keyframes bi-exit { to { opacity: 0; transform: scale(1.06); filter: blur(6px); } }
+@keyframes bi-exit { to { opacity: 0; transform: scale(1.05); } }
 @keyframes bi-out { to { opacity: 0; visibility: hidden; } }
+/* Intro startet erst, wenn Schriften geladen sind (vorher stehendes Dunkelblau, kein Ruckeln) */
+.intro-on:not(.intro-play) .bsv-intro, .intro-on:not(.intro-play) .bsv-intro * { animation-play-state: paused !important; }
+.bsv-intro { contain: strict; }
+.bi-inner { will-change: transform, opacity; }
 
 /* Seitenwechsel: dunkelblauer Vorhang mit Dachlinie */
 .curtain { position: fixed; inset: 0; z-index: 90; pointer-events: none; display: grid; place-items: center; background: var(--navy); transform: translateY(100%); }
@@ -546,6 +555,9 @@ textarea { min-height: 140px; resize: vertical; }
 @keyframes cu-out { from { transform: translateY(0); } to { transform: translateY(-100%); } }
 
 /* Hauptüberschrift: Wörter steigen nacheinander auf */
+.hero-go .hero-photo { animation-play-state: running !important; }
+.hero h1, .hero h1 .hl, .hero h1 .blue { text-wrap: wrap; }
+.hero h1 .w > span { will-change: transform; }
 .hero h1 .w { display: inline-block; overflow: hidden; vertical-align: bottom; padding-bottom: .06em; margin-bottom: -.06em; }
 .hero h1 .w > span { display: inline-block; transform: translateY(105%); }
 .hero-go .hero h1 .w > span { transform: none; transition: transform .8s var(--ease-out) calc(var(--i) * .07s); }
@@ -671,7 +683,7 @@ textarea { min-height: 140px; resize: vertical; }
   .map .m-ring { stroke-dashoffset: 0; }
 }
 
-.hero-photo { position: absolute; inset: 0; background: #1a2a40 center 60% / cover no-repeat; transform: scale(1.08); animation: kenburns 22s ease-out forwards; }
+.hero-photo { will-change: transform; animation-play-state: paused !important; position: absolute; inset: 0; background: #1a2a40 center 60% / cover no-repeat; transform: scale(1.08); animation: kenburns 22s ease-out forwards; }
 @keyframes kenburns { to { transform: scale(1); } }
 .photo.has-img { background-size: cover; background-position: center; background-repeat: no-repeat; }
 .photo.has-img .cap { display: none; }
@@ -1218,13 +1230,13 @@ const LEISTUNGEN = [
     ergebnis: [["i-doc", "Mängelliste", "Alle Auffälligkeiten, sortiert nach Dringlichkeit."], ["i-shield", "Sanierungsbedarf", "Welche Maßnahmen in den nächsten Jahren anstehen und wie dringend sie sind."], ["i-shield", "Verhandlungsbasis", "Sachliche Argumente für das Gespräch über den Kaufpreis."]],
     faq: [["Wie lange dauert eine Begehung?", "Bei einem Einfamilienhaus meist 1,5 bis 3 Stunden, je nach Größe und Zustand."], ["Kann ich bei der Begehung dabei sein?", "Ja, ausdrücklich. Ich erkläre Ihnen vor Ort, was ich sehe."], ["Lohnt sich das auch bei einem Neubau?", "Ja. Gerade bei der Abnahme lohnt sich ein zweiter Blick, denn danach müssen Sie Mängel in der Regel selbst nachweisen."]] },
 
-  { slug: "gutachten", icon: "gutachten", title: "Gutachten\u00aderstellung", short: "Schriftliche Gutachten für Versicherung, Gewährleistung oder Gericht, nachvollziehbar dokumentiert.",
+  { slug: "gutachten", icon: "gutachten", title: "Gutachten\u00aderstellung", short: "Ursachen klären, Schäden bewerten, Entscheidungen absichern: unabhängig untersucht und verständlich erläutert.",
     foto: "Foto: Gutachten-Deckblatt mit Logo oder Dokumentation am Schreibtisch",
     lead: "Risse im Mauerwerk, Feuchtigkeit im Keller oder Zweifel an der Bauausführung? Ich untersuche Schäden und vermutete Baumängel, kläre die Ursachen und bewerte, wie schwerwiegend das Problem ist.",
     anlaesse: ["Streit mit Handwerker oder Bauträger über Mängel", "Schadensmeldung bei der Gebäudeversicherung", "Beweissicherung vor Bauarbeiten in der Nachbarschaft", "Grundlage für Ihren Anwalt", "Kurzgutachten für eine schnelle Entscheidung"],
     vorgehen: [["Fragestellung klären", "Wir legen fest, welche Fragen das Gutachten beantworten soll."], ["Ortstermin", "Ich nehme den Befund auf, messe und fotografiere."], ["Auswertung", "Ich bewerte die Ergebnisse nach den anerkannten Regeln der Technik."], ["Gutachten", "Sie erhalten das schriftliche Gutachten und ich erläutere es Ihnen auf Wunsch."]],
     ergebnis: [["i-doc", "Schriftliches Gutachten", "Mit Befund, Ursache und fachlicher Bewertung."], ["i-photo", "Fotodokumentation", "Fotos und Messprotokolle als Anlage."], ["i-shield", "Belastbare Grundlage", "Für Gespräche mit Versicherung, Gegenseite oder Anwalt."]],
-    faq: [["Was ist der Unterschied zwischen Kurzgutachten und Gutachten?", "Ein Kurzgutachten fasst die wichtigsten Feststellungen kompakt zusammen. Ein ausführliches Gutachten begründet jede Aussage im Detail und eignet sich besser, wenn ein Streit droht."], ["Kann ich ein Privatgutachten vor Gericht verwenden?", "Ein Privatgutachten hilft, Ihre Ansprüche fachlich zu begründen. Ein gerichtlich bestelltes Gutachten ersetzt es allerdings nicht."], ["Wie lange dauert die Erstellung?", ph("[Bearbeitungszeit ergänzen, z. B. 1–3 Wochen nach Ortstermin]")]] },
+    faq: [["Was ist der Unterschied zwischen Kurzgutachten und Gutachten?", "Ein Kurzgutachten fasst die wichtigsten Feststellungen kompakt zusammen. Ein ausführliches Gutachten begründet jede Aussage im Detail und eignet sich besser, wenn ein Streit droht."], ["Kann ich ein Privatgutachten vor Gericht verwenden?", "Ein Privatgutachten hilft, Ihre Ansprüche fachlich zu begründen. Ein gerichtlich bestelltes Gutachten ersetzt es allerdings nicht."], ["Wie lange dauert die Erstellung?", "Das hängt vom Umfang der Fragestellung ab. Den voraussichtlichen Zeitrahmen nenne ich Ihnen vorab, damit Sie planen können."]] },
 
   { slug: "bauueberwachung", icon: "bau", title: "Bau\u00adüberwachung & Bau\u00adleitung", short: "Unabhängige Kontrolle in den wichtigen Bauphasen oder die komplette Bauleitung.",
     foto: "Foto: Baustelle, Rohbau oder Kontrolle einer Abdichtung",
@@ -1232,32 +1244,32 @@ const LEISTUNGEN = [
     anlaesse: ["Neubau eines Einfamilienhauses", "Bauen mit Bauträger oder Generalunternehmer", "Umfangreiche Sanierung im Bestand", "Kontrolle vor dem Verschließen von Abdichtung und Dämmung", "Bauabnahme"],
     vorgehen: [["Termine festlegen", "Wir planen die Kontrolltermine passend zu den Bauphasen."], ["Kontrolle vor Ort", "Ich prüfe die Ausführung, bevor Bauteile verdeckt werden."], ["Protokoll", "Nach jedem Termin erhalten Sie ein Protokoll mit Fotos."], ["Abnahme", "Ich begleite die Abnahme und halte offene Mängel fest."]],
     ergebnis: [["i-doc", "Protokolle", "Nachvollziehbare Dokumentation jeder Bauphase."], ["i-euro", "Weniger Folgekosten", "Mängel werden früh behoben statt teuer im Nachhinein."], ["i-shield", "Sicherheit bei der Abnahme", "Sie wissen genau, was Sie abnehmen."]],
-    faq: [["Welche Kontrolltermine sind wichtig?", "Typisch sind Bodenplatte und Abdichtung, Rohbau, Dach, Fenster und Dämmung vor dem Innenputz sowie die Abnahme."], ["Was ist der Unterschied zwischen Bauüberwachung und Bauleitung?", "Bei der Bauüberwachung kontrolliere ich die Arbeit der Firmen. Als Bauleiter koordiniere ich zusätzlich Gewerke, Termine und Abläufe."], ["Was kostet die Baubegleitung?", ph("[Preismodell ergänzen, z. B. pro Termin oder pauschal]")]] },
+    faq: [["Welche Kontrolltermine sind wichtig?", "Typisch sind Bodenplatte und Abdichtung, Rohbau, Dach, Fenster und Dämmung vor dem Innenputz sowie die Abnahme."], ["Was ist der Unterschied zwischen Bauüberwachung und Bauleitung?", "Bei der Bauüberwachung kontrolliere ich die Arbeit der Firmen. Als Bauleiter koordiniere ich zusätzlich Gewerke, Termine und Abläufe."], ["Was kostet die Baubegleitung?", "Art, Umfang und Häufigkeit der Kontrollen stimmen wir auf Ihr Bauvorhaben ab. Danach richtet sich auch der Preis, den ich Ihnen vorab nenne."]] },
 
 
-  { slug: "schlichtung", icon: "streit", title: "Schlichtung bei Bau\u00adstreitigkeiten", short: "Neutrale Bewertung strittiger Mängel, damit sich beide Seiten ohne Prozess einigen.",
+  { slug: "schlichtung", icon: "streit", title: "Schlichtung bei Bau\u00adstreitigkeiten", short: "Strittige Mängel neutral bewerten und sachlich vermitteln, damit eine außergerichtliche Einigung möglich wird.",
     foto: "Foto: Gespräch auf der Baustelle",
     lead: "Wenn Bauprojekte zum Konflikt werden, braucht es eine sachliche Grundlage und einen unabhängigen Blick. Ich kläre technische Streitfragen und zeige nachvollziehbare Lösungswege auf.",
     anlaesse: ["Streit über die Qualität der Ausführung", "Uneinigkeit über Nachbesserung oder Minderung", "Rechnung wird wegen Mängeln nicht bezahlt", "Abnahme wird verweigert", "Beide Seiten wollen eine schnelle Lösung"],
     vorgehen: [["Beide Seiten anhören", "Ich lasse mir die Sicht beider Parteien schildern."], ["Gemeinsamer Ortstermin", "Wir sehen uns die strittigen Punkte zusammen an."], ["Neutrale Bewertung", "Ich bewerte, ob ein Mangel vorliegt und wie schwer er wiegt."], ["Lösungsvorschlag", "Sie erhalten einen Vorschlag für Nachbesserung oder Ausgleich."]],
     ergebnis: [["i-shield", "Neutrale Einschätzung", "Fachlich begründet und für beide Seiten nachvollziehbar."], ["i-doc", "Lösungsvorschlag", "Konkrete Schritte für Nachbesserung oder Minderung."], ["i-euro", "Weniger Kosten", "Eine Einigung spart Zeit und Prozesskosten."]],
-    faq: [["Ist das Ergebnis verbindlich?", "Nur wenn beide Seiten das vorher vereinbaren. Sonst ist es eine fachliche Empfehlung."], ["Wer bezahlt die Schlichtung?", "Üblich ist eine Teilung der Kosten. Das legen wir vorab gemeinsam fest."], ["Brauche ich einen Anwalt?", "Nicht zwingend. Bei hohen Streitwerten kann eine anwaltliche Beratung zusätzlich sinnvoll sein."]] },
+    faq: [["Ist das Ergebnis verbindlich?", "Meine Tätigkeit dient der technischen Klärung und sachverständigen Vermittlung. Eine rechtliche Beratung oder eine verbindliche Entscheidung über Ansprüche ist damit nicht verbunden."], ["Wer bezahlt die Schlichtung?", "Üblich ist eine Teilung der Kosten. Das legen wir vorab gemeinsam fest."], ["Brauche ich einen Anwalt?", "Nicht zwingend. Bei hohen Streitwerten kann eine anwaltliche Beratung zusätzlich sinnvoll sein."]] },
 
-  { slug: "energieberatung", icon: "energie", title: "Energie\u00adberatung", short: "Schwachstellen der Gebäudehülle erkennen und Sanierungsschritte sinnvoll planen.",
+  { slug: "energieberatung", icon: "energie", title: "Energie\u00adberatung", short: "Energieberatung, Energieausweise, Fördermittelberatung und individueller Sanierungsfahrplan (iSFP).",
     foto: "Foto: Fassade oder Dach mit Dämmarbeiten",
     lead: "Welche energetischen Maßnahmen lohnen sich für Ihre Immobilie? Ich zeige Ihnen, wie sich Energiebedarf und Wohnkomfort gezielt verbessern lassen, abgestimmt auf Ihre Ziele und Ihr Budget.",
     anlaesse: ["Hohe Heizkosten", "Geplanter Heizungstausch", "Sanierung von Dach, Fassade oder Fenstern", "Kauf eines älteren Hauses", "Fragen zu Fördermitteln"],
     vorgehen: [["Bestandsaufnahme", "Ich nehme Gebäudehülle, Fenster und Heizung auf."], ["Analyse", "Auf Wunsch mit Wärmebildern, um Schwachstellen sichtbar zu machen."], ["Maßnahmenplan", "Sie erhalten Maßnahmen mit Reihenfolge und groben Kosten."], ["Begleitung", "Auf Wunsch begleite ich die Umsetzung."]],
     ergebnis: [["i-shield", "Schwachstellen", "Eine Übersicht, wo Wärme verloren geht."], ["i-doc", "Maßnahmenplan", "Was zuerst kommt und was warten kann."], ["i-euro", "Förderhinweise", "Hinweise auf passende Förderprogramme."]],
-    faq: [["Ist die Beratung förderfähig?", ph("[Nur angeben, wenn ein Eintrag in der Energieeffizienz-Expertenliste besteht]")], ["Wann ist eine Thermografie sinnvoll?", "In der Heizperiode, wenn es draußen deutlich kälter ist als drinnen. Dann sind Wärmebrücken am besten zu sehen."], ["Erstellen Sie auch Energieausweise?", ph("[ergänzen, falls angeboten]")]] },
+    faq: [["Ist die Beratung förderfähig?", "Ich unterstütze Sie dabei, passende Fördermöglichkeiten zu erkennen und frühzeitig in Ihre Sanierungsplanung einzubeziehen, inklusive der jeweiligen Voraussetzungen, Fristen und Nachweise."], ["Wann ist eine Thermografie sinnvoll?", "In der Heizperiode, wenn es draußen deutlich kälter ist als drinnen. Dann sind Wärmebrücken am besten zu sehen."], ["Erstellen Sie auch Energieausweise?", "Ja. Ich erstelle Bedarfs- und Verbrauchsausweise und erkläre Ihnen, welche Ausweisart infrage kommt und wie die Kennwerte einzuordnen sind."]] },
 
   { slug: "leckageortung", icon: "leck", title: "Leckage\u00adortung", short: "Undichte Leitungen und Abdichtungen finden, mit möglichst wenig Öffnung von Wand und Boden.",
     foto: "Foto: Feuchtemessung am Boden oder Wasserfleck an der Decke",
     lead: "Feuchte Wände, ein Wasserfleck an der Decke oder steigender Wasserverbrauch: Ich suche die undichte Stelle gezielt, damit nur dort geöffnet wird, wo es nötig ist.",
     anlaesse: ["Feuchte Stellen an Decke, Wand oder Boden", "Wasserzähler läuft, obwohl nichts verbraucht wird", "Druckverlust in der Heizung", "Feuchter Estrich nach einem Wasserschaden", "Undichte Dusche oder undichtes Flachdach"],
-    vorgehen: [["Aufnahme", "Ich lasse mir die Situation schildern und sehe mir die Schadensstelle an."], ["Messung", "Feuchtemessung und Wärmebild grenzen den Bereich ein. " + ph("[weitere Verfahren ergänzen]")], ["Ortung", "Ich markiere die vermutete Schadensstelle für den Handwerker."], ["Bericht", "Sie erhalten einen Bericht für Ihre Versicherung."]],
+    vorgehen: [["Aufnahme", "Ich lasse mir die Situation schildern und sehe mir die Schadensstelle an."], ["Messung", "Je nach Befund grenzen geeignete Messverfahren die mögliche Leckstelle ein."], ["Ortung", "Ich markiere die vermutete Schadensstelle für den Handwerker."], ["Bericht", "Sie erhalten einen Bericht für Ihre Versicherung."]],
     ergebnis: [["i-shield", "Gezielte Öffnung", "Weniger Stemmarbeiten, weniger Folgeschäden."], ["i-doc", "Bericht", "Dokumentation für die Versicherung."], ["i-euro", "Geringere Kosten", "Schnelle Ortung verkürzt den Schaden."]],
-    faq: [["Zahlt die Versicherung die Leckageortung?", "Die Leitungswasserversicherung übernimmt die Suche häufig. Fragen Sie am besten vorher nach."], ["Welche Messverfahren setzen Sie ein?", ph("[ergänzen, z. B. Feuchtemessung, Thermografie, Druckprüfung]")], ["Wie schnell können Sie kommen?", "In der Regel innerhalb von 48 Stunden, bei akutem Wasseraustritt nach Absprache schneller."]] },
+    faq: [["Zahlt die Versicherung die Leckageortung?", "Die Leitungswasserversicherung übernimmt die Suche häufig. Fragen Sie am besten vorher nach."], ["Welche Messverfahren setzen Sie ein?", "Je nach Befund setze ich geeignete Messverfahren ein, um die Feuchtigkeitsverteilung zu erfassen und die mögliche Leckstelle einzugrenzen, zum Beispiel Feuchtemessung und Wärmebild."], ["Wie schnell können Sie kommen?", "In der Regel innerhalb von 48 Stunden, bei akutem Wasseraustritt nach Absprache schneller."]] },
 
   { slug: "thermografie", icon: "thermo", title: "Bau-Thermografie", short: "Wärmebilder zeigen Wärmebrücken, fehlende Dämmung und Feuchtestellen auf einen Blick.",
     foto: "Foto: Wärmebild einer Hausfassade",
@@ -1265,7 +1277,7 @@ const LEISTUNGEN = [
     anlaesse: ["Vor dem Hauskauf", "Hohe Heizkosten", "Schimmel in Raumecken", "Kontrolle eines Neubaus", "Planung einer Sanierung"],
     vorgehen: [["Termin planen", "In der Heizperiode, idealerweise früh am Morgen."], ["Aufnahmen", "Wärmebilder von außen und innen."], ["Auswertung", "Ich ordne die Auffälligkeiten ein und unterscheide echte Mängel von Messeffekten."], ["Bericht", "Sie erhalten die Wärmebilder mit Erklärung."]],
     ergebnis: [["i-photo", "Wärmebilder", "Mit Erklärung, was zu sehen ist."], ["i-shield", "Prioritäten", "Welche Schwachstellen zuerst behoben werden sollten."], ["i-doc", "Empfehlung", "Konkrete Maßnahmen für jede Auffälligkeit."]],
-    faq: [["Wann ist die beste Zeit für eine Thermografie?", "Etwa von November bis März, wenn es draußen deutlich kälter ist als drinnen, am besten vor Sonnenaufgang."], ["Wie lange dauert die Aufnahme?", "Bei einem Einfamilienhaus meist 1 bis 2 Stunden."], ["Was kostet eine Thermografie?", ph("[Preis ergänzen]")]] }
+    faq: [["Wann ist die beste Zeit für eine Thermografie?", "Etwa von November bis März, wenn es draußen deutlich kälter ist als drinnen, am besten vor Sonnenaufgang."], ["Wie lange dauert die Aufnahme?", "Bei einem Einfamilienhaus meist 1 bis 2 Stunden."], ["Was kostet eine Thermografie?", "Das hängt von Größe und Umfang ab, etwa ob nur außen oder auch innen aufgenommen wird. Den Preis nenne ich Ihnen vorab."]] }
 ];
 
 /* Zusatzinhalte je Leistung: Einleitung, Prüfpunkte, Kosten, Eckdaten */
@@ -1329,7 +1341,7 @@ MEHR.hauskaufberatung.eck = ["ca. 1,5–3 Std., abhängig von Größe und Zustan
 /* Andrés Texte für die Leistungsseiten (Abschnitte: [Überschrift oder null, [Absatz | [Liste]]]) */
 MEHR.gutachten.tagline = "Ursachen klären. Schäden bewerten. Entscheidungen absichern.";
 MEHR.gutachten.sections = [
-  [null, ["Risse im Mauerwerk, Feuchtigkeit im Keller oder Zweifel an der Bauausführung: Wer Auffälligkeiten an einem Gebäude feststellt, braucht klare Antworten. Was steckt dahinter? Wie schwerwiegend ist das Problem? Und besteht Handlungsbedarf?", "Als Sachverständiger für Schäden an Gebäuden untersuche ich Schäden und vermutete Baumängel, analysiere mögliche Ursachen und bewerte ihre bautechnische Bedeutung. Dabei verbinde ich Fachwissen mit langjähriger Erfahrung aus Handwerk und Bauleitung. So entsteht ein unabhängiges Gutachten, das technische Zusammenhänge nachvollziehbar erklärt und Ihnen eine belastbare Grundlage für das weitere Vorgehen bietet."]],
+  [null, ["Risse im Mauerwerk, Feuchtigkeit im Keller oder Zweifel an der Bauausführung: Wer Auffälligkeiten an einem Gebäude feststellt, braucht klare Antworten. Was steckt dahinter? Wie schwerwiegend ist das Problem? Und besteht Handlungsbedarf?", "Als Sachverständiger für Schäden an Gebäuden untersuche ich Schäden und vermutete Baumängel, analysiere mögliche Ursachen und bewerte ihre bautechnische Bedeutung. Dabei verbinde ich fundiertes Fachwissen mit langjähriger Erfahrung aus Handwerk und Bauleitung. So entsteht ein unabhängiges Gutachten, das technische Zusammenhänge nachvollziehbar erklärt und Ihnen eine belastbare Grundlage für das weitere Vorgehen bietet."]],
   ["Genau untersuchen. Nachvollziehbar beurteilen.", ["Jedes Gutachten wird auf die konkrete Fragestellung abgestimmt. Ich erfasse den Zustand der betroffenen Bauteile, dokumentiere die Befunde und bewerte diese unter Berücksichtigung der maßgeblichen technischen Anforderungen und der anerkannten Regeln der Technik. Dabei unterscheide ich klar zwischen festgestellten Tatsachen, möglichen Ursachen und fachlichen Schlussfolgerungen.", "Je nach Auftrag und Untersuchungsumfang umfasst das Gutachten:", [
     "<b>Schadens- und Mängelerfassung:</b> Untersuchung und Dokumentation der betroffenen Bauteile",
     "<b>Ursachenanalyse:</b> Betrachtung von Konstruktion, Material, Ausführung und relevanten äußeren Einflüssen",
@@ -1359,7 +1371,7 @@ MEHR.bauueberwachung.sections = [
 
 MEHR.schlichtung.tagline = "Sachverhalte klären. Lösungen ermöglichen.";
 MEHR.schlichtung.sections = [
-  [null, ["Ob Uneinigkeit über die Ausführungsqualität, strittige Baumängel oder unterschiedliche Auffassungen zu Schadensursachen: Wenn Bauprojekte zum Konflikt werden, braucht es eine sachliche Grundlage und einen unabhängigen Blick.", "Als Sachverständiger für Schäden an Gebäuden unterstütze ich die Beteiligten dabei, technische Streitfragen zu klären und nachvollziehbare Lösungswege zu entwickeln. Dafür verbinde ich Fachwissen mit langjähriger Erfahrung aus Handwerk und Bauleitung."]],
+  [null, ["Ob Uneinigkeit über die Ausführungsqualität, strittige Baumängel oder unterschiedliche Auffassungen zu Schadensursachen: Wenn Bauprojekte zum Konflikt werden, braucht es eine sachliche Grundlage und einen unabhängigen Blick.", "Als Sachverständiger für Schäden an Gebäuden unterstütze ich die Beteiligten dabei, technische Streitfragen zu klären und nachvollziehbare Lösungswege zu entwickeln. Dafür verbinde ich fundiertes Fachwissen mit langjähriger Erfahrung aus Handwerk und Bauleitung."]],
   ["Unabhängig prüfen. Sachlich vermitteln.", ["Im Mittelpunkt stehen die bautechnischen Tatsachen. Ich untersuche die betroffenen Bauteile, dokumentiere die Feststellungen und bewerte, ob die beanstandete Ausführung fachlich begründet zu bemängeln ist. Ursachen, Auswirkungen und mögliche Maßnahmen werden nachvollziehbar eingeordnet.", "Wenn die Beteiligten eine gemeinsame Klärung wünschen, erläutere ich die Ergebnisse in einem moderierten Gespräch. Ziel ist es, unterschiedliche Standpunkte auf eine überprüfbare fachliche Grundlage zurückzuführen und Möglichkeiten für eine außergerichtliche Einigung aufzuzeigen.", "Je nach Fragestellung umfasst meine Unterstützung:", [
     "Erfassung der strittigen Punkte und Sichtung relevanter Bauunterlagen",
     "Gemeinsame Ortsbesichtigung und Dokumentation des baulichen Zustands",
@@ -1375,11 +1387,11 @@ MEHR.schlichtung.sections = [
 
 MEHR.energieberatung.tagline = "Gebäude verstehen. Sinnvoll modernisieren.";
 MEHR.energieberatung.sections = [
-  [null, ["Welche energetischen Maßnahmen lohnen sich für Ihre Immobilie? Ich untersuche den Gebäudezustand und zeige Ihnen, wie sich Energiebedarf und Wohnkomfort gezielt verbessern lassen, abgestimmt auf Ihre Ziele und Ihr Budget."]],
+  [null, ["Welche energetischen Maßnahmen lohnen sich für Ihre Immobilie? Ich untersuche den Gebäudezustand und zeige Ihnen, wie sich Energiebedarf und Wohnkomfort gezielt verbessern lassen, abgestimmt auf Ihre Ziele und Ihr Budget.", "<b>Mein Anspruch:</b> klare Empfehlungen und ein durchdachtes Konzept, das zu Ihrer Immobilie passt."]],
   ["Energieberatung", ["Bei einem Vor-Ort-Termin betrachte ich Gebäudehülle und Anlagentechnik und entwickle passende Verbesserungsvorschläge. Dabei berücksichtige ich Einsparpotenziale, Wirtschaftlichkeit und das Zusammenspiel von Wärmeschutz, Feuchteschutz, Lüftung und Heizung."]],
   ["Energieausweise", ["Ich erstelle Bedarfs- und Verbrauchsausweise entsprechend den Anforderungen Ihres Gebäudes. Welche Ausweisart infrage kommt und wie die Kennwerte einzuordnen sind, erläutere ich Ihnen verständlich."]],
   ["Fördermittelberatung", ["Ich unterstütze Sie dabei, passende Fördermöglichkeiten zu erkennen und frühzeitig in Ihre Sanierungsplanung einzubeziehen. Dabei berücksichtige ich die jeweiligen Voraussetzungen, Fristen und erforderlichen Nachweise."]],
-  ["Individueller Sanierungsfahrplan (iSFP)", ["Der individuelle Sanierungsfahrplan zeigt, wie sich Ihr Wohngebäude energetisch weiterentwickeln lässt, in aufeinander abgestimmten Schritten oder im Rahmen einer umfassenden Sanierung.", "Ausgehend vom Gebäudezustand werden geeignete Maßnahmenpakete zusammengestellt und in eine sinnvolle Reihenfolge gebracht. Der Fahrplan erläutert deren voraussichtliche Auswirkungen auf Energiebedarf und Wohnkomfort sowie die zu erwartenden Investitionen und mögliche Förderungen.", "So können Sie einzelne Maßnahmen gezielt vorbereiten und spätere Sanierungsschritte bereits mitdenken. Zusätzliche Fördervorteile können sich ergeben, wenn die jeweiligen Programmvoraussetzungen erfüllt sind.", "<b>Mein Anspruch:</b> energetische Zusammenhänge verständlich machen und eine Sanierungsstrategie entwickeln, die zu Ihrem Gebäude, Ihren Zielen und Ihrem Budget passt."]]
+  ["Individueller Sanierungsfahrplan (iSFP)", ["Der individuelle Sanierungsfahrplan (iSFP) zeigt, wie sich Ihr Wohngebäude energetisch weiterentwickeln lässt, in aufeinander abgestimmten Schritten oder im Rahmen einer umfassenden Sanierung.", "Ausgehend vom Gebäudezustand werden geeignete Maßnahmenpakete zusammengestellt und in eine sinnvolle Reihenfolge gebracht. Der Fahrplan erläutert deren voraussichtliche Auswirkungen auf Energiebedarf und Wohnkomfort sowie die zu erwartenden Investitionen und mögliche Förderungen.", "So können Sie einzelne Maßnahmen gezielt vorbereiten und spätere Sanierungsschritte bereits mitdenken. Zusätzliche Fördervorteile können sich ergeben, wenn die jeweiligen Programmvoraussetzungen erfüllt sind.", "<b>Mein Anspruch:</b> energetische Zusammenhänge verständlich machen und eine Sanierungsstrategie entwickeln, die zu Ihrem Gebäude, Ihren Zielen und Ihrem Budget passt."]]
 ];
 
 MEHR.leckageortung.keepIntro = true;
@@ -1530,7 +1542,7 @@ function leistungPage(l) {
   </div></section>`;
 }
 
-const DOCS_TILE = `<div class="tile tile--docs">${ic("gutachten")}<h3>Benötigte Unterlagen</h3><p>Je mehr Informationen Sie mir geben, desto genauer kann ich einschätzen. Hilfreich sind Grundrisse, Ansichten und Schnitte, Baubeschreibung, Energieausweis, Baugrundgutachten und Fotos. Keine Voraussetzung, aber oft eine große Hilfe.</p><a class="go" href="#kontakt">Unterlagen mitschicken <span class="arrow">→</span></a></div>`;
+const DOCS_TILE = `<div class="tile tile--docs">${ic("gutachten")}<h3>Benötigte Unterlagen</h3><p>Je mehr Informationen Sie mir zur Verfügung stellen, desto fundierter kann ich den Schaden einschätzen und beurteilen. Hierzu gehören:</p><ul class="docs-mini"><li>Grundrisse, Ansichten und Schnitte</li><li>Baubeschreibung</li><li>Energieausweis</li><li>Baugrundgutachten</li><li>Fotos</li></ul><p class="docs-note">Die Unterlagen sind keine Voraussetzung, können aber für eine genauere Analyse durchaus hilfreich sein.</p></div>`;
 document.getElementById("home-tiles").innerHTML = LEISTUNGEN.map(tile).join("") + DOCS_TILE;
 document.getElementById("all-tiles").innerHTML = LEISTUNGEN.map(tile).join("") + DOCS_TILE;
 document.getElementById("dd-list").innerHTML = LEISTUNGEN.map(l => `<a href="#${l.slug}">${ic(l.icon)}${l.title}</a>`).join("") + `<a class="all" href="#leistungen">Alle Leistungen im Überblick →</a>`;
@@ -1562,11 +1574,16 @@ const REDUCED = matchMedia("(prefers-reduced-motion: reduce)").matches;
   const go = () => root.classList.add("hero-go");
   if (!root.classList.contains("intro-on")) { requestAnimationFrame(() => requestAnimationFrame(go)); return; }
   let ended = false;
-  const end = () => { if (ended) return; ended = true; intro.classList.add("done"); root.classList.remove("intro-on"); go(); };
+  const end = () => {
+    if (ended) return; ended = true; intro.classList.add("done"); root.classList.remove("intro-on", "intro-play"); go();
+    setTimeout(() => (window.requestIdleCallback || (f => setTimeout(f, 0)))(() => applyPhotos(document), { timeout: 1500 }), 1300);
+  };
   intro.addEventListener("click", end);
   document.getElementById("bi-skip").addEventListener("click", end);
   intro.addEventListener("animationend", e => { if (e.target === intro && e.animationName === "bi-out") end(); });
-  setTimeout(end, 3800);
+  const play = () => { if (root.classList.contains("intro-play")) return; requestAnimationFrame(() => requestAnimationFrame(() => { root.classList.add("intro-play"); setTimeout(end, 3800); })); };
+  (document.fonts && document.fonts.ready ? document.fonts.ready : Promise.resolve()).then(play);
+  setTimeout(play, 900);
 })();
 
 /* Hauptüberschrift in Wörter zerlegen */
@@ -1628,8 +1645,8 @@ if (REDUCED || !io) document.querySelectorAll(".finder, .map-wrap").forEach(el =
 const PHOTOS = {"hero": {"src": "img/ad57e7bbd641.jpg", "by": "Yanhao Fang", "link": "https://unsplash.com/@alamanga?utm_source=bsv_niewerth_entwurf&utm_medium=referral", "people": false, "alt": "A red brick building with windows and a clock"}, "z-ortstermin": {"src": "img/dd884c04fc85.jpg", "by": "Kacper G", "link": "https://unsplash.com/@aucoeurdumonstre?utm_source=bsv_niewerth_entwurf&utm_medium=referral", "people": false, "alt": "Old white building wall with windows and small white flowers"}, "z-ursache": {"src": "img/34d3a5d9567c.jpg", "by": "Jon Moore", "link": "https://unsplash.com/@thejmoore?utm_source=bsv_niewerth_entwurf&utm_medium=referral", "people": false, "alt": "brown and gray brick wall"}, "z-baustelle": {"src": "img/30b1c2f12c89.jpg", "by": "Flow Clark", "link": "https://unsplash.com/@flowclark?utm_source=bsv_niewerth_entwurf&utm_medium=referral", "people": false, "alt": "gray concrete wall during daytime"}, "z-mess": {"src": "img/959ed172179e.jpg", "by": "rawkkim", "link": "https://unsplash.com/@rawkkim?utm_source=bsv_niewerth_entwurf&utm_medium=referral", "people": false, "alt": "A camera is set up to take a picture of a house"}, "gebaeudeschaeden": {"src": "img/37d9563c3d9b.jpg", "by": "Krakograff Textures", "link": "https://unsplash.com/@krakograff?utm_source=bsv_niewerth_entwurf&utm_medium=referral", "people": false, "alt": "map"}, "gebaeudeschaeden-2": {"src": "img/e3a9e8e6542a.jpg", "by": "Hydra 4x", "link": "https://unsplash.com/@hydra4x?utm_source=bsv_niewerth_entwurf&utm_medium=referral", "people": false, "alt": "a wall that has some dirt on it"}, "hauskaufberatung": {"src": "img/1599099f68d8.jpg", "by": "Chris Weiher", "link": "https://unsplash.com/@chrisvomradio?utm_source=bsv_niewerth_entwurf&utm_medium=referral", "people": false, "alt": "a house with a large hedge in front of it"}, "hauskaufberatung-2": {"src": "img/66efb4e2e9b6.jpg", "by": "Ibrahim Rifath", "link": "https://unsplash.com/@ripey__?utm_source=bsv_niewerth_entwurf&utm_medium=referral", "people": false, "alt": "white Volkswagen Jetta parked beside house"}, "gutachten": {"src": "img/855c015b2b5b.jpg", "by": "2H Media", "link": "https://unsplash.com/@2hmedia?utm_source=bsv_niewerth_entwurf&utm_medium=referral", "people": false, "alt": "a pen sitting on top of a pile of papers"}, "gutachten-2": {"src": "img/9032acd1a27f.jpg", "by": "Tierra Mallorca", "link": "https://unsplash.com/@tierramallorca?utm_source=bsv_niewerth_entwurf&utm_medium=referral", "people": false, "alt": "white and red wooden house beside grey framed magnifying glass"}, "bauueberwachung": {"src": "img/29572d8b29ae.jpg", "by": "Troy Mortier", "link": "https://unsplash.com/@troyscanon?utm_source=bsv_niewerth_entwurf&utm_medium=referral", "people": false, "alt": "Wooden house frame under construction behind a fence"}, "bauueberwachung-2": {"src": "img/3df24a8974e8.jpg", "by": "Iain", "link": "https://unsplash.com/@photoken123?utm_source=bsv_niewerth_entwurf&utm_medium=referral", "people": false, "alt": "an aerial view of a building being constructed"}, "schlichtung": {"src": "img/2f27fca757ad.jpg", "by": "Brett Jordan", "link": "https://unsplash.com/@brett_jordan?utm_source=bsv_niewerth_entwurf&utm_medium=referral", "people": false, "alt": "brown brick building during daytime"}, "schlichtung-2": {"src": "img/741b6ef6d20d.jpg", "by": "Marek Studzinski", "link": "https://unsplash.com/@jccards?utm_source=bsv_niewerth_entwurf&utm_medium=referral", "people": false, "alt": "A ruler and a pencil laying on the floor"}, "energieberatung": {"src": "img/5bcbfd9d4322.jpg", "by": "Troy Mortier", "link": "https://unsplash.com/@troyscanon?utm_source=bsv_niewerth_entwurf&utm_medium=referral", "people": false, "alt": "Construction debris piled in front of a brick house"}, "energieberatung-2": {"src": "img/dd884c04fc85.jpg", "by": "Kacper G", "link": "https://unsplash.com/@aucoeurdumonstre?utm_source=bsv_niewerth_entwurf&utm_medium=referral", "people": false, "alt": "Old white building wall with windows and small white flowers"}, "leckageortung": {"src": "img/fe15d994c9d2.jpg", "by": "Brett Jordan", "link": "https://unsplash.com/@brett_jordan?utm_source=bsv_niewerth_entwurf&utm_medium=referral", "people": false, "alt": "A room with a ceiling that has been torn off"}, "leckageortung-2": {"src": "img/07d289b6bffe.jpg", "by": "Krakograff Textures", "link": "https://unsplash.com/@krakograff?utm_source=bsv_niewerth_entwurf&utm_medium=referral", "people": false, "alt": "A wall that has some paint on it"}, "thermografie": {"src": "img/959ed172179e.jpg", "by": "rawkkim", "link": "https://unsplash.com/@rawkkim?utm_source=bsv_niewerth_entwurf&utm_medium=referral", "people": false, "alt": "A camera is set up to take a picture of a house"}, "thermografie-2": {"src": "img/fdb2bebe384c.jpg", "by": "Maksym Diachenko", "link": "https://unsplash.com/@photofixation?utm_source=bsv_niewerth_entwurf&utm_medium=referral", "people": false, "alt": "man in black jacket walking on sidewalk during night time"}};
 const UNSPLASH = "https://unsplash.com/?utm_source=bsv_niewerth_entwurf&utm_medium=referral";
 const creditHtml = f => `Beispielfoto · <a href="${f.link}" target="_blank" rel="noopener">${f.by}</a> / <a href="${UNSPLASH}" target="_blank" rel="noopener">Unsplash</a>`;
-function applyPhotos(scope) {
-  scope.querySelectorAll("[data-photo]").forEach(el => {
+function applyPhotos(scope, heroOnly) {
+  scope.querySelectorAll(heroOnly ? ".hero-photo[data-photo]" : "[data-photo]").forEach(el => {
     const f = PHOTOS[el.dataset.photo]; if (!f || el.dataset.done) return;
     el.dataset.done = "1";
     el.style.backgroundImage = `url("${f.src}")`;
@@ -1637,7 +1654,7 @@ function applyPhotos(scope) {
     el.classList.add("has-img"); el.setAttribute("role", "img"); el.setAttribute("aria-label", "Beispielfoto: " + (f.alt || ""));
   });
 }
-applyPhotos(document);
+applyPhotos(document, document.documentElement.classList.contains("intro-on"));
 
 /* Seitenwechsel (in WordPress echte Seiten) */
 function swapPage() {
@@ -1658,7 +1675,7 @@ function swapPage() {
 let firstRoute = true;
 function route() {
   const c = document.getElementById("curtain");
-  if (firstRoute || REDUCED) { firstRoute = false; swapPage(); applyPhotos(document); applyReveal(document); return; }
+  if (firstRoute || REDUCED) { firstRoute = false; swapPage(); applyPhotos(document, document.documentElement.classList.contains("intro-on")); applyReveal(document); return; }
   c.classList.remove("leave"); c.classList.add("cover");
   setTimeout(() => {
     swapPage(); applyPhotos(document); applyReveal(document);
