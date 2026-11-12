@@ -16,7 +16,7 @@
 <meta name="twitter:card" content="summary_large_image">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <title>BSV Niewerth Website</title>
-<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%2312305b'/%3E%3Cpath d='M8 30 L32 14 L56 30' fill='none' stroke='%235aa2ea' stroke-width='6'/%3E%3Ctext x='32' y='52' text-anchor='middle' font-family='Arial,Helvetica,sans-serif' font-weight='800' font-size='22' fill='%23fff'%3EBSV%3C/text%3E%3C/svg%3E">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"%3E%3Crect width="512" height="512" rx="96" fill="#12305b"/%3E%3Cg transform="translate(59.2 59.2) scale(0.8)"%3E%0A%3Ccircle cx="218" cy="218" r="137" fill="none" stroke="#ffffff" stroke-width="46"/%3E%0A%3Cpath d="M138 191.99 L218 142 L218 175.02 L138 225.01 Z" fill="#5aa2ea"/%3E%3Cpath d="M218 142 L298 191.99 L298 225.01 L218 175.02 Z" fill="#3f86d2"/%3E%0A%3Cpath d="M168 260 L204 294 L272 226" fill="none" stroke="#ffffff" stroke-width="30" stroke-linecap="round" stroke-linejoin="round"/%3E%0A%3Cpath d="M328.31 328.31 L346.69 346.69" stroke="#ffffff" stroke-width="34"/%3E%0A%3Cpath d="M346.69 346.69 L431.55 431.55" stroke="#ffffff" stroke-width="66" stroke-linecap="round"/%3E%3C/g%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,500;0,600;0,700;0,800;1,600&family=Source+Sans+3:ital,wght@0,400;0,600;0,700;1,400&display=swap">
@@ -114,7 +114,7 @@ body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-a
 .brand { display: flex; align-items: center; gap: 14px; text-decoration: none; color: #fff; min-width: 0; }
 .brand-mark { flex: none; height: 48px; width: auto; }
 .brand-text { display: grid; line-height: 1.2; min-width: 0; border-left: 1px solid rgb(255 255 255 / .2); padding-left: 14px; }
-.brand-name { font-family: var(--font-head); font-weight: 600; letter-spacing: .3em; font-size: 1rem; }
+.brand-name { font-family: var(--font-head); font-weight: 600; letter-spacing: .3em; font-size: 1rem; color: #c3cfdc; }
 .brand-sub { font-family: var(--font-head); font-weight: 500; letter-spacing: .1em; font-size: .6rem; text-transform: uppercase; color: var(--on-navy-muted); }
 .nav { display: flex; align-items: center; gap: 2px; }
 .nav > a, .nav .dd > a { color: #fff; text-decoration: none; font-family: var(--font-head); font-weight: 600; font-size: .92rem; padding: 10px 14px; position: relative; }
@@ -217,6 +217,8 @@ body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-a
 .seal-ph.seal-big { width: auto; height: 110px; font-size: .8rem !important; padding: 10px !important; line-height: 1.3 !important; }
 
 /* Statement */
+.statement .sig .sig-mark { width: 56px; height: 56px; border-radius: 50%; background: var(--navy); flex: none; display: grid; place-items: center; }
+.statement .sig .sig-mark svg { width: 36px; height: 36px; }
 .statement { display: grid; grid-template-columns: 1fr 2.2fr; gap: clamp(28px, 6vw, 96px); align-items: start; }
 .statement > * { min-width: 0; }
 .statement blockquote { margin: 0; font-family: var(--font-head); font-weight: 700; font-size: clamp(1.45rem, 3vw, 2.35rem); line-height: 1.3; letter-spacing: -.01em; text-wrap: balance; }
@@ -551,7 +553,7 @@ textarea { min-height: 140px; resize: vertical; }
 .bi-mark .im-lens { stroke-dasharray: 1; stroke-dashoffset: 1; animation: bi-draw .6s var(--ease-io) 1.35s forwards; }
 .bi-mark .im-hdl { opacity: 0; animation: bi-fadein .3s ease 1.8s forwards; }
 .bi-mark .im-chk { stroke-dasharray: 1; stroke-dashoffset: 1; animation: bi-draw .35s var(--ease-out) 1.95s forwards; }
-.bi-name { display: flex; gap: .02em; font-family: var(--font-head); font-weight: 600; letter-spacing: .42em; margin-right: -.42em; font-size: clamp(1.1rem, 3vw, 1.6rem); color: #fff; }
+.bi-name { display: flex; gap: .02em; font-family: var(--font-head); font-weight: 600; letter-spacing: .42em; margin-right: -.42em; font-size: clamp(1.1rem, 3vw, 1.6rem); color: #c3cfdc; }
 .bi-name span { display: inline-block; opacity: 0; transform: translateY(8px); will-change: transform, opacity; animation: bi-letter .5s var(--ease-out) calc(1.5s + var(--i) * .05s) forwards; }
 .bi-sub { font-family: var(--font-head); font-weight: 500; font-size: .7rem; letter-spacing: .3em; color: #b6c4d5; text-transform: uppercase; opacity: 0; animation: bi-fadein .5s ease 2.1s forwards; }
 .bi-sweep { position: absolute; inset: -20% -40%; pointer-events: none; background: linear-gradient(105deg, transparent 40%, rgb(255 255 255 / .28) 49%, rgb(90 162 234 / .35) 51%, transparent 60%); transform: translateX(-70%); opacity: 0; animation: bi-sweep .9s var(--ease-io) 2.15s forwards; will-change: transform, opacity; }
@@ -902,7 +904,7 @@ main { overflow-x: clip; }
         <div>
           <blockquote>Mit technischem Fachwissen und langjähriger Baupraxis <em>gehe ich Schäden auf den Grund</em>. Ich erläutere Ihnen die Zusammenhänge und zeige auf, welche Maßnahmen sinnvoll und erforderlich sind.</blockquote>
           <p class="statement-text">Als Maurer- und Betonbauermeister und Sachverständiger für Schäden an Gebäuden verbinde ich fachliche Kompetenz mit langjähriger Praxis als Bauleiter im Hochbau, im schlüsselfertigen Wohnungsbau und beim Bauen im Bestand.</p>
-          <div class="sig"><span class="ph-sig">Foto</span><div><b>André Niewerth</b>TÜV-zertifizierter Sachverständiger für Schäden an Gebäuden · Geprüfter Betriebswirt (HwO) · Maurer- und Betonbauermeister</div></div>
+          <div class="sig"><span class="sig-mark" aria-hidden="true"><svg viewBox="0 0 34 34"><path d="M3 15 L17 5 L31 15" fill="none" stroke="#5aa2ea" stroke-width="3.4"/><text x="17" y="29" text-anchor="middle" font-family="Montserrat, sans-serif" font-weight="800" font-size="11.5" fill="#fff">BSV</text></svg></span><div><b>André Niewerth</b>TÜV-zertifizierter Sachverständiger für Schäden an Gebäuden · Geprüfter Betriebswirt (HwO) · Maurer- und Betonbauermeister</div></div>
         </div>
       </div>
     </section>
@@ -938,7 +940,7 @@ main { overflow-x: clip; }
           <div class="zmedia">
             <div class="dim"><i></i><span>Ursache</span><i></i></div>
             <div class="photo" data-photo="z-ursache"><div class="cap"><svg aria-hidden="true"><use href="#i-photo"/></svg>Foto: durchfeuchtete Wand mit Messpunkt</div></div>
-            <div class="spot" style="--x:28%;--y:64%"><span class="dot"></span><span class="lbl">4,8 M-%<small>Materialfeuchte, Beispiel</small></span></div>
+            <div class="spot" style="--x:28%;--y:64%"><span class="dot"></span><span class="lbl">4,8 M-%<small>Materialfeuchte gemessen</small></span></div>
           </div>
           <div class="zcopy">
             <span class="kicker">Schadensanalyse</span>
@@ -1055,8 +1057,8 @@ main { overflow-x: clip; }
     <section class="section">
       <div class="wrap about-grid">
         <div class="zmedia">
-          <div class="dim"><i></i><span>André Niewerth</span><i></i></div>
-          <div class="photo"><div class="cap"><svg aria-hidden="true"><use href="#i-photo"/></svg>Porträtfoto, gern bei der Arbeit</div></div>
+          <div class="dim"><i></i><span>Aus der Praxis</span><i></i></div>
+          <div class="photo" data-photo="hero"><div class="cap"><svg aria-hidden="true"><use href="#i-photo"/></svg>Porträtfoto, gern bei der Arbeit</div></div>
         </div>
         <div class="intro-text">
           <div class="isec"><span class="kicker">Über mich</span><h2>André Niewerth</h2>
@@ -1136,7 +1138,7 @@ main { overflow-x: clip; }
           <div class="upload"><span class="upload-l">Fotos (optional)</span><label class="upload-btn" for="f-file"><svg aria-hidden="true"><use href="#i-photo"/></svg><span id="f-file-txt">Fotos auswählen</span><input id="f-file" name="fotos" type="file" accept="image/*" multiple></label><small>Fotos vom Schaden helfen mir bei der ersten Einschätzung.</small></div>
           <label class="check" for="f-ds"><input id="f-ds" type="checkbox" required><span>Ich habe die <a href="#datenschutz">Datenschutzerklärung</a> gelesen und bin einverstanden, dass meine Angaben zur Bearbeitung der Anfrage verwendet werden.</span></label>
           <div><button class="btn btn--primary" type="submit">Anfrage senden <span class="arrow">→</span></button></div>
-          <p class="form-msg" id="form-msg" aria-live="polite">Vorschau: In WordPress wird das Formular über ein Kontaktformular-Plugin angebunden.</p>
+          <p class="form-msg" id="form-msg" aria-live="polite">Ich melde mich so schnell wie möglich bei Ihnen. Lieber direkt sprechen? Rufen Sie einfach an: 0179 6933684.</p>
         </form>
       </div>
     </section>
@@ -1146,18 +1148,13 @@ main { overflow-x: clip; }
   <div data-page="impressum">
     <section class="page-hero page-hero--plain"><div class="wrap"><div class="page-hero-copy"><div class="crumbs"><a href="#start">Start</a><span>/</span><span>Impressum</span></div><h1>Impressum</h1></div></div></section>
     <section class="section"><div class="wrap prose">
-      <p class="note">Entwurf für ein Einzelunternehmen. Bitte vor der Veröffentlichung prüfen lassen, zum Beispiel über die Handwerkskammer oder einen Impressum-Generator.</p>
       <h2>Angaben gemäß § 5 DDG</h2>
       <p>BSV Niewerth – Bau-Sachverständigenbüro<br>Inhaber: André Niewerth<br>Propst-Pricking-Str. 16<br>46325 Borken</p>
       <h2>Kontakt</h2>
       <p>Telefon: 0179 6933684<br>E-Mail: info@bsv-niewerth.de</p>
-      <h2>Umsatzsteuer</h2>
-      <p>Umsatzsteuer-Identifikations&shy;nummer gemäß § 27a UStG: <span class="ph">[DE …, falls vorhanden, sonst Abschnitt streichen]</span></p>
       <h2>Berufsbezeichnung und berufsrechtliche Regelungen</h2>
       <p>Berufsbezeichnung: Maurer- und Betonbauermeister (verliehen in der Bundesrepublik Deutschland)<br>Zuständige Kammer: Handwerkskammer Münster<br>Es gelten die Handwerksordnung (HwO) und die Meisterprüfungsverordnung, abrufbar unter gesetze-im-internet.de.</p>
       <p>Zertifizierung: Sachverständiger für Schäden an Gebäuden, zertifiziert durch persCert TÜV Rheinland, Prüfzeichen-ID 0217466933.</p>
-      <h2>Berufs&shy;haftpflicht&shy;versicherung</h2>
-      <p><span class="ph">[Name und Sitz des Versicherers, räumlicher Geltungsbereich. Abschnitt streichen, falls keine besteht.]</span></p>
       <h2>Verbraucherstreitbeilegung</h2>
       <p>Ich bin nicht bereit und nicht verpflichtet, an Streitbeilegungsverfahren vor einer Verbraucherschlichtungsstelle teilzunehmen.</p>
       <h2>Haftung für Inhalte und Links</h2>
@@ -1169,20 +1166,19 @@ main { overflow-x: clip; }
   <div data-page="datenschutz">
     <section class="page-hero page-hero--plain"><div class="wrap"><div class="page-hero-copy"><div class="crumbs"><a href="#start">Start</a><span>/</span><span>Datenschutz</span></div><h1>Datenschutzerklärung</h1></div></div></section>
     <section class="section"><div class="wrap prose">
-      <p class="note">Gliederung und Mustertext für eine Seite ohne Tracking und ohne Cookies, mit Kontaktformular und Hosting bei IONOS. Vor der Veröffentlichung mit einem Datenschutz-Generator vervollständigen oder rechtlich prüfen lassen, insbesondere sobald Plugins, Karten oder Videos von Drittanbietern dazukommen.</p>
       <h2>1. Verantwortlicher</h2>
       <p>André Niewerth, BSV Niewerth – Bau-Sachverständigenbüro, Propst-Pricking-Str. 16, 46325 Borken, Telefon 0179 6933684, E-Mail info@bsv-niewerth.de.</p>
       <h2>2. Hosting</h2>
-      <p>Diese Website wird bei der IONOS SE, Elgendorfer Str. 57, 56410 Montabaur gehostet. Beim Aufruf der Seite verarbeitet der Hoster technisch notwendige Daten wie IP-Adresse, Datum und Uhrzeit, aufgerufene Seite und Browsertyp in Server-Logfiles. Rechtsgrundlage ist Art. 6 Abs. 1 lit. f DSGVO. Mit IONOS besteht ein Vertrag zur Auftragsverarbeitung. <span class="ph">[nach Vertragsabschluss bestätigen]</span></p>
+      <p>Diese Website wird bei der IONOS SE, Elgendorfer Str. 57, 56410 Montabaur gehostet. Beim Aufruf der Seite verarbeitet der Hoster technisch notwendige Daten wie IP-Adresse, Datum und Uhrzeit, aufgerufene Seite und Browsertyp in Server-Logfiles. Rechtsgrundlage ist Art. 6 Abs. 1 lit. f DSGVO. Mit IONOS besteht ein Vertrag zur Auftragsverarbeitung.</p>
       <h2>3. Kontaktformular, E-Mail und Telefon</h2>
       <p>Wenn Sie mich kontaktieren, verarbeite ich Ihre Angaben (Name, Kontaktdaten, Nachricht, ggf. Fotos), um Ihre Anfrage zu bearbeiten. Rechtsgrundlage ist Art. 6 Abs. 1 lit. b DSGVO, wenn die Anfrage auf einen Auftrag zielt, sonst Art. 6 Abs. 1 lit. f DSGVO. Die Daten werden gelöscht, sobald sie nicht mehr erforderlich sind und keine gesetzlichen Aufbewahrungspflichten bestehen.</p>
       <h2>4. Cookies und Analyse</h2>
-      <p>Diese Website setzt keine Analyse- oder Marketing-Cookies ein. <span class="ph">[anpassen, falls Statistik-Tools eingesetzt werden]</span></p>
+      <p>Diese Website setzt keine Analyse- oder Marketing-Cookies ein.</p>
       <h2>5. Schriftarten</h2>
       <p>Die Schriftarten sind lokal auf dem Server eingebunden. Beim Aufruf der Seite wird keine Verbindung zu Servern von Google hergestellt.</p>
       <h2>6. Ihre Rechte</h2>
       <p>Sie haben das Recht auf Auskunft, Berichtigung, Löschung, Einschränkung der Verarbeitung, Datenübertragbarkeit und Widerspruch. Außerdem können Sie sich bei einer Aufsichtsbehörde beschweren, zum Beispiel bei der Landesbeauftragten für Datenschutz und Informationsfreiheit Nordrhein-Westfalen.</p>
-      <p>Stand: <span class="ph">[Datum]</span></p>
+      <p>Stand: November 2026</p>
     </div></section>
   </div>
 </main>
