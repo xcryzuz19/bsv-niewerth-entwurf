@@ -202,14 +202,14 @@ body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-a
 /* Vertrauenskarte über dem Hero-Rand */
 .trustcard { position: relative; z-index: 3; margin-top: -96px; background: linear-gradient(to bottom, transparent 96px, var(--navy) 96px); }
 .trustcard .inner { background: #fff; border-radius: var(--r); box-shadow: var(--shadow); overflow: hidden; display: grid; grid-template-columns: auto minmax(0, 1fr) minmax(0, 1fr); }
-.tc { padding: 16px 26px; display: grid; grid-template-columns: 48px minmax(0, 1fr); gap: 16px; align-items: center; border-right: 1px solid var(--line); min-width: 0; }
+.tc { padding: 16px 32px; display: grid; grid-template-columns: 58px minmax(0, 1fr); gap: 18px; align-items: center; border-right: 1px solid var(--line); min-width: 0; }
 .tc:last-child { border-right: 0; }
-.tc b { font-family: var(--font-head); font-size: 1.02rem; line-height: 1.3; display: block; color: var(--navy); margin-bottom: 2px; }
-.tc span { color: var(--muted); font-size: .92rem; line-height: 1.4; display: block; }
-.tci { width: 48px; height: 48px; border-radius: 50%; background: var(--blue-pale); display: grid !important; place-items: center; }
-.tci svg { width: 24px; height: 24px; stroke: var(--blue); fill: none; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+.tc b { font-family: var(--font-head); font-size: 1.2rem; line-height: 1.3; display: block; color: var(--navy); margin-bottom: 2px; }
+.tc span { color: var(--muted); font-size: 1.02rem; line-height: 1.4; display: block; }
+.tci { width: 58px; height: 58px; border-radius: 50%; background: var(--blue-pale); display: grid !important; place-items: center; }
+.tci svg { width: 28px; height: 28px; stroke: var(--blue); fill: none; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
 .tc--seal { display: flex; align-items: center; justify-content: center; padding: 14px; transition: background .2s; }
-.tc--seal img { height: 130px; width: auto; max-width: 100%; display: block; }
+.tc--seal img { height: 100px; width: auto; max-width: 100%; display: block; }
 @media (max-width: 900px) { .tc--seal img { height: auto; width: 100%; max-width: 440px; } }
 .tc--seal:hover { background: var(--soft); }
 .seal-ph { width: 48px; height: 48px; font-size: .5rem !important; padding: 3px !important; line-height: 1.1 !important; border: 1px dashed var(--ph); background: var(--ph-bg); color: var(--ph); border-radius: 6px; display: grid; place-items: center; text-align: center; font-size: .66rem; line-height: 1.25; padding: 6px; font-weight: 600; }
