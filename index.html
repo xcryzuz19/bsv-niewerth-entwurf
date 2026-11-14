@@ -188,7 +188,7 @@ body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-a
 .promises svg { width: 20px; height: 20px; flex: none; stroke: var(--blue-light); fill: none; stroke-width: 2.6; }
 .hero-actions { display: flex; flex-wrap: wrap; gap: 14px; }
 .hero-note { position: absolute; right: max(20px, env(safe-area-inset-right, 0px)); bottom: 96px; z-index: 2; font-size: .74rem; background: rgb(0 0 0 / .5); color: #fff; padding: 4px 10px; border-radius: 3px; }
-.scroll-hint { position: absolute; left: 50%; bottom: 90px; z-index: 2; width: 26px; height: 42px; border: 2px solid rgb(255 255 255 / .5); border-radius: 13px; transform: translateX(-50%); }
+.scroll-hint { position: absolute; left: 50%; bottom: 128px; z-index: 2; width: 26px; height: 42px; border: 2px solid rgb(255 255 255 / .5); border-radius: 13px; transform: translateX(-50%); }
 .scroll-hint::after { content: ""; position: absolute; left: 50%; top: 8px; width: 4px; height: 8px; margin-left: -2px; border-radius: 2px; background: #fff; animation: wheel 1.8s ease-in-out infinite; }
 @keyframes wheel { 0% { transform: translateY(0); opacity: 1; } 70% { transform: translateY(12px); opacity: 0; } 100% { opacity: 0; } }
 @media (max-width: 760px) {
@@ -201,20 +201,32 @@ body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-a
 
 /* Vertrauenskarte über dem Hero-Rand */
 .trustcard { position: relative; z-index: 3; margin-top: -96px; background: linear-gradient(to bottom, transparent 96px, var(--navy) 96px); }
-.trustcard .inner { background: #fff; border-radius: var(--r); box-shadow: var(--shadow); overflow: hidden; display: grid; grid-template-columns: auto minmax(0, 1fr) minmax(0, 1fr); }
-.tc { padding: 16px 32px; display: grid; grid-template-columns: 58px minmax(0, 1fr); gap: 18px; align-items: center; border-right: 1px solid var(--line); min-width: 0; }
+.trustcard .inner { background: #fff; border-radius: var(--r); box-shadow: var(--shadow); overflow: hidden; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.tc { padding: 22px 28px; display: grid; grid-template-columns: 58px auto; justify-content: center; gap: 18px; align-items: center; border-right: 1px solid var(--line); min-width: 0; }
 .tc:last-child { border-right: 0; }
 .tc b { font-family: var(--font-head); font-size: 1.2rem; line-height: 1.3; display: block; color: var(--navy); margin-bottom: 2px; }
 .tc span { color: var(--muted); font-size: 1.02rem; line-height: 1.4; display: block; }
 .tci { width: 58px; height: 58px; border-radius: 50%; background: var(--blue-pale); display: grid !important; place-items: center; }
 .tci svg { width: 28px; height: 28px; stroke: var(--blue); fill: none; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
 .tc--seal { display: flex; align-items: center; justify-content: center; padding: 14px; transition: background .2s; }
-.tc--seal img { height: 100px; width: auto; max-width: 100%; display: block; }
-@media (max-width: 900px) { .tc--seal img { height: auto; width: 100%; max-width: 440px; } }
+.tc--seal img { height: 92px; width: auto; max-width: 100%; display: block; }
+@media (max-width: 900px) { .tc--seal img { height: 92px; width: auto; max-width: 100%; } }
+@media (max-width: 520px) { .tc--seal img { height: auto; width: 100%; max-width: 250px; } }
 .tc--seal:hover { background: var(--soft); }
 .seal-ph { width: 48px; height: 48px; font-size: .5rem !important; padding: 3px !important; line-height: 1.1 !important; border: 1px dashed var(--ph); background: var(--ph-bg); color: var(--ph); border-radius: 6px; display: grid; place-items: center; text-align: center; font-size: .66rem; line-height: 1.25; padding: 6px; font-weight: 600; }
 @media (max-width: 900px) { .trustcard .inner { grid-template-columns: 1fr 1fr; } .tc--seal { grid-column: span 2; border-right: 0 !important; border-bottom: 1px solid var(--line); } }
-@media (max-width: 520px) { .trustcard { margin-top: -64px; background: linear-gradient(to bottom, transparent 64px, var(--navy) 64px); } .trustcard .inner { grid-template-columns: minmax(0, 1fr); } .tc { padding: 18px 20px; border-right: 0 !important; border-bottom: 1px solid var(--line); } .tc:last-child { border-bottom: 0; } .tc--seal { grid-column: auto; } }
+@media (max-width: 520px) {
+  .trustcard { margin-top: -64px; background: linear-gradient(to bottom, transparent 64px, var(--navy) 64px); }
+  .trustcard .inner { grid-template-columns: 1fr 1fr; }
+  .tc--seal { grid-column: span 2; padding: 14px 16px; }
+  .tc--seal img { max-width: 260px; margin-inline: auto; }
+  .tc:not(.tc--seal) { grid-template-columns: 1fr; justify-items: center; text-align: center; gap: 8px; padding: 16px 10px; border-bottom: 0; }
+  .tc:not(.tc--seal):nth-child(2) { border-right: 1px solid var(--line) !important; }
+  .tc b { font-size: .98rem; }
+  .tc span { font-size: .85rem; }
+  .tci { width: 44px; height: 44px; }
+  .tci svg { width: 22px; height: 22px; }
+}
 
 .seal-ph.seal-big { width: auto; height: 110px; font-size: .8rem !important; padding: 10px !important; line-height: 1.3 !important; }
 
@@ -618,7 +630,7 @@ textarea { min-height: 140px; resize: vertical; }
 
 /* Schadens-Finder: Haus im Schnitt mit Prüfpunkten */
 .finder { background: var(--navy); color: #fff; position: relative; overflow: hidden; }
-.finder::before { content: ""; position: absolute; inset: 0; pointer-events: none; opacity: .5;
+.finder::before { content: ""; position: absolute; inset: 0; pointer-events: none; opacity: .5; -webkit-mask-image: linear-gradient(to bottom, transparent, #000 160px); mask-image: linear-gradient(to bottom, transparent, #000 160px);
   background-image: linear-gradient(rgb(90 162 234 / .07) 1px, transparent 1px), linear-gradient(90deg, rgb(90 162 234 / .07) 1px, transparent 1px); background-size: 32px 32px; }
 .finder .wrap { position: relative; display: grid; grid-template-columns: minmax(0, .9fr) minmax(0, 1.3fr); gap: clamp(32px, 5vw, 80px); align-items: center; padding-block: clamp(64px, 9vw, 120px); }
 .finder-copy { display: grid; gap: 18px; align-content: start; }
