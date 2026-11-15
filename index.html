@@ -660,7 +660,13 @@ textarea { min-height: 140px; resize: vertical; }
 @media (max-width: 520px) { .hs { transform: translate(-9px, -50%); } .hs--l { transform: translate(calc(-100% + 9px), -50%); } }
 .hs:hover .pt, .hs[aria-pressed="true"] .pt { background: var(--blue-light); transform: scale(1.15); }
 .hs[aria-pressed="true"] .tx { background: var(--blue); border-color: var(--blue); }
-@media (max-width: 900px) { .finder .wrap { grid-template-columns: minmax(0, 1fr); } .finder-stage { order: -1; } .finder-card { min-height: 0; } }
+@media (max-width: 900px) {
+  .finder .wrap { grid-template-columns: minmax(0, 1fr); gap: 18px; }
+  .finder-copy { display: contents; }
+  .finder-copy h2 { order: 1; } .finder-copy > p { order: 2; }
+  .finder-stage { order: 3; margin-block: 8px 4px; }
+  .finder-card { order: 4; min-height: 0; margin-top: 0; scroll-margin-bottom: 128px; scroll-margin-top: 100px; }
+}
 @media (max-width: 520px) { .hs .tx { font-size: .7rem; padding: 4px 8px; } .hs .pt { width: 18px; height: 18px; } }
 
 @media (prefers-reduced-motion: reduce) {
@@ -1686,6 +1692,11 @@ if (REDUCED || !io) document.querySelectorAll(".finder, .map-wrap").forEach(el =
     box.querySelectorAll(".hs").forEach(x => x.setAttribute("aria-pressed", String(x === b)));
     card.innerHTML = `<span class="fc-k">${s.k}</span><h3>${s.h}</h3><p>${s.t}</p><a href="#${s.to}">${s.l} →</a>`;
     card.classList.remove("swap"); void card.offsetWidth; card.classList.add("swap");
+    // Handy/Tablet: Karte liegt unter dem Haus. Ist sie nicht ganz sichtbar, sanft hinscrollen.
+    if (matchMedia("(max-width: 900px)").matches) {
+      const r = card.getBoundingClientRect(), bar = document.querySelector(".callbar"), barH = bar && getComputedStyle(bar).display !== "none" ? bar.offsetHeight : 0;
+      if (r.bottom > innerHeight - barH - 8) card.scrollIntoView({ behavior: "smooth", block: "end" });
+    }
   });
 })();
 
