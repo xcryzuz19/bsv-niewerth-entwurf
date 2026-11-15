@@ -109,7 +109,7 @@ a:hover .arrow { transform: translateX(4px); }
 
 /* ---------- Kopfzeile ---------- */
 body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 30; background: var(--navy); }
-.site-header { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 20; background: rgb(15 29 46 / .96); backdrop-filter: blur(10px); color: #fff; border-bottom: 1px solid rgb(255 255 255 / .07); }
+.site-header { position: sticky; top: 0; z-index: 20; padding-top: env(safe-area-inset-top, 0px); background: #0f1d2e; color: #fff; border-bottom: 1px solid rgb(255 255 255 / .07); transition: box-shadow .3s; }
 .site-header .wrap { display: flex; align-items: center; justify-content: space-between; gap: 24px; min-height: 82px; }
 .brand { display: flex; align-items: center; gap: 14px; text-decoration: none; color: #fff; min-width: 0; }
 .brand-mark { flex: none; height: 48px; width: auto; }
@@ -618,11 +618,7 @@ textarea { min-height: 140px; resize: vertical; }
 .in > .reveal-img { clip-path: inset(0 0 0 0); }
 
 /* Kopfzeile wird beim Scrollen schmaler */
-.site-header .wrap { transition: min-height .3s var(--ease-out); }
-.site-header .brand-mark { transition: height .3s var(--ease-out); }
 .site-header.scrolled { box-shadow: 0 10px 30px rgb(0 0 0 / .25); }
-.site-header.scrolled .wrap { min-height: 66px; }
-.site-header.scrolled .brand-mark { height: 38px; }
 
 /* Buttons: Lichtkante beim Darüberfahren */
 .btn--primary { position: relative; overflow: hidden; }
