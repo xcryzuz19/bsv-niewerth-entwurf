@@ -637,7 +637,7 @@ textarea { min-height: 140px; resize: vertical; }
 .finder-card .fc-k { font: 700 .72rem var(--font-head); letter-spacing: .18em; text-transform: uppercase; color: var(--blue-light); }
 .finder-card h3 { font-size: 1.35rem; }
 .finder-card p { color: #d4deea; }
-.finder-card a { justify-self: start; margin-top: 6px; color: #fff; font-family: var(--font-head); font-weight: 700; text-decoration: none; border-bottom: 2px solid var(--blue-light); padding-bottom: 2px; }
+.finder-card a.fc-more { justify-self: start; margin-top: 6px; color: #fff; font-family: var(--font-head); font-weight: 700; text-decoration: none; border-bottom: 2px solid var(--blue-light); padding-bottom: 2px; }
 .finder-card.swap { animation: fc-swap .45s var(--ease-out); }
 @keyframes fc-swap { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
 .finder-stage { position: relative; }
@@ -668,6 +668,48 @@ textarea { min-height: 140px; resize: vertical; }
   .finder-card { order: 4; min-height: 0; margin-top: 0; scroll-margin-bottom: 128px; scroll-margin-top: 100px; }
 }
 @media (max-width: 520px) { .hs .tx { font-size: .7rem; padding: 4px 8px; } .hs .pt { width: 18px; height: 18px; } }
+
+
+/* Anliegen-Karten (Startseite) */
+.needs { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; }
+.need { background: #fff; border: 1px solid var(--line); border-radius: var(--r); padding: 28px 26px 24px; display: grid; grid-template-rows: auto auto 1fr auto; gap: 12px; align-content: start; min-width: 0; transition: box-shadow .25s, transform .25s; }
+.need:hover { box-shadow: var(--shadow); transform: translateY(-2px); }
+.need .ico { width: 46px; height: 46px; }
+.need h3 { font-size: 1.18rem; line-height: 1.3; }
+.need p { color: var(--muted); font-size: .97rem; }
+.need-act { display: grid; gap: 12px; justify-items: start; margin-top: 6px; }
+.need-act .btn { font-size: .9rem; padding: .85em 1.25em; }
+.need-more { font-family: var(--font-head); font-weight: 700; font-size: .82rem; color: var(--blue); text-decoration: none; }
+.need-more:hover { text-decoration: underline; }
+.needs-foot { margin-top: 28px; color: var(--muted); }
+.needs-foot a { color: var(--blue); font-weight: 600; }
+@media (max-width: 1000px) { .needs { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 600px) { .needs { grid-template-columns: minmax(0, 1fr); } .need { padding: 24px 20px 20px; } }
+/* Schadens-Finder: Schaltflächen in der Karte */
+.fc-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 20px; margin-top: 8px; }
+.fc-actions .btn { font-size: .88rem; padding: .8em 1.2em; }
+/* Aus der Praxis */
+.cases { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; }
+.case { background: #fff; border: 1px solid var(--line); border-radius: var(--r); overflow: hidden; display: grid; grid-template-rows: auto 1fr; min-width: 0; }
+.case-photo { aspect-ratio: 16 / 9; background: var(--soft) center / cover no-repeat; }
+.case-body { padding: 28px 28px 26px; display: grid; gap: 14px; align-content: start; }
+.case-meta { font: 700 .74rem var(--font-head); letter-spacing: .14em; text-transform: uppercase; color: var(--blue); }
+.case h3 { font-size: 1.25rem; line-height: 1.3; }
+.case-steps { list-style: none; padding: 0; margin: 4px 0 0; display: grid; gap: 0; }
+.case-steps li { position: relative; padding: 0 0 16px 26px; }
+.case-steps li::before { content: ""; position: absolute; left: 4px; top: 7px; width: 10px; height: 10px; border-radius: 50%; border: 2px solid var(--blue); background: #fff; z-index: 1; }
+.case-steps li::after { content: ""; position: absolute; left: 9px; top: 14px; bottom: -4px; width: 2px; background: var(--line); }
+.case-steps li:last-child { padding-bottom: 0; }
+.case-steps li:last-child::after { display: none; }
+.case-steps li:last-child::before { background: var(--blue); }
+.case-steps b { display: block; font: 700 .78rem var(--font-head); letter-spacing: .08em; text-transform: uppercase; color: var(--navy); margin-bottom: 2px; }
+.case-steps span { color: var(--muted); font-size: .97rem; }
+.case-link { justify-self: start; font-family: var(--font-head); font-weight: 700; font-size: .85rem; color: var(--blue); text-decoration: none; margin-top: 4px; }
+@media (max-width: 900px) { .cases { grid-template-columns: minmax(0, 1fr); } .case-body { padding: 22px 20px; } }
+/* Formular: Anliegen aus einer Schaltfläche */
+.f-anl { display: none; margin: -4px 0 4px; color: var(--muted); font-size: .95rem; }
+.f-anl.on { display: block; }
+#kontaktformular { scroll-margin-top: 100px; }
 
 @media (prefers-reduced-motion: reduce) {
   .reveal, .reveal-img { opacity: 1; transform: none; clip-path: none; transition: none; }
@@ -918,6 +960,19 @@ main { overflow-x: clip; }
       </div>
     </section>
 
+    <section class="section section--soft" id="anliegen" aria-labelledby="anliegen-h">
+      <div class="wrap">
+        <div class="head"><span class="kicker">Ihr Anliegen</span><h2 id="anliegen-h">Was ist bei Ihnen los?</h2><p>Wählen Sie, was am besten passt. Sie schildern mir kurz die Lage, gerne mit Fotos, und ich melde mich mit einer ersten Einschätzung.</p></div>
+        <div class="needs" id="needs"></div>
+        <p class="needs-foot">Ihr Anliegen ist nicht dabei? Rufen Sie mich an unter <a href="tel:+491796933684">0179 6933684</a> oder <a href="#kontakt">schreiben Sie mir</a>.</p>
+      </div>
+    </section>
+    <section class="section" id="praxis" aria-labelledby="praxis-h" hidden>
+      <div class="wrap">
+        <div class="head"><span class="kicker">Aus der Praxis</span><h2 id="praxis-h">So läuft das in echten Fällen</h2><p>Ausgewählte Aufträge aus dem Münsterland und dem Ruhrgebiet, anonymisiert und mit Einverständnis der Auftraggeber.</p></div>
+        <div class="cases" id="cases"></div>
+      </div>
+    </section>
     <section class="section">
       <div class="wrap statement">
         <span class="kicker">Mein Anspruch</span>
@@ -1145,7 +1200,8 @@ main { overflow-x: clip; }
           <a class="btn btn--outline" href="https://www.google.com/maps/search/?api=1&query=Propst-Pricking-Str.+16+46325+Borken" target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#i-pin"/></svg>Route planen</a>
         </div>
         <form id="kontaktformular" novalidate>
-          <h2 style="font-size:1.5rem">Ihre Anfrage</h2>
+          <h2 style="font-size:1.5rem" id="f-h">Ihre Anfrage</h2>
+          <p class="f-anl" id="f-anl">Unverbindlich anfragen, gerne mit Fotos.</p>
           <div><div style="font-family:var(--font-head);font-weight:700;font-size:.9rem;margin-bottom:8px">Worum geht es?</div><div class="chips" id="f-chips"></div></div>
           <div class="frow">
             <label for="f-name">Name *<input id="f-name" name="name" autocomplete="name" required></label>
@@ -1208,10 +1264,10 @@ main { overflow-x: clip; }
 <section class="contact-band" id="kontaktband">
   <svg class="bigroof" viewBox="0 0 600 300" aria-hidden="true"><path d="M20 290 L300 40 L580 290"/></svg>
   <div class="wrap">
-    <div><h2>Klarheit beginnt mit einem Gespräch.</h2><p>Schildern Sie mir Ihr Anliegen. Ich freue mich auf Ihre Anfrage.</p></div>
+    <div><h2 id="kb-h">Klarheit beginnt mit einem Gespräch.</h2><p id="kb-p">Schildern Sie mir Ihr Anliegen. Ich freue mich auf Ihre Anfrage.</p></div>
     <div class="cboxes">
       <a class="cbox" href="tel:+491796933684"><svg aria-hidden="true"><use href="#i-phone"/></svg><div><b>0179 6933684</b><small>Persönlich für Sie da</small></div></a>
-      <a class="cbox" href="#kontakt"><svg aria-hidden="true"><use href="#i-mail"/></svg><div><b>Anfrage senden</b><small>info@bsv-niewerth.de</small></div></a>
+      <a class="cbox" href="#kontakt" id="kb-cta"><svg aria-hidden="true"><use href="#i-mail"/></svg><div><b id="kb-b">Anfrage senden</b><small id="kb-s">info@bsv-niewerth.de</small></div></a>
     </div>
   </div>
 </section>
@@ -1260,6 +1316,30 @@ const ic = k => `<svg class="ico" viewBox="0 0 34 34" aria-hidden="true">${ICONS
 const use = id => `<svg aria-hidden="true"><use href="#${id}"/></svg>`;
 const ph = t => `<span class="ph">${t}</span>`;
 const ROOF = '<svg class="roofline" viewBox="0 0 100 18" preserveAspectRatio="none" aria-hidden="true"><path d="M0 17 L50 2 L100 17"/></svg>';
+
+/* Situationsbezogene Anfragen je Leistung: [Schaltfläche, Überschrift, Text, Beispiel im Nachrichtenfeld] */
+const CTA = {
+  gebaeudeschaeden: ["Schaden einschätzen lassen", "Riss, Feuchte oder Schimmel entdeckt?", "Schildern Sie mir kurz, was Ihnen aufgefallen ist, gerne mit ein paar Fotos. Ich melde mich mit einer ersten Einschätzung und sage Ihnen, ob ein Ortstermin sinnvoll ist.", "z. B. Feuchter Fleck an der Kellerwand seit dem Frühjahr, Baujahr 1978"],
+  hauskaufberatung: ["Hauskauf begleiten lassen", "Haus oder Wohnung im Blick?", "Nennen Sie mir das Objekt und, falls schon bekannt, den Besichtigungstermin. Ich sage Ihnen, ob ich dabei sein kann und was die Begleitung kostet.", "z. B. Einfamilienhaus, Baujahr 1965, Besichtigung nächste Woche in Borken"],
+  gutachten: ["Gutachten anfragen", "Sie brauchen eine fundierte Bewertung?", "Beschreiben Sie kurz den Schaden und wofür Sie das Gutachten brauchen. Ich nenne Ihnen den nötigen Umfang und einen klaren Kostenrahmen.", "z. B. Risse nach dem Anbau, Gutachten für das Gespräch mit der Baufirma"],
+  bauueberwachung: ["Bau prüfen lassen", "Sie bauen neu oder modernisieren?", "Erzählen Sie mir, was geplant ist und wie weit der Bau ist. Ich schlage Ihnen vor, welche Bauabschnitte ich prüfe, bevor sie hinter Putz und Estrich verschwinden.", "z. B. Neubau Einfamilienhaus, Bodenplatte fertig, Rohbau startet im April"],
+  schlichtung: ["Schlichtung anfragen", "Streit über eine Bauleistung?", "Schildern Sie mir kurz, worum es geht. Ich sage Ihnen ehrlich, ob eine Schlichtung in Ihrem Fall Aussicht auf Erfolg hat.", "z. B. Uneinigkeit mit dem Fliesenleger über Gefälle und Fugen im Bad"],
+  energieberatung: ["Energieberatung anfragen", "Sanierung geplant oder Energieausweis nötig?", "Nennen Sie mir Baujahr, Heizung und was Sie vorhaben. Ich sage Ihnen, welche Beratung passt und welche Förderung in Frage kommen kann.", "z. B. Haus von 1972, neue Heizung geplant, Frage nach Förderung"],
+  leckageortung: ["Leck orten lassen", "Wasserfleck oder Verdacht auf ein Leck?", "Beschreiben Sie, wo das Wasser auftritt und seit wann. Ich orte die Stelle gezielt, damit nur dort geöffnet wird, wo es nötig ist.", "z. B. Wasserfleck an der Wohnzimmerdecke unter dem Bad, Wasserzähler läuft"],
+  thermografie: ["Wärmebild anfragen", "Kalte Wände oder hohe Heizkosten?", "Schildern Sie kurz, was Ihnen auffällt. Wärmebilder sind in der Heizperiode am aussagekräftigsten, den Termin stimme ich passend zur Witterung mit Ihnen ab.", "z. B. Kalte Ecken im Schlafzimmer, Wärmebild der ganzen Fassade gewünscht"]
+};
+/* Einstieg nach Problem auf der Startseite */
+const NEEDS = [
+  { icon: "schaden", h: "Feuchtigkeit im Keller oder an der Wand?", t: "Finden Sie heraus, woher die Feuchtigkeit kommt und welche Maßnahmen wirklich nötig sind.", cta: "Feuchte einschätzen lassen", to: "gebaeudeschaeden", hint: "z. B. Feuchte Kellerwand mit weißen Ausblühungen, muffiger Geruch, Baujahr 1975" },
+  { icon: "schaden", h: "Risse in Wand, Decke oder Fassade?", t: "Ich kläre, ob der Riss nur optisch stört oder auf ein Problem im Bauwerk hinweist.", cta: "Riss beurteilen lassen", to: "gebaeudeschaeden", hint: "z. B. Schräger Riss über dem Fenster, seit einem Jahr breiter geworden" },
+  { icon: "thermo", h: "Schimmel in der Wohnung?", t: "Wärmebrücke, Lüftung oder eindringende Feuchte: Erst wenn die Ursache klar ist, hält die Sanierung.", cta: "Schimmel untersuchen lassen", to: "gebaeudeschaeden", hint: "z. B. Schimmel in der Schlafzimmerecke, kommt nach dem Abwischen wieder" },
+  { icon: "kauf", h: "Haus oder Wohnung im Blick?", t: "Ich begleite die Besichtigung und zeige Ihnen, welcher Sanierungsbedarf auf Sie zukommt, bevor Sie unterschreiben.", cta: "Hauskauf begleiten lassen", to: "hauskaufberatung", hint: CTA.hauskaufberatung[3] },
+  { icon: "bau", h: "Neubau oder Umbau?", t: "Ich prüfe die Bauabschnitte, bevor Mängel hinter Putz und Estrich verschwinden.", cta: "Bau prüfen lassen", to: "bauueberwachung", hint: CTA.bauueberwachung[3] },
+  { icon: "leck", h: "Wasserschaden oder Leitung undicht?", t: "Ich orte die Leckage gezielt, damit nur dort geöffnet wird, wo es nötig ist.", cta: "Leck orten lassen", to: "leckageortung", hint: CTA.leckageortung[3] }
+];
+/* Aus der Praxis: echte, anonymisierte Fälle von André. Solange die Liste leer ist, bleibt der Bereich ausgeblendet.
+   Aufbau: { to: "gebaeudeschaeden", ort: "Kreis Borken", h: "Überschrift", aus: "Ausgangslage", unt: "Untersuchung", erg: "Ergebnis", foto: "data:image/jpeg;base64,..." (optional) } */
+const PRAXIS = [];
 
 const LEISTUNGEN = [
   { slug: "gebaeudeschaeden", icon: "schaden", title: "Gebäude\u00adschäden", short: "Risse, Feuchtigkeit, Setzungen oder Schimmel: Ursachen klären und den passenden Sanierungsweg aufzeigen.",
@@ -1540,7 +1620,7 @@ function leistungPage(l) {
         ${x.tagline ? `<p class="tagline">${x.tagline}</p>` : ""}
         <p class="reach">${PIN}Kreis Borken, Münsterland und Ruhrgebiet</p>
         <p>${l.lead}</p>
-        <div class="hero-actions"><a class="btn btn--primary" href="#kontakt">${use("i-cal")}Termin vereinbaren</a><a class="btn btn--outline-light" href="tel:+491796933684">${use("i-phone")}0179 6933684</a></div>
+        <div class="hero-actions"><a class="btn btn--primary" href="#kontakt" data-thema="${l.slug}">${CTA[l.slug][0]} <span class="arrow">→</span></a><a class="btn btn--outline-light" href="tel:+491796933684">${use("i-phone")}0179 6933684</a></div>
       </div>
       <div class="zmedia">
         <div class="dim"><i></i><span>${l.title}</span><i></i></div>
@@ -1559,7 +1639,7 @@ function leistungPage(l) {
         <dt>Ortstermin</dt><dd>kurzfristig nach Absprache</dd>
         <dt>Einsatzgebiet</dt><dd>Kreis Borken, Münsterland und Ruhrgebiet</dd>
       </dl>
-      <a class="btn btn--primary" href="#kontakt">Anfrage senden</a>
+      <a class="btn btn--primary" href="#kontakt" data-thema="${l.slug}">${CTA[l.slug][0]}</a>
     </aside>
   </div></section>
   <section class="section section--soft"><div class="wrap proto-wrap">
@@ -1584,17 +1664,39 @@ function leistungPage(l) {
   </div></section>
   <section class="section"><div class="wrap cost">
     <div><span class="kicker">Kosten</span><h2>Was kostet das?</h2></div>
-    <div class="cost-text"><p>${x.kosten}</p><a class="btn btn--outline" href="#kontakt">Unverbindlich anfragen <span class="arrow">→</span></a></div>
+    <div class="cost-text"><p>${x.kosten}</p><a class="btn btn--outline" href="#kontakt" data-thema="${l.slug}">Unverbindlich anfragen <span class="arrow">→</span></a></div>
   </div></section>
   <section class="section section--soft"><div class="wrap faq-grid">
     <div class="head" style="margin:0;align-content:start"><span class="kicker">Häufige Fragen</span><h2>Gut zu wissen</h2><p>Ihre Frage ist nicht dabei? Rufen Sie mich einfach an.</p></div>
     <div class="faq">${l.faq.map(([q, a], i) => `<details${i === 0 ? " open" : ""}><summary>${q}</summary><p>${a}</p></details>`).join("")}</div>
   </div></section>
+  ${casesFor(l.slug).length ? `<section class="section"><div class="wrap"><div class="head"><span class="kicker">Aus der Praxis</span><h2>Ein Fall aus meiner Arbeit</h2></div><div class="cases">${casesHtml(casesFor(l.slug), false)}</div></div></section>` : ""}
   <section class="section" style="padding-block:64px"><div class="wrap more-grid">
     <div><h3>Einsatzgebiet</h3><p class="area-line">${TOWNS.join(" · ")}, das übrige Münsterland und das Ruhrgebiet</p></div>
     <div><h3>Weitere Leistungen</h3><div class="other">${others}</div></div>
   </div></section>`;
 }
+
+function casesFor(slug) { return PRAXIS.filter(c => c.to === slug); }
+function casesHtml(list, withLink = true) {
+  return list.map(c => {
+    const l = LEISTUNGEN.find(x => x.slug === c.to);
+    return `<article class="case">${c.foto ? `<div class="case-photo" role="img" aria-label="${c.h}" style="background-image:url('${c.foto}')"></div>` : ""}<div class="case-body">
+      <span class="case-meta">${l ? l.title : ""}${c.ort ? " · " + c.ort : ""}</span><h3>${c.h}</h3>
+      <ol class="case-steps"><li><b>Ausgangslage</b><span>${c.aus}</span></li><li><b>Untersuchung</b><span>${c.unt}</span></li><li><b>Ergebnis</b><span>${c.erg}</span></li></ol>
+      ${withLink && l ? `<a class="case-link" href="#${l.slug}">Mehr zu ${l.title} →</a>` : ""}</div></article>`;
+  }).join("");
+}
+function renderPraxis() {
+  const sec = document.getElementById("praxis");
+  sec.hidden = !PRAXIS.length;
+  document.getElementById("cases").innerHTML = casesHtml(PRAXIS.slice(0, 4));
+}
+renderPraxis();
+document.getElementById("needs").innerHTML = NEEDS.map(n => {
+  const l = LEISTUNGEN.find(x => x.slug === n.to);
+  return `<article class="need">${ic(n.icon)}<h3>${n.h}</h3><p>${n.t}</p><div class="need-act"><a class="btn btn--primary" href="#kontakt" data-thema="${n.to}" data-label="${n.cta}" data-hint="${n.hint}">${n.cta} <span class="arrow">→</span></a><a class="need-more" href="#${n.to}">Mehr zu ${l.title} →</a></div></article>`;
+}).join("");
 
 const DOCS_TILE = `<div class="tile tile--docs">${ic("gutachten")}<h3>Benötigte Unterlagen</h3><p>Je mehr Informationen Sie mir zur Verfügung stellen, desto fundierter kann ich den Schaden einschätzen und beurteilen. Hierzu gehören:</p><ul class="docs-mini"><li>Grundrisse, Ansichten und Schnitte</li><li>Baubeschreibung</li><li>Energieausweis</li><li>Baugrundgutachten</li><li>Fotos</li></ul><p class="docs-note">Die Unterlagen sind keine Voraussetzung, können aber für eine genauere Analyse durchaus hilfreich sein.</p></div>`;
 document.getElementById("home-tiles").innerHTML = LEISTUNGEN.map(tile).join("") + DOCS_TILE;
@@ -1602,7 +1704,7 @@ document.getElementById("all-tiles").innerHTML = LEISTUNGEN.map(tile).join("") +
 document.getElementById("dd-list").innerHTML = LEISTUNGEN.map(l => `<a href="#${l.slug}">${ic(l.icon)}${l.title}</a>`).join("") + `<a class="all" href="#leistungen">Alle Leistungen im Überblick →</a>`;
 document.getElementById("m-list").innerHTML = LEISTUNGEN.map(l => `<a href="#${l.slug}">${ic(l.icon)}${l.title}</a>`).join("") + `<a class="all" href="#leistungen">Alle Leistungen im Überblick</a>`;
 document.getElementById("f-list").innerHTML = LEISTUNGEN.map(l => `<li><a href="#${l.slug}">${l.title}</a></li>`).join("");
-document.getElementById("f-chips").innerHTML = [...LEISTUNGEN.map(l => l.title), "Sonstiges"].map((t, i) => `<label><input type="radio" name="thema" id="f-t${i}" value="${t}"${i === 0 ? " checked" : ""}><span>${t}</span></label>`).join("");
+document.getElementById("f-chips").innerHTML = [...LEISTUNGEN.map(l => [l.title, l.slug]), ["Sonstiges", "sonstiges"]].map(([t, sl], i) => `<label><input type="radio" name="thema" id="f-t${i}" data-slug="${sl}" value="${t.replace(/\u00ad|­/g, "")}"${i === 0 ? " checked" : ""}><span>${t}</span></label>`).join("");
 
 /* Menü */
 const mnav = document.getElementById("mnav"), burger = document.getElementById("burger");
@@ -1678,11 +1780,11 @@ if (REDUCED || !io) document.querySelectorAll(".finder, .map-wrap").forEach(el =
 /* Schadens-Finder */
 (function () {
   const SPOTS = [
-    { k: "Dach", x: 50, y: 25, h: "Dach und Dachstuhl", t: "Feuchte unter dem Dach, Schäden an Eindeckung oder Holz und fehlende Dämmung. Mit der Drohne sehe ich mir das Dach von oben an, Wärmebilder zeigen, wo Wärme und Wasser ihren Weg finden.", to: "thermografie", l: "Zur Bau-Thermografie" },
-    { k: "Fenster", x: 66.6, y: 41.3, h: "Fenster und Anschlüsse", t: "Kalte Laibungen, Kondenswasser und Schimmel am Rahmen entstehen oft an undichten Anschlüssen oder an Wärmebrücken.", to: "gebaeudeschaeden", l: "Zu Gebäudeschäden" },
-    { k: "Bad", x: 39.5, y: 58, h: "Bad und Leitungen", t: "Ein Wasserfleck an der Decke darunter oder ein feuchter Boden deutet auf eine Leckage hin. Ich finde die Stelle, bevor großflächig geöffnet wird.", to: "leckageortung", l: "Zur Leckageortung" },
-    { k: "Wände", x: 23.2, y: 55.5, h: "Risse in den Wänden", t: "Ob harmloser Putzriss oder Setzung: Ich bewerte Verlauf, Breite und Ursache und sage Ihnen, ob Handlungsbedarf besteht.", to: "gebaeudeschaeden", l: "Zu Gebäudeschäden", left: true },
-    { k: "Keller", x: 31, y: 84, h: "Feuchter Keller", t: "Muffiger Geruch, Salzausblühungen oder nasse Wände: Ich messe die Feuchte und finde heraus, ob Abdichtung, Kondensat oder aufsteigende Feuchte dahintersteckt.", to: "gebaeudeschaeden", l: "Zu Gebäudeschäden" }
+    { k: "Dach", cta: "Dach prüfen lassen", hint: "z. B. Feuchte Stellen unter der Dachschräge nach Starkregen", x: 50, y: 25, h: "Dach und Dachstuhl", t: "Feuchte unter dem Dach, Schäden an Eindeckung oder Holz und fehlende Dämmung. Mit der Drohne sehe ich mir das Dach von oben an, Wärmebilder zeigen, wo Wärme und Wasser ihren Weg finden.", to: "thermografie", l: "Zur Bau-Thermografie" },
+    { k: "Fenster", cta: "Ursache klären lassen", hint: "z. B. Kondenswasser und Schimmel am Fensterrahmen im Kinderzimmer", x: 66.6, y: 41.3, h: "Fenster und Anschlüsse", t: "Kalte Laibungen, Kondenswasser und Schimmel am Rahmen entstehen oft an undichten Anschlüssen oder an Wärmebrücken.", to: "gebaeudeschaeden", l: "Zu Gebäudeschäden" },
+    { k: "Bad", cta: "Leck orten lassen", hint: "z. B. Wasserfleck an der Decke unter dem Bad, Wasserzähler läuft", x: 39.5, y: 58, h: "Bad und Leitungen", t: "Ein Wasserfleck an der Decke darunter oder ein feuchter Boden deutet auf eine Leckage hin. Ich finde die Stelle, bevor großflächig geöffnet wird.", to: "leckageortung", l: "Zur Leckageortung" },
+    { k: "Wände", cta: "Riss beurteilen lassen", hint: "z. B. Schräger Riss über dem Fenster, seit einem Jahr breiter geworden", x: 23.2, y: 55.5, h: "Risse in den Wänden", t: "Ob harmloser Putzriss oder Setzung: Ich bewerte Verlauf, Breite und Ursache und sage Ihnen, ob Handlungsbedarf besteht.", to: "gebaeudeschaeden", l: "Zu Gebäudeschäden", left: true },
+    { k: "Keller", cta: "Feuchte einschätzen lassen", hint: "z. B. Feuchte Kellerwand mit weißen Ausblühungen, muffiger Geruch", x: 31, y: 84, h: "Feuchter Keller", t: "Muffiger Geruch, Salzausblühungen oder nasse Wände: Ich messe die Feuchte und finde heraus, ob Abdichtung, Kondensat oder aufsteigende Feuchte dahintersteckt.", to: "gebaeudeschaeden", l: "Zu Gebäudeschäden" }
   ];
   const box = document.getElementById("hotspots"), card = document.getElementById("finder-card");
   box.innerHTML = SPOTS.map((s, i) => `<button class="hs${s.left ? " hs--l" : ""}" type="button" aria-pressed="false" data-i="${i}" style="--x:${s.x}%;--y:${s.y}%;--i:${i}"><span class="pt"></span><span class="tx">${s.k}</span></button>`).join("");
@@ -1690,7 +1792,7 @@ if (REDUCED || !io) document.querySelectorAll(".finder, .map-wrap").forEach(el =
     const b = e.target.closest(".hs"); if (!b) return;
     const s = SPOTS[b.dataset.i];
     box.querySelectorAll(".hs").forEach(x => x.setAttribute("aria-pressed", String(x === b)));
-    card.innerHTML = `<span class="fc-k">${s.k}</span><h3>${s.h}</h3><p>${s.t}</p><a href="#${s.to}">${s.l} →</a>`;
+    card.innerHTML = `<span class="fc-k">${s.k}</span><h3>${s.h}</h3><p>${s.t}</p><div class="fc-actions"><a class="btn btn--primary" href="#kontakt" data-thema="${s.to}" data-label="${s.cta}" data-hint="${s.hint}">${s.cta} <span class="arrow">→</span></a><a class="fc-more" href="#${s.to}">${s.l} →</a></div>`;
     card.classList.remove("swap"); void card.offsetWidth; card.classList.add("swap");
     // Handy/Tablet: Karte liegt unter dem Haus. Ist sie nicht ganz sichtbar, sanft hinscrollen.
     if (matchMedia("(max-width: 900px)").matches) {
@@ -1726,9 +1828,11 @@ function swapPage() {
   const navKey = l ? "leistungen" : page;
   document.querySelectorAll("[data-nav]").forEach(a => { if (a.dataset.nav === navKey) a.setAttribute("aria-current", "page"); else a.removeAttribute("aria-current"); });
   document.getElementById("kontaktband").hidden = page === "kontakt";
+  setKontaktband(l ? l.slug : null);
   setMeta(l ? l.slug : page, l);
   if (document.activeElement && document.activeElement.blur) document.activeElement.blur();
   window.scrollTo(0, 0);
+  if (page === "kontakt" && applyAnliegen()) requestAnimationFrame(() => document.getElementById("kontaktformular").scrollIntoView());
 }
 /* Vorhang beim Seitenwechsel; in WordPress übernimmt das die View-Transition-Regel bzw. dasselbe Skript beim Seitenaufruf */
 let firstRoute = true;
@@ -1743,6 +1847,35 @@ function route() {
   }, 950);
 }
 window.addEventListener("hashchange", route);
+/* Situationsbezogene Schaltflächen: Anliegen ins Formular übernehmen */
+let pendingAnliegen = null;
+const MSG_DEFAULT = "z. B. Feuchter Fleck an der Kellerwand seit dem Frühjahr, Baujahr 1978";
+function applyAnliegen() {
+  const a = pendingAnliegen; pendingAnliegen = null;
+  const h = document.getElementById("f-h"), anl = document.getElementById("f-anl"), msg = document.getElementById("f-msg");
+  if (!a) { h.textContent = "Ihre Anfrage"; anl.classList.remove("on"); msg.placeholder = MSG_DEFAULT; return false; }
+  const c = CTA[a.thema] || [];
+  h.textContent = a.label || c[0] || "Ihre Anfrage";
+  anl.classList.add("on");
+  msg.placeholder = a.hint || c[3] || MSG_DEFAULT;
+  const r = document.querySelector(`#f-chips input[data-slug="${a.thema}"]`); if (r) r.checked = true;
+  return true;
+}
+document.addEventListener("click", e => {
+  const a = e.target.closest("a[data-thema]"); if (!a) { if (e.target.closest('a[href="#kontakt"]')) pendingAnliegen = null; return; }
+  pendingAnliegen = { thema: a.dataset.thema, label: a.dataset.label, hint: a.dataset.hint };
+  if ((location.hash.slice(1) || "start") === "kontakt") { e.preventDefault(); e.stopPropagation(); applyAnliegen(); document.getElementById("kontaktformular").scrollIntoView({ behavior: REDUCED ? "auto" : "smooth" }); }
+}, true);
+/* Kontaktband passt sich der Leistungsseite an */
+const KB = { h: "Klarheit beginnt mit einem Gespräch.", p: "Schildern Sie mir Ihr Anliegen. Ich freue mich auf Ihre Anfrage.", b: "Anfrage senden", s: "info@bsv-niewerth.de" };
+function setKontaktband(slug) {
+  const c = slug && CTA[slug], cta = document.getElementById("kb-cta");
+  document.getElementById("kb-h").textContent = c ? c[1] : KB.h;
+  document.getElementById("kb-p").textContent = c ? c[2] : KB.p;
+  document.getElementById("kb-b").textContent = c ? c[0] : KB.b;
+  document.getElementById("kb-s").textContent = c ? "Unverbindlich, gerne mit Fotos" : KB.s;
+  if (c) cta.dataset.thema = slug; else delete cta.dataset.thema;
+}
 /* Link auf die gerade offene Seite: nach oben scrollen statt nichts zu tun */
 document.addEventListener("click", e => {
   const a = e.target.closest('a[href^="#"]'); if (!a) return;
