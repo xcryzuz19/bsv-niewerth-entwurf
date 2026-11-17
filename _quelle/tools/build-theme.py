@@ -158,6 +158,10 @@ NAV = r'''/* Seitenwechsel in WordPress: Vorhang, dann echte Seite laden */
 js = js.replace("/*__NAV__*/", NAV)
 # Elemente, die es nur auf einzelnen Seiten gibt: fehlende Elemente ersetzt ein leerer Platzhalter
 js = js.replace("document.getElementById(", "$id(")
+for lid in ("home-tiles", "all-tiles", "dd-list", "m-list", "f-list", "f-chips", "rg-list", "rg-home", "needs"):
+    a_ = f'$id("{lid}").innerHTML ='
+    assert a_ in js, lid
+    js = js.replace(a_, f'if (!$id("{lid}").children.length) $id("{lid}").innerHTML =')
 js = 'const $id = id => document.getElementById(id) || document.createElement("div");\n' + js
 js = js.replace('const h1 = document.querySelector(".hero h1");', 'const h1 = document.querySelector(".hero h1"); if (!h1) return;')
 # Startseite: Intro nur dort, sonst sofort Hero/Seite aufbauen
@@ -172,7 +176,9 @@ for k, v in R.items():
         html = html.replace('<input id="f-ds" type="checkbox" required="">', '<input id="f-ds" name="einwilligung" value="ja" type="checkbox" required="">')
         html = html.replace('<form id="kontaktformular" novalidate="">', '<form id="kontaktformular" novalidate="" enctype="multipart/form-data"><div class="hp" aria-hidden="true"><label>Website<input name="website" tabindex="-1" autocomplete="off"></label></div><input type="hidden" name="ts" value="">')
         assert 'name="fotos[]"' in html and 'name="einwilligung"' in html and 'name="website"' in html
-    pages[k] = {"url": URLS[k], "title": v["name"].strip(), "content": "<!-- wp:html -->\n" + html.strip() + "\n<!-- /wp:html -->"}
+    meta = {"key": k, "page": v["page"], "title": v["title"], "desc": v["desc"], "ld": v["ld"], "nav": v["nav"], "kb": v["kb"]}
+    marker = "<!-- bsv:seo " + base64.b64encode(json.dumps(meta, ensure_ascii=False).encode()).decode() + " -->"
+    pages[k] = {"url": URLS[k], "title": v["name"].strip(), "content": "<!-- wp:html -->\n" + marker + "\n" + html.strip() + "\n<!-- /wp:html -->"}
 os.makedirs(os.path.join(OUT, "wp"), exist_ok=True)
 json.dump(pages, open(os.path.join(OUT, "wp", "pages.json"), "w", encoding="utf-8"), ensure_ascii=False)
 

@@ -11,10 +11,25 @@ function bsv_data() {
 	if ($d === null) $d = json_decode(file_get_contents(__DIR__ . '/inc/routes.json'), true);
 	return $d;
 }
+/* SEO-Daten aus dem Seiteninhalt (Kommentar <!-- bsv:seo … -->); so brauchen neue Seiten kein Theme-Update */
+function bsv_marker() {
+	static $m = false;
+	if ($m !== false) return $m;
+	$m = null;
+	if (is_singular()) {
+		$c = get_post_field('post_content', get_queried_object_id());
+		if ($c && preg_match('/<!-- bsv:seo ([A-Za-z0-9+\/=]+) -->/', $c, $x)) {
+			$d = json_decode(base64_decode($x[1]), true);
+			if (is_array($d) && !empty($d['key'])) $m = $d;
+		}
+	}
+	return $m;
+}
 function bsv_route_key() {
 	static $k = false;
 	if ($k !== false) return $k;
 	$k = null;
+	if (bsv_marker()) return $k = bsv_marker()['key'];
 	if (is_front_page()) {
 		$k = 'start';
 	} elseif (is_page()) {
@@ -26,8 +41,9 @@ function bsv_route_key() {
 	return $k;
 }
 function bsv_route() {
+	if (bsv_marker()) return bsv_marker();
 	$k = bsv_route_key();
-	return $k ? bsv_data()['routes'][$k] : null;
+	return ($k && isset(bsv_data()['routes'][$k])) ? bsv_data()['routes'][$k] : null;
 }
 
 add_action('after_setup_theme', function () {
@@ -97,7 +113,7 @@ function bsv_render_page() {
 	$r = bsv_route();
 	$post = get_post();
 	if ($r && $post && strpos(ltrim($post->post_content), '<!-- wp:html -->') === 0) {
-		$html = preg_replace(['/^\s*<!-- wp:html -->\s*/', '/\s*<!-- \/wp:html -->\s*$/'], '', $post->post_content);
+		$html = preg_replace(['/^\s*<!-- wp:html -->\s*/', '/\s*<!-- \/wp:html -->\s*$/', '/<!-- bsv:seo [A-Za-z0-9+\/=]+ -->\s*/'], '', $post->post_content);
 		echo '<div data-page="' . esc_attr($r['page']) . '" class="is-active">' . $html . '</div>';
 		return;
 	}

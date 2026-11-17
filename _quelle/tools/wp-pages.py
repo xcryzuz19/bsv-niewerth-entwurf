@@ -16,8 +16,10 @@ for k in order:
     slug = parts[-1] if parts[0] else "start"
     parent = ids.get(parts[0] if parts[0] != "leistungen" or len(parts) > 1 else None, 0) if len(parts) > 1 else 0
     if len(parts) > 1: parent = ids[{"leistungen": "leistungen", "ratgeber": "ratgeber"}[parts[0]]]
-    body = {"title": v["title"], "slug": slug, "content": v["content"], "status": status, "parent": parent, "comment_status": "closed", "ping_status": "closed"}
     pid = existing.get((slug, parent))
+    st = status if status != "auto" else (None if pid else "draft")
+    body = {"title": v["title"], "slug": slug, "content": v["content"], "parent": parent, "comment_status": "closed", "ping_status": "closed"}
+    if st: body["status"] = st
     res = req("POST", f"/pages/{pid}" if pid else "/pages", body)
     ids[k] = res["id"]
     raw = req("GET", f"/pages/{res['id']}?context=edit&_fields=content")["content"]["raw"]

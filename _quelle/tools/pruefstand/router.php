@@ -32,7 +32,8 @@ function is_front_page() { global $KEY; return $KEY === 'start'; }
 function is_page() { global $KEY; return $KEY !== null; }
 function is_singular() { return is_page(); }
 function get_queried_object() { global $KEY, $PAGES; $u = trim($PAGES[$KEY]['url'], '/'); $parts = explode('/', $u); return (object) ['post_name' => end($parts), 'post_parent' => count($parts) > 1 ? $parts[0] : 0]; }
-function get_post_field($f, $id) { return $id; }
+function get_post_field($f, $id) { global $KEY, $PAGES; if ($f === 'post_content') return $KEY ? $PAGES[$KEY]['content'] : ''; return $id; }
+function get_queried_object_id() { return 1; }
 function get_post() { global $KEY, $PAGES; return (object) ['post_content' => $PAGES[$KEY]['content']]; }
 function have_posts() { static $n = 0; return $n++ === 0; } function the_post() {}
 function the_title() { echo 'Titel'; } function the_content() { echo ''; }
