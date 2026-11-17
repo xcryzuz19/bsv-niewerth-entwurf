@@ -249,5 +249,6 @@ function bsv_self_update(WP_REST_Request $req) {
 	if (is_wp_error($res)) return $res;
 	if (!$res) return new WP_Error('bsv_update', implode(' ', $skin->get_error_messages()) ?: 'Update fehlgeschlagen.', ['status' => 500]);
 	wp_clean_themes_cache();
+	if (function_exists('wp_cache_clear_cache')) wp_cache_clear_cache();
 	return ['ok' => true, 'version' => wp_get_theme('bsv-niewerth')->get('Version')];
 }
