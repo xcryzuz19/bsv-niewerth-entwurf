@@ -92,7 +92,7 @@ body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-a
 .brand-mark { flex: none; height: 48px; width: auto; }
 .brand-text { display: grid; line-height: 1.2; min-width: 0; border-left: 1px solid rgb(255 255 255 / .2); padding-left: 14px; }
 .brand-name { font-family: var(--font-head); font-weight: 600; letter-spacing: .3em; font-size: 1rem; color: #c3cfdc; }
-.brand-sub { font-family: var(--font-head); font-weight: 500; letter-spacing: .1em; font-size: .6rem; text-transform: uppercase; color: var(--on-navy-muted); }
+.brand-sub { font-family: var(--font-head); font-weight: 500; letter-spacing: .1em; font-size: .64rem; text-transform: uppercase; color: var(--on-navy-muted); }
 .nav { display: flex; align-items: center; gap: 2px; }
 .nav > a, .nav .dd > a { color: #fff; text-decoration: none; font-family: var(--font-head); font-weight: 600; font-size: .92rem; padding: 10px 14px; position: relative; }
 .nav > a:not(.btn)::after, .nav .dd > a::before { content: ""; position: absolute; left: 14px; right: 14px; bottom: 4px; height: 2px; background: var(--blue-light); transform: scaleX(0); transform-origin: left; transition: transform .25s; }
@@ -111,8 +111,11 @@ body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-a
 .dd-panel .all { grid-column: span 2; border-top: 1px solid var(--line); margin-top: 6px; padding-top: 14px; color: var(--blue); }
 .burger { display: none; background: transparent; border: 1px solid rgb(255 255 255 / .3); color: #fff; border-radius: var(--r); width: 48px; height: 48px; cursor: pointer; align-items: center; justify-content: center; }
 .burger svg { width: 22px; height: 22px; stroke: currentColor; stroke-width: 2; fill: none; }
-@media (max-width: 1120px) { .nav .header-phone { display: none; } }
-@media (max-width: 1000px) { .nav { display: none; } .burger { display: inline-flex; } }
+.nav > a, .nav .dd > a, .brand-name, .brand-sub, .nav .btn { white-space: nowrap; }
+.brand { flex: none; }
+@media (max-width: 1360px) { .nav .header-phone { display: none; } }
+@media (max-width: 1240px) { .nav > a, .nav .dd > a { padding-inline: 10px; font-size: .88rem; } .nav > a:not(.btn)::after, .nav .dd > a::before { left: 10px; right: 10px; } .site-header .wrap { gap: 16px; } }
+@media (max-width: 1080px) { .nav { display: none; } .burger { display: inline-flex; } }
 @media (max-width: 420px) { .brand-text { display: none; } }
 
 /* Handy-Menü */
@@ -645,7 +648,7 @@ textarea { min-height: 140px; resize: vertical; }
   .finder-stage { order: 3; margin-block: 8px 4px; }
   .finder-card { order: 4; min-height: 0; margin-top: 0; scroll-margin-bottom: 128px; scroll-margin-top: 100px; }
 }
-@media (max-width: 520px) { .hs .tx { font-size: .7rem; padding: 4px 8px; } .hs .pt { width: 18px; height: 18px; } }
+@media (max-width: 520px) { .hs { padding-block: 7px; } .hs .tx { font-size: .76rem; padding: 5px 9px; } .hs .pt { width: 18px; height: 18px; } }
 
 
 /* Ratgeber */
@@ -744,6 +747,14 @@ a.ccard--link:hover { border-color: var(--blue); box-shadow: var(--shadow); }
 .chk-act { display: flex; flex-wrap: wrap; gap: 12px; }
 .chk-note { color: var(--muted) !important; font-size: .9rem !important; }
 @media (max-width: 560px) { .chk-opts { grid-template-columns: minmax(0, 1fr); } .chk-act .btn { flex: 1 1 100%; } }
+/* Lesbare Zeilenlänge auf breiten Bildschirmen */
+.page-hero-copy > p { max-width: 46rem; }
+.needs-foot { max-width: 62rem; }
+.hs { padding-block: 4px; }
+@media (max-width: 520px) { .hs { padding-block: 8px; } }
+/* Sehr große und Ultrawide-Bildschirme */
+@media (min-width: 2300px) { .hero { min-height: min(calc(100svh - 82px), 1180px); } }
+@media (min-width: 3000px) { html { font-size: 21px; } :root { --wrap: 1880px; } }
 /* Riss-Tagebuch */
 .rt-form { display: grid; grid-template-columns: 150px minmax(0, 1fr) 120px auto; gap: 12px; align-items: end; }
 .tool .rt-form label { display: grid; gap: 6px; min-width: 0; }
@@ -1030,7 +1041,7 @@ main { overflow-x: clip; }
             <span class="fc-k">Schadens-Finder</span>
             <h3>Fünf typische Stellen</h3>
             <p>Dach, Fenster, Bad, Wände und Keller: Hier entstehen die meisten Schäden, die ich bei Ortsterminen untersuche.</p>
-            <a class="fc-more" href="#schadens-check">Lieber Schritt für Schritt? Zum Schadens-Check →</a>
+            <a class="fc-more" href="#schadens-check">Lieber Schritt für Schritt? Zum Schadens-Check&nbsp;→</a>
           </div>
         </div>
         <div class="finder-stage">
@@ -1885,7 +1896,7 @@ const faqHtml = f => `<div class="faq">${f.map(([q, a], i) => `<details${i === 0
 const artCard = a => `<a class="acard" href="#${a.slug}"><span class="acard-k">Ratgeber · ${a.min} Min. Lesezeit</span><h3>${a.h1}</h3><p>${a.lead}</p><span class="go">Weiterlesen <span class="arrow">→</span></span></a>`;
 
 function regionPage(r) {
-  const themen = NEEDS.map(n => { const l = LEISTUNGEN.find(x => x.slug === n.to); return `<article class="need">${ic(n.icon)}<h3>${n.h}</h3><p>${n.t}</p><div class="need-act"><a class="btn btn--primary" href="#kontakt" data-thema="${n.to}" data-label="${n.cta}" data-hint="${n.hint}">${n.cta} <span class="arrow">→</span></a><a class="need-more" href="#${n.to}">Mehr zu ${l.title} →</a></div></article>`; }).join("");
+  const themen = NEEDS.map(n => { const l = LEISTUNGEN.find(x => x.slug === n.to); return `<article class="need">${ic(n.icon)}<h3>${n.h}</h3><p>${n.t}</p><div class="need-act"><a class="btn btn--primary" href="#kontakt" data-thema="${n.to}" data-label="${n.cta}" data-hint="${n.hint}">${n.cta} <span class="arrow">→</span></a><a class="need-more" href="#${n.to}">Mehr zu ${l.title}&nbsp;→</a></div></article>`; }).join("");
   const andere = REGIONEN.filter(x => x !== r).map(x => `<a href="#${x.slug}">${PIN}${x.name}</a>`).join("");
   return `
   <section class="page-hero page-hero--plain">
@@ -1956,13 +1967,13 @@ function artikelPage(a) {
       ${(a.print || clFor("art", a.slug).length) ? `<div class="art-actions">${clFor("art", a.slug).map(c => clLink(c)).join("")}${a.print ? `<button type="button" class="btn btn--outline print-btn" data-print>Seite drucken</button>` : ""}</div>` : ""}
       <nav class="toc" aria-label="Inhalt"><b>Inhalt</b><ol>${a.secs.map(([h]) => `<li><a href="#${slugId(h)}" data-toc>${h}</a></li>`).join("")}</ol></nav>
       ${a.secs.map(([h, ps]) => `<div class="isec" id="${slugId(h)}"><h2>${h}</h2>${ps.map(para).join("")}</div>` + (a.tool && a.tool[0] === h ? TOOLS[a.tool[1]] : "")).join("")}
-      <aside class="author" aria-label="Über den Autor"><span class="author-k">Über den Autor</span><b>André Niewerth</b><p>Sachverständiger für Schäden an Gebäuden (persCert TÜV Rheinland), Maurer- und Stahlbetonbauermeister und Geprüfter Betriebswirt (HwO). Seit seiner Maurerlehre 1997 am Bau, heute mit eigenem Sachverständigenbüro in Borken.</p><div class="author-links"><a href="#ueber-mich">Mehr über mich →</a><a href="https://www.certipedia.com/quality_marks/0217466933?locale=de" target="_blank" rel="noopener">Zertifikat beim TÜV prüfen →</a></div></aside>
+      <aside class="author" aria-label="Über den Autor"><span class="author-k">Über den Autor</span><b>André Niewerth</b><p>Sachverständiger für Schäden an Gebäuden (persCert TÜV Rheinland), Maurer- und Stahlbetonbauermeister und Geprüfter Betriebswirt (HwO). Seit seiner Maurerlehre 1997 am Bau, heute mit eigenem Sachverständigenbüro in Borken.</p><div class="author-links"><a href="#ueber-mich">Mehr über mich&nbsp;→</a><a href="https://www.certipedia.com/quality_marks/0217466933?locale=de" target="_blank" rel="noopener">Zertifikat beim TÜV prüfen&nbsp;→</a></div></aside>
     </article>
     <aside class="facts-box" aria-label="Hilfe vom Sachverständigen">
       <h3>${c[1]}</h3>
       <p style="color:#d4deea">${c[2]}</p>
       <a class="btn btn--primary" href="#kontakt" data-thema="${a.to}">${c[0]}</a>
-      <a class="fb-link" href="#${l.slug}">Mehr zu ${l.title} →</a>
+      <a class="fb-link" href="#${l.slug}">Mehr zu ${l.title}&nbsp;→</a>
       <p class="fb-regions">Vor Ort im <a href="#bausachverstaendiger-borken">Kreis Borken</a>, im <a href="#bausachverstaendiger-muensterland">Münsterland</a> und im <a href="#bausachverstaendiger-ruhrgebiet">Ruhrgebiet</a>.</p>
     </aside>
   </div></section>
@@ -2013,7 +2024,7 @@ function renderChecklisten() {
   const el = document.getElementById("cl-list"); if (!el || el.children.length) return;
   el.innerHTML = CHECKLISTEN.map(c => {
     const a = c.art && RATGEBER.find(x => x.slug === c.art), l = LEISTUNGEN.find(x => x.slug === c.to);
-    return `<article class="clcard"><span class="acard-k">PDF · ${c.pages} ${c.pages > 1 ? "Seiten" : "Seite"} · kostenlos</span><h3>${c.title}</h3><p>${c.text}</p><div class="clcard-act">${clLink(c)}${a ? `<a class="need-more" href="#${a.slug}">Zum Ratgeber →</a>` : `<a class="need-more" href="#${l.slug}">Mehr zu ${l.title} →</a>`}</div></article>`;
+    return `<article class="clcard"><span class="acard-k">PDF · ${c.pages} ${c.pages > 1 ? "Seiten" : "Seite"} · kostenlos</span><h3>${c.title}</h3><p>${c.text}</p><div class="clcard-act">${clLink(c)}${a ? `<a class="need-more" href="#${a.slug}">Zum Ratgeber&nbsp;→</a>` : `<a class="need-more" href="#${l.slug}">Mehr zu ${l.title}&nbsp;→</a>`}</div></article>`;
   }).join("");
 }
 
@@ -2186,7 +2197,7 @@ function leistungPage(l) {
   </div></section>
   ${casesFor(l.slug).length ? `<section class="section"><div class="wrap"><div class="head"><span class="kicker">Aus der Praxis</span><h2>Ein Fall aus meiner Arbeit</h2></div><div class="cases">${casesHtml(casesFor(l.slug), false)}</div></div></section>` : ""}
   <section class="section" style="padding-block:64px"><div class="wrap more-grid">
-    <div><h3>Einsatzgebiet</h3><p class="area-line">${TOWNS.join(" · ")}, das übrige Münsterland und das Ruhrgebiet</p><div class="other">${REGIONEN.map(r => `<a href="#${r.slug}">${PIN}${r.name}</a>`).join("")}</div>${RATGEBER.filter(a => a.to === l.slug).length ? `<h3 style="margin-top:12px">Passend dazu im Ratgeber</h3><ul class="rg-links">${RATGEBER.filter(a => a.to === l.slug).map(a => `<li><a href="#${a.slug}">${a.h1} →</a></li>`).join("")}</ul>` : ""}${clFor("to", l.slug).length ? `<h3 style="margin-top:12px">Kostenlose Checklisten</h3><ul class="rg-links">${clFor("to", l.slug).map(c => `<li><a href="${PDF_URL}${c.file}" download>${c.title} (PDF) →</a></li>`).join("")}</ul>` : ""}</div>
+    <div><h3>Einsatzgebiet</h3><p class="area-line">${TOWNS.join(" · ")}, das übrige Münsterland und das Ruhrgebiet</p><div class="other">${REGIONEN.map(r => `<a href="#${r.slug}">${PIN}${r.name}</a>`).join("")}</div>${RATGEBER.filter(a => a.to === l.slug).length ? `<h3 style="margin-top:12px">Passend dazu im Ratgeber</h3><ul class="rg-links">${RATGEBER.filter(a => a.to === l.slug).map(a => `<li><a href="#${a.slug}">${a.h1}&nbsp;→</a></li>`).join("")}</ul>` : ""}${clFor("to", l.slug).length ? `<h3 style="margin-top:12px">Kostenlose Checklisten</h3><ul class="rg-links">${clFor("to", l.slug).map(c => `<li><a href="${PDF_URL}${c.file}" download>${c.title} (PDF)&nbsp;→</a></li>`).join("")}</ul>` : ""}</div>
     <div><h3>Weitere Leistungen</h3><div class="other">${others}</div></div>
   </div></section>`;
 }
@@ -2198,7 +2209,7 @@ function casesHtml(list, withLink = true) {
     return `<article class="case">${c.foto ? `<div class="case-photo" role="img" aria-label="${c.h}" style="background-image:url('${c.foto}')"></div>` : ""}<div class="case-body">
       <span class="case-meta">${l ? l.title : ""}${c.ort ? " · " + c.ort : ""}</span><h3>${c.h}</h3>
       <ol class="case-steps"><li><b>Ausgangslage</b><span>${c.aus}</span></li><li><b>Untersuchung</b><span>${c.unt}</span></li><li><b>Ergebnis</b><span>${c.erg}</span></li></ol>
-      ${withLink && l ? `<a class="case-link" href="#${l.slug}">Mehr zu ${l.title} →</a>` : ""}</div></article>`;
+      ${withLink && l ? `<a class="case-link" href="#${l.slug}">Mehr zu ${l.title}&nbsp;→</a>` : ""}</div></article>`;
   }).join("");
 }
 function renderPraxis() {
@@ -2212,13 +2223,13 @@ renderChecklisten();
 document.getElementById("rg-home").innerHTML = RATGEBER.slice(0, 3).map(artCard).join("");
 document.getElementById("needs").innerHTML = NEEDS.map(n => {
   const l = LEISTUNGEN.find(x => x.slug === n.to);
-  return `<article class="need">${ic(n.icon)}<h3>${n.h}</h3><p>${n.t}</p><div class="need-act"><a class="btn btn--primary" href="#kontakt" data-thema="${n.to}" data-label="${n.cta}" data-hint="${n.hint}">${n.cta} <span class="arrow">→</span></a><a class="need-more" href="#${n.to}">Mehr zu ${l.title} →</a></div></article>`;
+  return `<article class="need">${ic(n.icon)}<h3>${n.h}</h3><p>${n.t}</p><div class="need-act"><a class="btn btn--primary" href="#kontakt" data-thema="${n.to}" data-label="${n.cta}" data-hint="${n.hint}">${n.cta} <span class="arrow">→</span></a><a class="need-more" href="#${n.to}">Mehr zu ${l.title}&nbsp;→</a></div></article>`;
 }).join("");
 
 const DOCS_TILE = `<div class="tile tile--docs">${ic("gutachten")}<h3>Benötigte Unterlagen</h3><p>Je mehr Informationen Sie mir zur Verfügung stellen, desto fundierter kann ich den Schaden einschätzen und beurteilen. Hierzu gehören:</p><ul class="docs-mini"><li>Grundrisse, Ansichten und Schnitte</li><li>Baubeschreibung</li><li>Energieausweis</li><li>Baugrundgutachten</li><li>Fotos</li></ul><p class="docs-note">Die Unterlagen sind keine Voraussetzung, können aber für eine genauere Analyse durchaus hilfreich sein.</p></div>`;
 document.getElementById("home-tiles").innerHTML = LEISTUNGEN.map(tile).join("") + DOCS_TILE;
 document.getElementById("all-tiles").innerHTML = LEISTUNGEN.map(tile).join("") + DOCS_TILE;
-document.getElementById("dd-list").innerHTML = LEISTUNGEN.map(l => `<a href="#${l.slug}">${ic(l.icon)}${l.title}</a>`).join("") + `<a class="all" href="#leistungen">Alle Leistungen im Überblick →</a>`;
+document.getElementById("dd-list").innerHTML = LEISTUNGEN.map(l => `<a href="#${l.slug}">${ic(l.icon)}${l.title}</a>`).join("") + `<a class="all" href="#leistungen">Alle Leistungen im Überblick&nbsp;→</a>`;
 document.getElementById("m-list").innerHTML = LEISTUNGEN.map(l => `<a href="#${l.slug}">${ic(l.icon)}${l.title}</a>`).join("") + `<a class="all" href="#leistungen">Alle Leistungen im Überblick</a>`;
 document.getElementById("f-list").innerHTML = LEISTUNGEN.map(l => `<li><a href="#${l.slug}">${l.title}</a></li>`).join("");
 document.getElementById("f-chips").innerHTML = [...LEISTUNGEN.map(l => [l.title, l.slug]), ["Sonstiges", "sonstiges"]].map(([t, sl], i) => `<label><input type="radio" name="thema" id="f-t${i}" data-slug="${sl}" value="${t.replace(/\u00ad|­/g, "")}"${i === 0 ? " checked" : ""}><span>${t}</span></label>`).join("");
@@ -2387,7 +2398,7 @@ if (REDUCED || !io) document.querySelectorAll(".finder, .map-wrap").forEach(el =
     const b = e.target.closest(".hs"); if (!b) return;
     const s = SPOTS[b.dataset.i];
     box.querySelectorAll(".hs").forEach(x => x.setAttribute("aria-pressed", String(x === b)));
-    card.innerHTML = `<span class="fc-k">${s.k}</span><h3>${s.h}</h3><p>${s.t}</p><div class="fc-actions"><a class="btn btn--primary" href="#kontakt" data-thema="${s.to}" data-label="${s.cta}" data-hint="${s.hint}">${s.cta} <span class="arrow">→</span></a><a class="fc-more" href="#${s.to}">${s.l} →</a></div>`;
+    card.innerHTML = `<span class="fc-k">${s.k}</span><h3>${s.h}</h3><p>${s.t}</p><div class="fc-actions"><a class="btn btn--primary" href="#kontakt" data-thema="${s.to}" data-label="${s.cta}" data-hint="${s.hint}">${s.cta} <span class="arrow">→</span></a><a class="fc-more" href="#${s.to}">${s.l}&nbsp;→</a></div>`;
     card.classList.remove("swap"); void card.offsetWidth; card.classList.add("swap");
     // Handy/Tablet: Karte liegt unter dem Haus. Ist sie nicht ganz sichtbar, sanft hinscrollen.
     if (matchMedia("(max-width: 900px)").matches) {
