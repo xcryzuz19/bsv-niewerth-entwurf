@@ -312,7 +312,7 @@ body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-a
 .mnav .ico .a, .tile:hover .ico .a { stroke: #fff; }
 
 /* ---------- Hero mit Video ---------- */
-.hero { position: relative; overflow: hidden; background: var(--navy-3); color: #fff; isolation: isolate; display: flex; align-items: center; min-height: min(calc(100vh - 82px), 1100px); }
+.hero { position: relative; overflow: hidden; background: var(--navy-3); color: #fff; isolation: isolate; display: flex; align-items: center; min-height: min(calc(100svh - 82px), 860px); }
 .hero > .wrap { width: 100%; }
 .hero-stage { position: absolute; inset: 0; z-index: -2; }
 .hero-stage canvas, .hero-stage video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; }
@@ -320,7 +320,7 @@ body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-a
 .hero-roof { position: absolute; left: 0; right: 0; top: 0; height: 100%; z-index: 0; pointer-events: none; }
 .hero-roof path { fill: none; stroke: rgb(90 162 234 / .35); stroke-width: 1.5; stroke-dasharray: 2600; stroke-dashoffset: 2600; animation: draw 2.4s cubic-bezier(.6,.1,.2,1) .3s forwards; }
 @keyframes draw { to { stroke-dashoffset: 0; } }
-.hero .wrap { position: relative; z-index: 2; padding-block: clamp(80px, 12vw, 168px) clamp(130px, 14vw, 200px); }
+.hero .wrap { position: relative; z-index: 2; padding-block: clamp(48px, 5.5vw, 96px) clamp(150px, 13vw, 190px); }
 .hero-copy { display: grid; gap: 26px; max-width: 58rem; }
 .hero h1 { font-size: clamp(2.3rem, 4.6vw, 3.7rem); }
 .hero-lead { max-width: 40rem !important; }
@@ -878,8 +878,8 @@ textarea { min-height: 140px; resize: vertical; }
 /* WhatsApp */
 a.ccard--link { text-decoration: none; color: inherit; transition: border-color .2s, box-shadow .2s; }
 a.ccard--link:hover { border-color: var(--blue); box-shadow: var(--shadow); }
-.contact-band .kb-wa { display: flex; align-items: center; gap: 10px; margin-top: 16px; font-size: 1rem; }
-.contact-band .kb-wa svg { width: 22px; height: 22px; flex: none; stroke: var(--blue-light); fill: none; stroke-width: 1.8; }
+.contact-band .kb-wa { display: block; margin-top: 16px; font-size: 1rem; }
+.contact-band .kb-wa svg { width: 20px; height: 20px; display: inline-block; vertical-align: -4px; margin-right: 8px; stroke: var(--blue-light); fill: none; stroke-width: 1.8; }
 .contact-band .kb-wa a { color: #fff; font-weight: 600; }
 /* Ratgeber: Downloads */
 .art-actions { display: flex; flex-wrap: wrap; gap: 12px; }
