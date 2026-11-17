@@ -111,8 +111,8 @@ body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-a
 .dd-panel .all { grid-column: span 2; border-top: 1px solid var(--line); margin-top: 6px; padding-top: 14px; color: var(--blue); }
 .burger { display: none; background: transparent; border: 1px solid rgb(255 255 255 / .3); color: #fff; border-radius: var(--r); width: 48px; height: 48px; cursor: pointer; align-items: center; justify-content: center; }
 .burger svg { width: 22px; height: 22px; stroke: currentColor; stroke-width: 2; fill: none; }
-.nav > a, .nav .dd > a, .brand-name, .brand-sub, .nav .btn { white-space: nowrap; }
-.brand { flex: none; }
+.nav > a, .nav .dd > a, .site-header .brand-name, .site-header .brand-sub, .nav .btn { white-space: nowrap; }
+.site-header .brand { flex: none; }
 @media (max-width: 1360px) { .nav .header-phone { display: none; } }
 @media (max-width: 1240px) { .nav > a, .nav .dd > a { padding-inline: 10px; font-size: .88rem; } .nav > a:not(.btn)::after, .nav .dd > a::before { left: 10px; right: 10px; } .site-header .wrap { gap: 16px; } }
 @media (max-width: 1080px) { .nav { display: none; } .burger { display: inline-flex; } }
