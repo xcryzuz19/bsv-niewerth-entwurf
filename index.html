@@ -858,6 +858,22 @@ textarea { min-height: 140px; resize: vertical; }
   .section, .page-hero .wrap { padding-block: 12px !important; } body { padding: 0 !important; }
   .reveal { opacity: 1 !important; transform: none !important; } .intro-grid { display: block !important; }
 }
+/* Rechner im Ratgeber */
+.tool { background: var(--navy); color: #fff; border-radius: var(--r); padding: clamp(20px, 3vw, 30px); display: grid; gap: 14px; }
+.tool h3 { font-size: 1.3rem; }
+.intro-text .tool p { color: #d4deea; font-size: 1rem; }
+.tool .kurz-k { color: var(--blue-light); }
+.tool-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.tool fieldset { border: 1px solid rgb(255 255 255 / .18); border-radius: var(--r); padding: 12px 14px 14px; margin: 0; display: grid; gap: 10px; min-width: 0; }
+.tool legend { font-family: var(--font-head); font-weight: 700; font-size: .85rem; padding: 0 6px; color: var(--blue-light); }
+.tool label { color: #fff; font-size: .82rem; }
+.tool input { background: rgb(255 255 255 / .08); color: #fff; border-bottom-color: rgb(255 255 255 / .3); }
+.tool input:focus { background: rgb(255 255 255 / .14); border-bottom-color: var(--blue-light); }
+.tool-out { display: grid; gap: 6px; border-radius: var(--r); padding: 14px 16px; background: rgb(255 255 255 / .06); border-left: 4px solid var(--blue-light); font-size: 1rem; line-height: 1.5; }
+.tool-out.ok { border-left-color: #4cc38a; } .tool-out.mid { border-left-color: #e2b84b; } .tool-out.no { border-left-color: #e5735f; }
+.tool-out span { color: #b6c4d5; font-size: .88rem; }
+.tool-note { color: #b6c4d5; font-size: .8rem; }
+@media (max-width: 520px) { .tool-grid { grid-template-columns: minmax(0, 1fr); } }
 /* Anliegen-Karten (Startseite) */
 .needs { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; }
 .need { background: #fff; border: 1px solid var(--line); border-radius: var(--r); padding: 28px 26px 24px; display: grid; grid-template-rows: auto auto 1fr auto; gap: 12px; align-content: start; min-width: 0; transition: box-shadow .25s, transform .25s; }
@@ -1237,7 +1253,7 @@ main { overflow-x: clip; }
           <h2>Das <span class="blue">erwartet Sie</span></h2>
         </div>
         <ol class="tape">
-          <li><span class="t">0<small>Std.</small></span><h3>Anfrage</h3><p>Sie rufen an oder schreiben mir. Fotos vom Schaden helfen bei der ersten Einschätzung.</p></li>
+          <li><span class="t"><svg class="t-ic" aria-hidden="true"><use href="#i-phone"/></svg><small>Start</small></span><h3>Anfrage</h3><p>Sie rufen an oder schreiben mir. Fotos vom Schaden helfen bei der ersten Einschätzung.</p></li>
           <li><span class="t"><svg class="t-ic" aria-hidden="true"><use href="#i-clock"/></svg><small>Kurzfristig</small></span><h3>Kurzfristiger Vor-Ort-Termin</h3><p>Ich komme zu Ihnen, untersuche, messe und fotografiere alles Relevante.</p><ul class="tape-list"><li>Ursachenforschung</li><li>Fachlich präzise und nachvollziehbar</li></ul></li>
           <li><span class="t">✓<small>Ergebnis</small></span><h3>Einschätzung</h3><p>Mündlich vor Ort, als Kurzbericht oder als ausführliches Gutachten.</p><ul class="tape-list"><li>Verständlich erklärt</li><li>Einschätzung des Sanierungsbedarfs</li><li>Zertifiziert und unabhängig</li><li>Neutrale Expertise ohne Interessenkonflikt</li></ul></li>
           <li><span class="t">+<small>Optional</small></span><h3>Begleitung</h3><p>Auf Wunsch begleite ich Sie bei Ihrem Bauvorhaben oder Ihrer Sanierungsmaßnahme, unterstütze Sie bei den Abnahmen oder übernehme die komplette Bauleitung für Sie.</p></li>
@@ -1563,7 +1579,7 @@ const LEISTUNGEN = [
 
   { slug: "gutachten", icon: "gutachten", title: "Gutachten\u00aderstellung", short: "Ursachen klären, Schäden bewerten, Entscheidungen absichern: unabhängig untersucht und verständlich erläutert.",
     foto: "Foto: Gutachten-Deckblatt mit Logo oder Dokumentation am Schreibtisch",
-    lead: "Risse im Mauerwerk, Feuchtigkeit im Keller oder Zweifel an der Bauausführung? Ich untersuche Schäden und vermutete Baumängel, kläre die Ursachen und bewerte, wie schwerwiegend das Problem ist.",
+    lead: "Unabhängig untersucht, nachvollziehbar bewertet: Ein Gutachten gibt Ihnen eine sachliche Grundlage für die Sanierung, für Ihre Versicherung, vor dem Kauf oder für das Gespräch mit der Baufirma.",
     anlaesse: ["Vorbereitung einer Sanierung", "Unterschiedliche Auffassungen über eine Bauleistung", "Unterstützung bei Versicherungsfragen", "Entscheidung vor einem Immobilienkauf", "Vermutete Baumängel oder Ausführungsfehler"],
     vorgehen: [["Fragestellung klären", "Wir legen fest, welche Fragen das Gutachten beantworten soll."], ["Ortstermin", "Ich nehme den Befund auf, messe und fotografiere."], ["Auswertung", "Ich bewerte die Ergebnisse nach den anerkannten Regeln der Technik."], ["Gutachten", "Sie erhalten das schriftliche Gutachten und ich erläutere es Ihnen auf Wunsch."]],
     ergebnis: [["i-doc", "Schriftliches Gutachten", "Befund, mögliche Ursachen und fachliche Bewertung, klar voneinander getrennt."], ["i-photo", "Nachvollziehbare Dokumentation", "Aussagekräftige Fotos und gegebenenfalls Messergebnisse."], ["i-shield", "Empfehlungen", "Erforderliche Maßnahmen oder weiterführende Untersuchungen."]],
@@ -1571,7 +1587,7 @@ const LEISTUNGEN = [
 
   { slug: "bauueberwachung", icon: "bau", title: "Bau\u00adüberwachung & Bau\u00adleitung", short: "Bauausführung zu vereinbarten Bauabschnitten prüfen, Abnahmen begleiten und auf Wunsch die Bauleitung übernehmen.",
     foto: "Foto: Baustelle, Rohbau oder Kontrolle einer Abdichtung",
-    lead: "Ob Neubau, Umbau oder Modernisierung: Die Qualität eines Gebäudes entscheidet sich in der Ausführung. Ich prüfe die entscheidenden Bauphasen, bevor Fehler verdeckt werden.",
+    lead: "Ich prüfe Ihren Bau zu den entscheidenden Zeitpunkten, solange Abdichtung, Dämmung und Anschlüsse noch sichtbar sind, und begleite Sie bis zur Abnahme.",
     anlaesse: ["Neubau eines Einfamilienhauses", "Bauen mit Bauträger oder Generalunternehmer", "Umfangreiche Sanierung im Bestand", "Kontrolle vor dem Verschließen von Abdichtung und Dämmung", "Bauabnahme"],
     vorgehen: [["Umfang festlegen", "Wir stimmen Art, Umfang und Häufigkeit der Kontrollen auf Ihr Bauvorhaben ab."], ["Kontrolle vor Ort", "Ich prüfe die Ausführung, bevor wichtige Bauteile verdeckt werden."], ["Dokumentation", "Auffälligkeiten halte ich mit Fotos und verständlicher fachlicher Einordnung fest."], ["Abnahme", "Ich unterstütze Sie bei der Prüfung und bei der Aufnahme offener Punkte in das Abnahmeprotokoll."]],
     ergebnis: [["i-doc", "Protokolle", "Nachvollziehbare Dokumentation der kontrollierten Bauabschnitte."], ["i-shield", "Abweichungen früh erkannt", "Korrekturen sind möglich, solange Details noch sichtbar sind."], ["i-euro", "Weniger Folgekosten", "Frühzeitig erkannte Mängel lassen sich mit weniger Aufwand beheben."]],
@@ -1580,7 +1596,7 @@ const LEISTUNGEN = [
 
   { slug: "schlichtung", icon: "streit", title: "Schlichtung bei Bau\u00adstreitigkeiten", short: "Strittige Mängel neutral bewerten und sachlich vermitteln, damit eine außergerichtliche Einigung möglich wird.",
     foto: "Foto: Gespräch auf der Baustelle",
-    lead: "Wenn Bauprojekte zum Konflikt werden, braucht es eine sachliche Grundlage und einen unabhängigen Blick. Ich kläre technische Streitfragen und zeige nachvollziehbare Lösungswege auf.",
+    lead: "Streit über Baumängel kostet Zeit, Geld und Nerven. Ich kläre die technischen Fragen neutral und zeige Wege zu einer Einigung ohne Gericht.",
     anlaesse: ["Streit über die Qualität der Ausführung", "Uneinigkeit über Nachbesserung oder Minderung", "Rechnung wird wegen Mängeln nicht bezahlt", "Abnahme wird verweigert", "Beide Seiten wollen eine schnelle Lösung"],
     vorgehen: [["Strittige Punkte erfassen", "Ich lasse mir die Sicht der Beteiligten schildern und sichte relevante Bauunterlagen."], ["Gemeinsame Ortsbesichtigung", "Wir sehen uns die strittigen Punkte gemeinsam an. Ich dokumentiere den baulichen Zustand."], ["Fachliche Bewertung", "Ich bewerte, ob die beanstandete Ausführung fachlich begründet zu bemängeln ist."], ["Lösungswege", "Ich erläutere die Befunde und zeige technisch geeignete Lösungs- und Nachbesserungsvorschläge auf."]],
     ergebnis: [["i-shield", "Sachliche Grundlage", "Eine fachlich begründete Bewertung, für alle Beteiligten nachvollziehbar."], ["i-doc", "Schriftliche Dokumentation", "Technische Ergebnisse und vereinbarte Maßnahmen."], ["i-euro", "Chance auf Einigung", "Kann helfen, langwierige Auseinandersetzungen und zusätzliche Kosten zu vermeiden."]],
@@ -1588,7 +1604,7 @@ const LEISTUNGEN = [
 
   { slug: "energieberatung", icon: "energie", title: "Energie\u00adberatung", short: "Energieberatung, Energieausweise, Fördermittelberatung und individueller Sanierungsfahrplan (iSFP).",
     foto: "Foto: Fassade oder Dach mit Dämmarbeiten",
-    lead: "Welche energetischen Maßnahmen lohnen sich für Ihre Immobilie? Ich zeige Ihnen, wie sich Energiebedarf und Wohnkomfort gezielt verbessern lassen, abgestimmt auf Ihre Ziele und Ihr Budget.",
+    lead: "Energieausweis, Fördermittel oder Sanierungsfahrplan: Ich zeige Ihnen, welche Maßnahmen sich für Ihr Haus wirklich lohnen und in welcher Reihenfolge sie sinnvoll sind.",
     anlaesse: ["Hohe Heizkosten", "Geplanter Heizungstausch", "Sanierung von Dach, Fassade oder Fenstern", "Kauf eines älteren Hauses", "Fragen zu Fördermitteln"],
     vorgehen: [["Vor-Ort-Termin", "Ich betrachte Gebäudehülle und Anlagentechnik."], ["Analyse", "Auf Wunsch mit Wärmebildern, um Schwachstellen sichtbar zu machen."], ["Empfehlungen", "Maßnahmen in sinnvoller Reihenfolge, mit Investitionen, Einsparpotenzial und möglichen Förderungen."], ["Nachweise", "Auf Wunsch Energieausweis oder individueller Sanierungsfahrplan (iSFP)."]],
     ergebnis: [["i-shield", "Schwachstellen erkannt", "Eine Übersicht, wo Ihr Gebäude Energie verliert."], ["i-doc", "Klare Reihenfolge", "Welche Maßnahmen zuerst sinnvoll sind und welche später folgen können."], ["i-euro", "Fördermöglichkeiten", "Passende Programme mit Voraussetzungen, Fristen und Nachweisen."]],
@@ -1596,7 +1612,7 @@ const LEISTUNGEN = [
 
   { slug: "leckageortung", icon: "leck", title: "Leckage\u00adortung", short: "Undichtigkeiten an Leitungen und Abdichtungen gezielt eingrenzen, damit nur dort geöffnet wird, wo es nötig ist.",
     foto: "Foto: Feuchtemessung am Boden oder Wasserfleck an der Decke",
-    lead: "Feuchte Wände, ein Wasserfleck an der Decke oder steigender Wasserverbrauch: Ich suche die undichte Stelle gezielt, damit nur dort geöffnet wird, wo es nötig ist.",
+    lead: "Wasser sucht sich seinen Weg, und wo der Fleck sichtbar wird, liegt das Leck oft nicht. Ich finde die Ursache mit Messtechnik und dokumentiere sie für Ihre Versicherung.",
     anlaesse: ["Feuchte Stellen an Decke, Wand oder Boden", "Wasserzähler läuft, obwohl nichts verbraucht wird", "Druckverlust in der Heizung", "Feuchter Estrich nach einem Wasserschaden", "Undichte Dusche oder undichtes Flachdach"],
     vorgehen: [["Schadensbild erfassen", "Ich prüfe, welche Leitungen, Anschlüsse oder Bauteile als Ursache infrage kommen."], ["Messung", "Je nach Befund grenzen geeignete Messverfahren die mögliche Leckstelle ein."], ["Eingrenzung", "Ist eine Öffnung nötig, kann sie auf den betroffenen Bereich beschränkt werden."], ["Dokumentation", "Ich erläutere die Befunde und welche weiteren Prüfungen oder Trocknungen sinnvoll sind."]],
     ergebnis: [["i-shield", "Gezielte Öffnung", "Unnötige Bauteilöffnungen werden vermieden."], ["i-doc", "Dokumentation", "Befunde nachvollziehbar festgehalten, zum Beispiel für Ihre Versicherung."], ["i-euro", "Folgeschäden begrenzt", "Je früher die Stelle gefunden wird, desto kleiner bleibt der Schaden."]],
@@ -1834,7 +1850,7 @@ const REGIONEN = [
 /* ---------- Ratgeber: Fachartikel zu typischen Bauschäden (Überschriften nach echten Suchanfragen) ---------- */
 const RATGEBER_STAND = "18.11.2026";
 const RATGEBER = [
-  { slug: "ratgeber-feuchter-keller", to: "gebaeudeschaeden", min: 8,
+  { slug: "ratgeber-feuchter-keller", to: "gebaeudeschaeden", min: 8, tool: ["Feuchter Keller im Sommer: Fenster auf oder zu?", "lueften"],
     seo: ["Feuchter Keller: Was tun? Ursachen, Selbsttest, Lösungen", "Feuchte Kellerwand, nasser Boden, muffiger Geruch? Ursachen erkennen, richtig lüften (Fenster auf oder zu?) und wann sich ein Gutachter lohnt."],
     h1: "Feuchter Keller: Was tun?",
     lead: "Ein feuchter Keller ist ärgerlich und kann teuer werden, wenn an der falschen Stelle saniert wird. Woher die Feuchte kommt, lässt sich oft schon mit einfachen Mitteln eingrenzen.",
@@ -2000,6 +2016,13 @@ function regionPage(r) {
   </div></section>`;
 }
 
+/* Kleine Rechner im Ratgeber */
+const TOOLS = {
+  lueften: `<div class="tool" data-tool="lueften"><span class="kurz-k">Lüftungsrechner</span><h3>Keller jetzt lüften oder nicht?</h3><p>Tragen Sie Temperatur und Luftfeuchte im Keller und draußen ein. Die Kellerwerte zeigt ein einfaches Hygrometer, die Außenwerte jede Wetter-App.</p>
+  <div class="tool-grid"><fieldset><legend>Im Keller</legend><label>Temperatur in °C<input type="number" inputmode="decimal" name="ti" value="15" step="0.5"></label><label>Luftfeuchte in %<input type="number" inputmode="numeric" name="hi" value="70" min="1" max="100"></label></fieldset>
+  <fieldset><legend>Draußen</legend><label>Temperatur in °C<input type="number" inputmode="decimal" name="ta" value="24" step="0.5"></label><label>Luftfeuchte in %<input type="number" inputmode="numeric" name="ha" value="60" min="1" max="100"></label></fieldset></div>
+  <output class="tool-out" aria-live="polite"></output><small class="tool-note">Grobe Orientierung nach der absoluten Luftfeuchte. Sie ersetzt keine Messung vor Ort.</small></div>`
+};
 const slugId = h => h.replace(/<[^>]+>/g, "").toLowerCase().replace(/ä/g, "ae").replace(/ö/g, "oe").replace(/ü/g, "ue").replace(/ß/g, "ss").replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
 function artikelPage(a) {
   const l = LEISTUNGEN.find(x => x.slug === a.to), c = CTA[a.to];
@@ -2019,7 +2042,7 @@ function artikelPage(a) {
       <div class="kurz"><span class="kurz-k">Kurz gesagt</span><p>${a.kurz}</p></div>
       ${a.print ? `<button type="button" class="btn btn--outline print-btn" data-print>Checkliste drucken</button>` : ""}
       <nav class="toc" aria-label="Inhalt"><b>Inhalt</b><ol>${a.secs.map(([h]) => `<li><a href="#${slugId(h)}" data-toc>${h}</a></li>`).join("")}</ol></nav>
-      ${a.secs.map(([h, ps]) => `<div class="isec" id="${slugId(h)}"><h2>${h}</h2>${ps.map(para).join("")}</div>`).join("")}
+      ${a.secs.map(([h, ps]) => `<div class="isec" id="${slugId(h)}"><h2>${h}</h2>${ps.map(para).join("")}</div>` + (a.tool && a.tool[0] === h ? TOOLS[a.tool[1]] : "")).join("")}
       <aside class="author" aria-label="Über den Autor"><span class="author-k">Über den Autor</span><b>André Niewerth</b><p>Sachverständiger für Schäden an Gebäuden (persCert TÜV Rheinland), Maurer- und Stahlbetonbauermeister und Geprüfter Betriebswirt (HwO). Seit seiner Maurerlehre 1997 am Bau, heute mit eigenem Sachverständigenbüro in Borken.</p><div class="author-links"><a href="#ueber-mich">Mehr über mich →</a><a href="https://www.certipedia.com/quality_marks/0217466933?locale=de" target="_blank" rel="noopener">Zertifikat beim TÜV prüfen →</a></div></aside>
     </article>
     <aside class="facts-box" aria-label="Hilfe vom Sachverständigen">
@@ -2236,7 +2259,30 @@ const REVEAL = ".head, .tile, .zcopy, .tape > li, .result, .proto, .faq details,
 const io = "IntersectionObserver" in window ? new IntersectionObserver(es => es.forEach(e => {
   if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); }
 }), { rootMargin: "0px 0px -8% 0px", threshold: .08 }) : null;
+function initTools(scope) {
+  scope.querySelectorAll('[data-tool="lueften"]').forEach(t => {
+    if (t.dataset.ready) return; t.dataset.ready = "1";
+    const v = n => parseFloat(String(t.querySelector(`[name="${n}"]`).value).replace(",", "."));
+    const sat = T => 6.112 * Math.exp(17.67 * T / (T + 243.5));          // Sättigungsdampfdruck in hPa
+    const abs = (T, H) => sat(T) * H / 100 * 216.74 / (273.15 + T);     // absolute Feuchte in g/m³
+    const dew = (T, H) => { const g = Math.log(H / 100) + 17.67 * T / (T + 243.5); return 243.5 * g / (17.67 - g); };
+    const f = x => x.toFixed(1).replace(".", ",");
+    const calc = () => {
+      const ti = v("ti"), hi = v("hi"), ta = v("ta"), ha = v("ha"), o = t.querySelector(".tool-out");
+      if ([ti, hi, ta, ha].some(isNaN) || hi <= 0 || ha <= 0 || hi > 100 || ha > 100) { o.className = "tool-out"; o.innerHTML = "Bitte alle vier Werte eintragen."; return; }
+      const ai = abs(ti, hi), aa = abs(ta, ha), td = dew(ta, ha);
+      let cls, msg;
+      if (aa <= ai - 1) { cls = "ok"; msg = "<b>Jetzt lüften lohnt sich.</b> Die Außenluft enthält weniger Wasser als die Kellerluft und nimmt beim Lüften Feuchte mit hinaus."; }
+      else if (aa < ai) { cls = "mid"; msg = "<b>Lüften bringt gerade nur wenig.</b> Innen und außen ist kaum ein Unterschied. Warten Sie lieber auf kühlere Stunden."; }
+      else { cls = "no"; msg = "<b>Fenster lieber geschlossen lassen.</b> Die Außenluft würde mehr Feuchte hereinbringen, als sie hinausträgt." + (td > ti - 1 ? ` Ihr Taupunkt liegt bei ${f(td)} °C. An Kellerwänden, die kühler sind, schlägt sich Wasser nieder.` : ""); }
+      o.className = "tool-out " + cls;
+      o.innerHTML = `${msg}<span>Wasser in der Luft: draußen ${f(aa)} g/m³ · im Keller ${f(ai)} g/m³</span>`;
+    };
+    t.addEventListener("input", calc); calc();
+  });
+}
 function applyReveal(scope) {
+  initTools(scope);
   if (REDUCED || !io) return;
   scope.querySelectorAll(REVEAL).forEach(el => {
     if (el.classList.contains("reveal")) return;

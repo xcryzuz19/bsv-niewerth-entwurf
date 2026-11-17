@@ -1,7 +1,7 @@
 // Rendert jede Ansicht der Vorschau und speichert das fertige HTML (für WordPress-Seiten und Theme-Rahmen).
 const { chromium } = require('/opt/node22/lib/node_modules/playwright');
 const fs = require('fs');
-const [src, out] = process.argv.slice(2);
+const [src, out] = process.argv.slice(2).map(x => require('path').resolve(x));
 (async () => {
   const b = await chromium.launch();
   const p = await b.newPage({ viewport: { width: 1440, height: 900 }, reducedMotion: 'reduce' });
@@ -25,6 +25,8 @@ const [src, out] = process.argv.slice(2);
         }
       }
       c.querySelectorAll('#stars, #win').forEach(x => x.innerHTML = '');
+      c.querySelectorAll('[data-ready]').forEach(x => x.removeAttribute('data-ready'));
+      c.querySelectorAll('.tool-out').forEach(x => { x.innerHTML = ''; x.className = 'tool-out'; });
       c.querySelectorAll('[aria-current]').forEach(x => x.removeAttribute('aria-current'));
       return c.outerHTML;
     };
