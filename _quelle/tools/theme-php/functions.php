@@ -182,3 +182,10 @@ function bsv_anfrage(WP_REST_Request $req) {
 	if (!$sent) return new WP_Error('bsv_mail', 'Die Anfrage konnte gerade nicht versendet werden.', ['status' => 500]);
 	return $ok;
 }
+
+/* Beim Aktivieren: sprechende Adressen (/leistungen/…) und bis zur Freigabe für Suchmaschinen gesperrt */
+add_action('after_switch_theme', function () {
+	update_option('permalink_structure', '/%postname%/');
+	if (!get_option('bsv_freigegeben')) update_option('blog_public', 0);
+	flush_rewrite_rules();
+});
