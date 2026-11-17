@@ -43,7 +43,7 @@ const [src, out] = process.argv.slice(2).map(x => require('path').resolve(x));
     callbar: __clean(document.querySelector('.callbar')),
     ldStatic: document.querySelector('script[type="application/ld+json"]:not(#ld-page)').textContent
   }));
-  const keys = await p.evaluate(() => ['start', 'leistungen', ...LEISTUNGEN.map(l => l.slug), 'ueber-mich', 'kontakt', 'impressum', 'datenschutz', 'ratgeber', ...RATGEBER.map(a => a.slug), ...REGIONEN.map(r => r.slug)]);
+  const keys = await p.evaluate(() => ['start', 'leistungen', ...LEISTUNGEN.map(l => l.slug), 'ueber-mich', 'kontakt', 'impressum', 'datenschutz', 'ratgeber', 'checklisten', 'schadens-check', ...RATGEBER.map(a => a.slug), ...REGIONEN.map(r => r.slug)]);
   const routes = {};
   for (const k of keys) {
     await p.evaluate(k => { location.hash = k; }, k); await p.waitForTimeout(400);

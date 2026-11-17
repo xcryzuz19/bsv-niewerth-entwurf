@@ -249,7 +249,8 @@ Image.open(os.path.join(pages_root, "og-image.jpg")).convert("RGB").resize((1200
 
 gen = os.path.join(here, "generated")
 for sub in ("icons", "og", "pdf"):
-    shutil.copytree(os.path.join(gen, sub), os.path.join(TDIR, "assets", sub), dirs_exist_ok=True)
+    if os.path.isdir(os.path.join(gen, sub)):
+        shutil.copytree(os.path.join(gen, sub), os.path.join(TDIR, "assets", sub), dirs_exist_ok=True)
 json.dump({"name": "BSV Niewerth – Bau-Sachverständigenbüro", "short_name": "BSV Niewerth", "start_url": "/", "display": "browser",
            "background_color": "#0f1d2e", "theme_color": "#0f1d2e", "lang": "de",
            "icons": [{"src": "icon-192.png", "sizes": "192x192", "type": "image/png"}, {"src": "icon-512.png", "sizes": "512x512", "type": "image/png"},

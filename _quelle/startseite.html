@@ -717,6 +717,33 @@ a.ccard--link:hover { border-color: var(--blue); box-shadow: var(--shadow); }
 /* Ratgeber: Downloads */
 .art-actions { display: flex; flex-wrap: wrap; gap: 12px; }
 @media print { .art-actions { display: none !important; } }
+/* Checklisten */
+.clgrid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; }
+.clcard { background: #fff; border: 1px solid var(--line); border-top: 3px solid var(--blue); border-radius: var(--r); padding: 26px 24px 22px; display: grid; grid-template-rows: auto auto 1fr auto; gap: 12px; min-width: 0; }
+.clcard h3 { font-size: 1.15rem; line-height: 1.3; }
+.clcard p { color: var(--muted); font-size: .96rem; }
+.clcard-act { display: grid; gap: 12px; justify-items: start; margin-top: 6px; }
+.clcard-act .btn { font-size: .9rem; padding: .85em 1.25em; }
+@media (max-width: 1000px) { .clgrid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 600px) { .clgrid { grid-template-columns: minmax(0, 1fr); } }
+/* Schadens-Check */
+.dcheck { max-width: 820px; margin-inline: auto; background: #fff; border-radius: var(--r); box-shadow: var(--shadow); border-top: 4px solid var(--blue); padding: clamp(24px, 4vw, 44px); display: grid; gap: 18px; scroll-margin-top: 100px; }
+.dcheck h2 { font-size: clamp(1.4rem, 2.6vw, 1.9rem); }
+.dcheck h3 { font-size: 1.05rem; margin-top: 4px; }
+.dcheck > p { color: #2f3d50; font-size: 1.06rem; }
+.chk-top { display: flex; justify-content: space-between; align-items: center; gap: 16px; flex-wrap: wrap; }
+.chk-bar { flex: 1; min-width: 120px; max-width: 260px; height: 6px; background: var(--soft); border-radius: 3px; overflow: hidden; }
+.chk-bar i { display: block; height: 100%; background: var(--blue); transition: width .4s var(--ease-out, ease); }
+.chk-opts { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+.chk-opt { text-align: left; font: inherit; font-family: var(--font-head); font-weight: 600; font-size: 1rem; color: var(--ink); background: var(--soft); border: 2px solid transparent; border-radius: var(--r); padding: 16px 18px; cursor: pointer; transition: border-color .15s, background .15s; }
+.chk-opt:hover, .chk-opt:focus-visible { border-color: var(--blue); background: #fff; }
+.chk-back { justify-self: start; background: none; border: 0; padding: 0; color: var(--blue); font: inherit; font-weight: 600; cursor: pointer; text-decoration: underline; }
+.chk-badge { font-family: var(--font-head); font-weight: 700; font-size: .78rem; padding: 6px 12px; border-radius: 999px; }
+.chk-badge.hoch { background: #fde4df; color: #9b2c1c; } .chk-badge.mittel { background: #fdf1d6; color: #7a5300; } .chk-badge.niedrig { background: #def5e8; color: #1b6b3a; }
+.chk-sum { color: var(--muted) !important; font-size: .92rem !important; margin-top: -8px; }
+.chk-act { display: flex; flex-wrap: wrap; gap: 12px; }
+.chk-note { color: var(--muted) !important; font-size: .9rem !important; }
+@media (max-width: 560px) { .chk-opts { grid-template-columns: minmax(0, 1fr); } .chk-act .btn { flex: 1 1 100%; } }
 /* Riss-Tagebuch */
 .rt-form { display: grid; grid-template-columns: 150px minmax(0, 1fr) 120px auto; gap: 12px; align-items: end; }
 .tool .rt-form label { display: grid; gap: 6px; min-width: 0; }
@@ -977,7 +1004,7 @@ main { overflow-x: clip; }
           </ul>
           <div class="hero-actions">
             <a class="btn btn--primary" href="#kontakt"><svg aria-hidden="true"><use href="#i-cal"/></svg>Termin vereinbaren</a>
-            <a class="btn btn--outline-light" href="#leistungen">Leistungen ansehen</a>
+            <a class="btn btn--outline-light" href="#schadens-check">Schadens-Check starten</a>
           </div>
         </div>
       </div>
@@ -1003,6 +1030,7 @@ main { overflow-x: clip; }
             <span class="fc-k">Schadens-Finder</span>
             <h3>Fünf typische Stellen</h3>
             <p>Dach, Fenster, Bad, Wände und Keller: Hier entstehen die meisten Schäden, die ich bei Ortsterminen untersuche.</p>
+            <a class="fc-more" href="#schadens-check">Lieber Schritt für Schritt? Zum Schadens-Check →</a>
           </div>
         </div>
         <div class="finder-stage">
@@ -1039,7 +1067,7 @@ main { overflow-x: clip; }
       <div class="wrap">
         <div class="head"><span class="kicker">Ihr Anliegen</span><h2 id="anliegen-h">Was ist bei Ihnen los?</h2><p>Wählen Sie, was am besten passt. Sie schildern mir kurz die Lage, gerne mit Fotos, und ich melde mich mit einer ersten Einschätzung.</p></div>
         <div class="needs" id="needs"></div>
-        <p class="needs-foot">Ihr Anliegen ist nicht dabei? Rufen Sie mich an unter <a href="tel:+491796933684">0179 6933684</a> oder <a href="#kontakt">schreiben Sie mir</a>.</p>
+        <p class="needs-foot">Unsicher, was dahintersteckt? Machen Sie den <a href="#schadens-check">Schadens-Check</a>. Ihr Anliegen ist nicht dabei? Rufen Sie mich an unter <a href="tel:+491796933684">0179 6933684</a> oder <a href="#kontakt">schreiben Sie mir</a>.</p>
       </div>
     </section>
     <section class="section" id="praxis" aria-labelledby="praxis-h" hidden>
@@ -1163,7 +1191,7 @@ main { overflow-x: clip; }
       <div class="wrap">
         <div class="head"><span class="kicker">Ratgeber</span><h2 id="rg-h">Wissen, bevor es teuer wird</h2><p>Was hinter typischen Schäden steckt, was Sie selbst prüfen können und wann ein Sachverständiger sinnvoll ist.</p></div>
         <div class="acards" id="rg-home"></div>
-        <a class="btn btn--outline" href="#ratgeber" style="margin-top:28px">Alle Ratgeber-Artikel <span class="arrow">→</span></a>
+        <div class="hero-actions" style="margin-top:28px"><a class="btn btn--outline" href="#ratgeber">Alle Ratgeber-Artikel <span class="arrow">→</span></a><a class="btn btn--primary" href="#checklisten"><svg aria-hidden="true"><use href="#i-doc"/></svg>Kostenlose Checklisten</a></div>
       </div>
     </section>
     <section class="section area-sec" id="einsatzgebiet">
@@ -1204,8 +1232,16 @@ main { overflow-x: clip; }
   <div data-page="region" id="region"></div>
   <div data-page="artikel" id="artikel"></div>
   <div data-page="ratgeber">
-    <section class="page-hero page-hero--plain"><svg class="bgroof" viewBox="0 0 600 260" aria-hidden="true"><path d="M10 250 L300 20 L590 250"/></svg><div class="wrap"><div class="page-hero-copy"><div class="crumbs"><a href="#start">Start</a><span>/</span><span>Ratgeber</span></div><h1>Ratgeber rund um <span class="blue">Bauschäden</span></h1><p>Feuchter Keller, Schimmel, Risse, Feuchtemessung, Hauskauf, Neubau und Bauabnahme: Hier erkläre ich, worauf es ankommt, was Sie selbst prüfen können und wann ein Sachverständiger sinnvoll ist.</p></div></div></section>
+    <section class="page-hero page-hero--plain"><svg class="bgroof" viewBox="0 0 600 260" aria-hidden="true"><path d="M10 250 L300 20 L590 250"/></svg><div class="wrap"><div class="page-hero-copy"><div class="crumbs"><a href="#start">Start</a><span>/</span><span>Ratgeber</span></div><h1>Ratgeber rund um <span class="blue">Bauschäden</span></h1><p>Feuchter Keller, Schimmel, Risse, Feuchtemessung, Hauskauf, Neubau und Bauabnahme: Hier erkläre ich, worauf es ankommt, was Sie selbst prüfen können und wann ein Sachverständiger sinnvoll ist.</p><div class="hero-actions"><a class="btn btn--primary" href="#checklisten"><svg aria-hidden="true"><use href="#i-doc"/></svg>Kostenlose Checklisten</a><a class="btn btn--outline-light" href="#schadens-check">Schadens-Check starten</a></div></div></div></section>
     <section class="section section--soft"><div class="wrap"><h2 class="sr-only">Alle Artikel</h2><div class="acards" id="rg-list"></div></div></section>
+  </div>
+  <div data-page="checklisten">
+    <section class="page-hero page-hero--plain"><svg class="bgroof" viewBox="0 0 600 260" aria-hidden="true"><path d="M10 250 L300 20 L590 250"/></svg><div class="wrap"><div class="page-hero-copy"><div class="crumbs"><a href="#start">Start</a><span>/</span><a href="#ratgeber">Ratgeber</a><span>/</span><span>Checklisten</span></div><h1>Kostenlose Checklisten <span class="blue">zum Ausdrucken</span></h1><p>Vom Hauskauf über den Neubau bis zum Wasserschaden: Diese Checklisten habe ich aus meiner Arbeit als Sachverständiger zusammengestellt. Laden Sie sie kostenlos herunter, drucken Sie sie aus und nehmen Sie sie mit.</p></div></div></section>
+    <section class="section section--soft"><div class="wrap"><h2 class="sr-only">Alle Checklisten</h2><div class="clgrid" id="cl-list"></div><p class="needs-foot">Sie möchten eine Checkliste weitergeben? Gern, zum Beispiel an Freunde, die gerade ein Haus kaufen oder bauen.</p></div></section>
+  </div>
+  <div data-page="schadens-check">
+    <section class="page-hero page-hero--plain"><svg class="bgroof" viewBox="0 0 600 260" aria-hidden="true"><path d="M10 250 L300 20 L590 250"/></svg><div class="wrap"><div class="page-hero-copy"><div class="crumbs"><a href="#start">Start</a><span>/</span><span>Schadens-Check</span></div><h1>Schadens-Check: <span class="blue">Was steckt dahinter?</span></h1><p>Drei Fragen, eine erste Einordnung. Der Check dauert etwa eine Minute und ist unverbindlich. Am Ende sehen Sie, was Sie selbst tun können und wann ein Sachverständiger sinnvoll ist.</p></div></div></section>
+    <section class="section section--soft"><div class="wrap"><div class="dcheck" data-tool="check"></div></div></section>
   </div>
 
   <!-- ================= ÜBER MICH ================= -->
@@ -1377,7 +1413,7 @@ main { overflow-x: clip; }
     </div>
     <div><h2 class="fh">Leistungen</h2><ul class="flist" id="f-list"></ul></div>
     <div><h2 class="fh">Kontakt</h2><ul class="flist"><li>Propst-Pricking-Str. 16<br>46325 Borken</li><li>0179 6933684</li><li>info@bsv-niewerth.de</li><li class="fregion"><a href="#bausachverstaendiger-borken">Kreis Borken</a> · <a href="#bausachverstaendiger-muensterland">Münsterland</a> · <a href="#bausachverstaendiger-ruhrgebiet">Ruhrgebiet</a></li></ul></div>
-    <div><h2 class="fh">Büro</h2><ul class="flist"><li><a href="#ueber-mich">Über mich</a></li><li><a href="#ratgeber">Ratgeber</a></li><li><a href="#kontakt">Kontakt</a></li><li><a href="#impressum">Impressum</a></li><li><a href="#datenschutz">Datenschutz</a></li></ul></div>
+    <div><h2 class="fh">Büro</h2><ul class="flist"><li><a href="#ueber-mich">Über mich</a></li><li><a href="#ratgeber">Ratgeber</a></li><li><a href="#checklisten">Checklisten</a></li><li><a href="#schadens-check">Schadens-Check</a></li><li><a href="#kontakt">Kontakt</a></li><li><a href="#impressum">Impressum</a></li><li><a href="#datenschutz">Datenschutz</a></li></ul></div>
   </div>
   <div class="fbottom"><div class="wrap"><span>© 2026 BSV Niewerth · André Niewerth</span><span>bsv-niewerth.de</span></div></div>
 </footer>
@@ -1917,7 +1953,7 @@ function artikelPage(a) {
   <section class="section"><div class="wrap intro-grid">
     <article class="intro-text article">
       <div class="kurz"><span class="kurz-k">Kurz gesagt</span><p>${a.kurz}</p></div>
-      ${a.print ? `<div class="art-actions">${a.pdf ? `<a class="btn btn--primary" href="https://bsv-niewerth.de/wp-content/themes/bsv-niewerth/assets/pdf/${a.pdf}" download>${use("i-doc")}Checkliste als PDF</a>` : ""}<button type="button" class="btn btn--outline print-btn" data-print>Seite drucken</button></div>` : ""}
+      ${(a.print || clFor("art", a.slug).length) ? `<div class="art-actions">${clFor("art", a.slug).map(c => clLink(c)).join("")}${a.print ? `<button type="button" class="btn btn--outline print-btn" data-print>Seite drucken</button>` : ""}</div>` : ""}
       <nav class="toc" aria-label="Inhalt"><b>Inhalt</b><ol>${a.secs.map(([h]) => `<li><a href="#${slugId(h)}" data-toc>${h}</a></li>`).join("")}</ol></nav>
       ${a.secs.map(([h, ps]) => `<div class="isec" id="${slugId(h)}"><h2>${h}</h2>${ps.map(para).join("")}</div>` + (a.tool && a.tool[0] === h ? TOOLS[a.tool[1]] : "")).join("")}
       <aside class="author" aria-label="Über den Autor"><span class="author-k">Über den Autor</span><b>André Niewerth</b><p>Sachverständiger für Schäden an Gebäuden (persCert TÜV Rheinland), Maurer- und Stahlbetonbauermeister und Geprüfter Betriebswirt (HwO). Seit seiner Maurerlehre 1997 am Bau, heute mit eigenem Sachverständigenbüro in Borken.</p><div class="author-links"><a href="#ueber-mich">Mehr über mich →</a><a href="https://www.certipedia.com/quality_marks/0217466933?locale=de" target="_blank" rel="noopener">Zertifikat beim TÜV prüfen →</a></div></aside>
@@ -1938,6 +1974,108 @@ function artikelPage(a) {
     <div class="head"><span class="kicker">Ratgeber</span><h2>Das könnte Sie auch interessieren</h2></div>
     <div class="acards">${mehr}</div>
   </div></section>`;
+}
+
+/* ---------- Kostenlose Checklisten (PDF) ---------- */
+const PDF_URL = "https://bsv-niewerth.de/wp-content/themes/bsv-niewerth/assets/pdf/";
+const rgLists = (slug, re) => RATGEBER.find(a => a.slug === slug).secs.filter(([h, it]) => it.some(Array.isArray) && (!re || re.test(h))).map(([h, it]) => [h, it.filter(Array.isArray).flat()]);
+const CHECKLISTEN = [
+  { file: "BSV-Niewerth-Checkliste-Hausbesichtigung.pdf", art: "ratgeber-hauskauf-besichtigung", to: "hauskaufberatung", btn: "Checkliste als PDF", pages: 2, extra: "notes",
+    title: "Checkliste Hausbesichtigung", text: "Keller, Dach, Fassade, Heizung, Unterlagen und die richtigen Fragen an den Verkäufer: zum Abhaken bei der Besichtigung.",
+    fields: ["Objekt / Adresse", "Datum der Besichtigung", "Baujahr"], secs: () => rgLists("ratgeber-hauskauf-besichtigung") },
+  { file: "BSV-Niewerth-Checkliste-Bauabnahme.pdf", art: "ratgeber-bauabnahme", to: "bauueberwachung", btn: "Checkliste als PDF", pages: 1, extra: "maengel",
+    title: "Checkliste Bauabnahme", text: "Vorbereitung, die wichtigsten Prüfpunkte bei der Begehung und eine Mängeltabelle für das Abnahmeprotokoll.",
+    fields: ["Bauvorhaben", "Datum der Abnahme", "Teilnehmer"], secs: () => rgLists("ratgeber-bauabnahme", /^(So bereiten|Checkliste)/) },
+  { file: "BSV-Niewerth-Checkliste-Neubau-Prueftermine.pdf", art: "ratgeber-baubegleitung-neubau", to: "bauueberwachung", btn: "Prüftermine als PDF", pages: 1, extra: "neubau",
+    title: "Prüftermine beim Neubau", text: "Die Bauabschnitte, die Sie prüfen lassen sollten, bevor sie verdeckt werden, mit Tabelle zum Eintragen der Termine.",
+    fields: ["Bauvorhaben", "Bauunternehmen", "Baubeginn"], secs: () => rgLists("ratgeber-baubegleitung-neubau") },
+  { file: "BSV-Niewerth-Rissprotokoll.pdf", art: "ratgeber-risse-wand", to: "gebaeudeschaeden", btn: "Rissprotokoll als PDF", pages: 1, extra: "riss",
+    title: "Rissprotokoll zum Ausdrucken", text: "Risse richtig beobachten: Anleitung, Warnzeichen und eine Tabelle für Datum, Stelle und Rissbreite.",
+    fields: ["Gebäude / Adresse", "Begonnen am", "Messmittel (z. B. Rissbreitenkarte)"], secs: () => rgLists("ratgeber-risse-wand", /^(So beobachten|Warnzeichen)/) },
+  { file: "BSV-Niewerth-Lueftungsprotokoll-Schimmel.pdf", art: "ratgeber-schimmel-wohnung", to: "gebaeudeschaeden", btn: "Lüftungsprotokoll als PDF", pages: 2, extra: "klima",
+    title: "Lüftungs- und Raumklima-Protokoll", text: "Bei Schimmel zwei bis vier Wochen Temperatur, Luftfeuchte und Lüften notieren: eine sachliche Grundlage für Vermieter, Mieter und Sachverständige.",
+    fields: ["Wohnung / Raum", "Begonnen am", "Hygrometer (Modell)"],
+    secs: () => [["So messen Sie richtig", ["Hygrometer in Raummitte aufstellen, nicht direkt an der Außenwand oder an der Heizung", "Möglichst morgens und abends zur gleichen Uhrzeit ablesen", "Vor dem Lüften messen und notieren, wie lange gelüftet wurde", "Besondere Ereignisse festhalten, zum Beispiel Wäschetrocknen, Kochen oder Duschen", "Den Schimmelbefall zu Beginn und am Ende mit Datum fotografieren"]],
+                 ["Sofortmaßnahmen bei Schimmel", ["Mehrmals täglich kurz und kräftig lüften statt Fenster dauerhaft zu kippen", "Alle Räume gleichmäßig heizen, auch wenig genutzte", "Möbel einige Zentimeter von Außenwänden abrücken", "Kleine Flächen feucht entfernen, größere fachgerecht sanieren lassen", "Als Mieter: Schimmel dem Vermieter unverzüglich schriftlich melden"]]] },
+  { file: "BSV-Niewerth-Checkliste-Wasserschaden.pdf", art: null, to: "leckageortung", btn: "Checkliste als PDF", pages: 1, extra: "wasser",
+    title: "Wasserschaden: Checkliste für die ersten Stunden", text: "Was nach einem Wasserschaden zu tun ist: Sicherheit, Dokumentation für die Versicherung, Meldung und Trocknung.",
+    fields: ["Gebäude / Adresse", "Schaden entdeckt am", "Betroffene Räume"],
+    secs: () => [["Sofort: Sicherheit", ["Bei Wasser in der Nähe von Steckdosen oder Geräten die Sicherung des Bereichs ausschalten", "Haupthahn oder den betroffenen Absperrhahn schließen", "Stehendes Wasser aufnehmen, Möbel und Wertsachen in Sicherheit bringen", "Bei Gefahr für das Gebäude oder Personen Hilfe holen"]],
+                 ["Dokumentieren", ["Fotos und Videos vom Schaden machen, bevor aufgeräumt wird", "Beschädigte Gegenstände auflisten und nicht vorschnell entsorgen", "Rechnungen und Belege von Notmaßnahmen aufbewahren"]],
+                 ["Melden", ["Versicherung unverzüglich informieren (Wohngebäude- oder Hausratversicherung)", "Als Mieter: Vermieter oder Hausverwaltung benachrichtigen", "Im Mehrfamilienhaus die Nachbarn darunter informieren"]],
+                 ["Ursache finden und richtig trocknen", ["Die Leckstelle orten lassen, bevor großflächig geöffnet wird", "Trocknung mit Feuchtemessungen begleiten lassen", "Erst nach nachgewiesener Trocknung Boden, Putz oder Tapete erneuern"]]] }
+];
+SEO.checklisten = ["Kostenlose Checklisten zum Bauen und Kaufen (PDF)", "Checklisten zum Ausdrucken vom Bausachverständigen: Hausbesichtigung, Bauabnahme, Neubau, Rissprotokoll, Lüftungsprotokoll und Wasserschaden."];
+SEO["schadens-check"] = ["Schadens-Check: Feuchte, Riss oder Schimmel einordnen", "Drei Fragen, eine erste Einordnung: Was hinter Feuchte, Rissen, Schimmel oder Wasserflecken stecken kann und was jetzt sinnvoll ist."];
+const clFor = (key, val) => CHECKLISTEN.filter(c => c[key] === val);
+const clLink = (c, cls = "btn btn--primary") => `<a class="${cls}" href="${PDF_URL}${c.file}" download>${use("i-doc")}${c.btn}</a>`;
+function renderChecklisten() {
+  const el = document.getElementById("cl-list"); if (!el || el.children.length) return;
+  el.innerHTML = CHECKLISTEN.map(c => {
+    const a = c.art && RATGEBER.find(x => x.slug === c.art), l = LEISTUNGEN.find(x => x.slug === c.to);
+    return `<article class="clcard"><span class="acard-k">PDF · ${c.pages} ${c.pages > 1 ? "Seiten" : "Seite"} · kostenlos</span><h3>${c.title}</h3><p>${c.text}</p><div class="clcard-act">${clLink(c)}${a ? `<a class="need-more" href="#${a.slug}">Zum Ratgeber →</a>` : `<a class="need-more" href="#${l.slug}">Mehr zu ${l.title} →</a>`}</div></article>`;
+  }).join("");
+}
+
+/* ---------- Schadens-Check: drei Fragen, erste Einordnung ---------- */
+const CHECK_Q = [
+  ["Wo zeigt sich der Schaden?", [["keller", "Im Keller"], ["innen", "Wand oder Decke innen"], ["aussen", "Fassade oder Außenwand"], ["fenster", "Am Fenster"], ["dach", "Dach oder Dachboden"], ["bad", "Bad, Küche oder Leitungen"], ["boden", "Am Boden"]]],
+  ["Was sehen oder bemerken Sie?", [["feucht", "Feuchte Stelle oder Wasserfleck"], ["wasser", "Wasser tropft oder läuft"], ["schimmel", "Schimmel"], ["riss", "Riss"], ["salz", "Weiße Beläge oder bröckelnder Putz"], ["geruch", "Muffiger Geruch"], ["kalt", "Kalte Stellen oder Zugluft"]]],
+  ["Wie entwickelt es sich?", [["neu", "Gerade erst entdeckt"], ["schlimmer", "Seit Wochen, es wird schlimmer"], ["gleich", "Schon länger, unverändert"], ["wieder", "Kommt immer wieder, z. B. nach Regen oder im Winter"]]]
+];
+function checkResult([wo, was, wie]) {
+  let r;
+  if (was === "wasser" || (wo === "bad" && was === "feucht") || (wo === "boden" && was === "feucht"))
+    r = { t: "Möglicher Leitungs- oder Wasserschaden", x: "Läuft oder tropft Wasser, oder zeigt sich ein Fleck in der Nähe von Leitungen, steckt oft eine Undichtigkeit dahinter. Je früher sie gefunden wird, desto kleiner bleibt der Schaden.", to: "leckageortung", art: null, urgent: true,
+      tun: ["Betroffenen Absperrhahn schließen, bei Wasser nahe Strom die Sicherung ausschalten", "Alles fotografieren und die Versicherung informieren", "Leckstelle orten lassen, bevor großflächig geöffnet wird"] };
+  else if (was === "riss")
+    r = { t: wie === "schlimmer" ? "Ein Riss, der sich bewegt" : "Riss im Bauteil", x: wie === "schlimmer" ? "Wird ein Riss breiter oder länger, arbeitet etwas im Gebäude. Das sollte fachlich beurteilt werden, bevor repariert wird." : "Viele Risse sind harmlose Putz- oder Schwindrisse. Ob Ihrer dazugehört, zeigen Verlauf, Lage und ob er sich verändert.", to: "gebaeudeschaeden", art: "ratgeber-risse-wand", urgent: wie === "schlimmer",
+      tun: ["Rissenden mit Bleistift und Datum markieren", "Breite messen und den Riss mit Lineal fotografieren", "Messung nach einigen Wochen wiederholen, zum Beispiel mit dem Riss-Tagebuch"] };
+  else if (was === "schimmel")
+    r = { t: "Schimmel: Ursache klären", x: (wo === "fenster" || wo === "innen") ? "Schimmel an Fenstern, in Ecken oder hinter Möbeln entsteht oft an kühlen Stellen, an denen sich Raumfeuchte niederschlägt. Ob eine Wärmebrücke, das Lüften oder eindringende Feuchte die Ursache ist, lässt sich mit Messungen klären." : "Schimmel braucht dauerhafte Feuchte. Woher sie kommt, entscheidet über die richtige Sanierung.", to: "gebaeudeschaeden", art: "ratgeber-schimmel-wohnung", urgent: wie === "schlimmer",
+      tun: ["Befall mit Datum fotografieren", "Luftfeuchte zwei bis vier Wochen protokollieren", "Kleine Flächen feucht entfernen, größere fachgerecht sanieren lassen"] };
+  else if (wo === "keller" || was === "salz" || was === "geruch")
+    r = { t: "Feuchte im Mauerwerk", x: "Feuchte Flecken, weiße Salzbeläge oder muffiger Geruch deuten auf Feuchte in der Wand hin. Typische Ursachen sind eine alte Abdichtung, aufsteigende Feuchte, Kondensat im Sommer oder eine Leckage.", to: "gebaeudeschaeden", art: "ratgeber-feuchter-keller", urgent: wie === "schlimmer",
+      tun: ["Folientest machen: Alufolie zwei bis drei Tage auf die Wand kleben", "Im Sommer nur in kühlen Stunden lüften (Lüftungsrechner im Ratgeber)", "Vor einer Sanierung die Ursache messen lassen"] };
+  else if (wo === "dach")
+    r = { t: "Feuchte unter dem Dach", x: "Feuchte unter dem Dach kann von einer undichten Eindeckung, schadhaften Anschlüssen oder von Kondensat durch fehlende Luftdichtheit kommen. Mit Drohne und Wärmebild lässt sich das oft ohne Gerüst eingrenzen.", to: "gebaeudeschaeden", art: null, urgent: wie === "schlimmer",
+      tun: ["Feuchte Stellen nach Regen und bei Frost beobachten", "Fotos vom Dachboden machen", "Keine Dämmung erneuern, bevor die Ursache klar ist"] };
+  else if (was === "kalt")
+    r = { t: "Wärmebrücke oder Undichtigkeit", x: "Kalte Stellen und Zugluft zeigen, wo Wärme verloren geht. Ein Wärmebild macht Wärmebrücken, Dämmlücken und undichte Anschlüsse sichtbar, am besten in der Heizperiode.", to: "thermografie", art: null, urgent: false,
+      tun: ["Stellen notieren, an denen es zieht oder kalt ist", "Auf Kondenswasser und Schimmel an diesen Stellen achten", "Wärmebild in der Heizperiode aufnehmen lassen"] };
+  else
+    r = { t: "Feuchte an der Gebäudehülle", x: "Feuchte Stellen an Fassade, Fenstern oder Wänden können viele Ursachen haben, von Schlagregen über undichte Anschlüsse bis zu Kondensat. Eine Untersuchung vor Ort schafft Klarheit.", to: "gebaeudeschaeden", art: null, urgent: wie === "schlimmer",
+      tun: ["Fotos mit Datum machen", "Beobachten, ob es nach Regen schlimmer wird", "Ursache klären lassen, bevor saniert wird"] };
+  r.badge = r.urgent ? ["hoch", "Bitte nicht lange warten"] : wie === "wieder" ? ["mittel", "Ursache klären lassen"] : wie === "neu" ? ["niedrig", "Beobachten und dokumentieren"] : ["mittel", "Zeitnah ansehen lassen"];
+  return r;
+}
+function initCheck(t) {
+  let step = 0, ans = [];
+  const label = (i, v) => CHECK_Q[i][1].find(o => o[0] === v)[1];
+  const render = () => {
+    if (step < 3) {
+      const [q, opts] = CHECK_Q[step];
+      t.innerHTML = `<div class="chk-top"><span class="kurz-k">Frage ${step + 1} von 3</span><div class="chk-bar"><i style="width:${(step + 1) / 3 * 100}%"></i></div></div>
+        <h2>${q}</h2><div class="chk-opts">${opts.map(([v, l]) => `<button type="button" class="chk-opt" data-v="${v}">${l}</button>`).join("")}</div>
+        ${step ? '<button type="button" class="chk-back" data-back>← Zurück</button>' : ""}`;
+    } else {
+      const r = checkResult(ans), l = LEISTUNGEN.find(x => x.slug === r.to), a = r.art && RATGEBER.find(x => x.slug === r.art), c = CTA[r.to], cl = CHECKLISTEN.find(x => x.to === r.to && (!r.art || x.art === r.art)) || null;
+      const msg = `Schadens-Check: ${label(0, ans[0])} · ${label(1, ans[1])} · ${label(2, ans[2])}.\n\n`;
+      t.innerHTML = `<div class="chk-top"><span class="kurz-k">Ihre erste Einordnung</span><span class="chk-badge ${r.badge[0]}">${r.badge[1]}</span></div>
+        <h2>${r.t}</h2><p class="chk-sum">${label(0, ans[0])} · ${label(1, ans[1])} · ${label(2, ans[2])}</p><p>${r.x}</p>
+        <h3>Was Sie jetzt tun können</h3><ul class="checks">${r.tun.map(x => `<li>${use("i-check")}<span>${x}</span></li>`).join("")}</ul>
+        <div class="chk-act"><a class="btn btn--primary" href="#kontakt" data-thema="${r.to}" data-label="${c[0]}" data-msg="${msg.replace(/"/g, "&quot;")}">${c[0]} <span class="arrow">→</span></a>
+        ${a ? `<a class="btn btn--outline" href="#${a.slug}">Ratgeber lesen</a>` : `<a class="btn btn--outline" href="#${l.slug}">Mehr zu ${l.title}</a>`}${cl ? clLink(cl, "btn btn--outline") : ""}</div>
+        <p class="chk-note">Eine erste Orientierung, keine Ferndiagnose. Sicher beurteilen lässt sich ein Schaden erst vor Ort. <button type="button" class="chk-back" data-restart>Neu starten</button></p>`;
+    }
+  };
+  t.addEventListener("click", e => {
+    const o = e.target.closest(".chk-opt");
+    if (o) { ans[step] = o.dataset.v; step++; render(); t.scrollIntoView({ behavior: "smooth", block: "start" }); return; }
+    if (e.target.closest("[data-back]")) { step--; render(); }
+    if (e.target.closest("[data-restart]")) { step = 0; ans = []; render(); }
+  });
+  render();
 }
 
 function setMeta(key, l) {
@@ -1969,6 +2107,12 @@ function extraLd(key, d, strip) {
     { "@type": "Article", "@id": aurl(a) + "#artikel", "headline": a.h1, "description": d[1], "inLanguage": "de", "datePublished": a.pub || "2026-11-16", "dateModified": iso(RATGEBER_STAND), "author": author, "publisher": { "@id": base + "#buero" }, "image": base + "wp-content/themes/bsv-niewerth/assets/og-image.jpg", "mainEntityOfPage": aurl(a), "about": strip(l.title), "articleSection": "Ratgeber" },
     { "@type": "FAQPage", "mainEntity": a.faq.map(([q, t]) => ({ "@type": "Question", "name": q, "acceptedAnswer": { "@type": "Answer", "text": strip(t) } })) },
     bc([["Start", ""], ["Ratgeber", "ratgeber/"], [a.h1, "ratgeber/" + a.slug.replace("ratgeber-", "") + "/"]]) ] }); }
+  if (key === "checklisten") return JSON.stringify({ "@context": "https://schema.org", "@graph": [
+    { "@type": "CollectionPage", "name": "Kostenlose Checklisten zum Ausdrucken", "url": base + "checklisten/", "author": author, "mainEntity": { "@type": "ItemList", "itemListElement": CHECKLISTEN.map((c, i) => ({ "@type": "ListItem", "position": i + 1, "item": { "@type": "DigitalDocument", "name": c.title, "description": c.text, "encodingFormat": "application/pdf", "url": PDF_URL + c.file, "author": { "@id": base + "#andre" }, "isAccessibleForFree": true } })) } },
+    bc([["Start", ""], ["Ratgeber", "ratgeber/"], ["Checklisten", "checklisten/"]]) ] });
+  if (key === "schadens-check") return JSON.stringify({ "@context": "https://schema.org", "@graph": [
+    { "@type": "WebPage", "name": "Schadens-Check", "url": base + "schadens-check/", "description": d[1], "provider": { "@id": base + "#buero" } },
+    bc([["Start", ""], ["Schadens-Check", "schadens-check/"]]) ] });
   if (key === "ratgeber") return JSON.stringify({ "@context": "https://schema.org", "@graph": [
     { "@type": "CollectionPage", "name": "Ratgeber rund um Bauschäden", "url": base + "ratgeber/", "author": author, "mainEntity": { "@type": "ItemList", "itemListElement": RATGEBER.map((x, i) => ({ "@type": "ListItem", "position": i + 1, "url": aurl(x), "name": x.h1 })) } },
     bc([["Start", ""], ["Ratgeber", "ratgeber/"]]) ] });
@@ -2042,7 +2186,7 @@ function leistungPage(l) {
   </div></section>
   ${casesFor(l.slug).length ? `<section class="section"><div class="wrap"><div class="head"><span class="kicker">Aus der Praxis</span><h2>Ein Fall aus meiner Arbeit</h2></div><div class="cases">${casesHtml(casesFor(l.slug), false)}</div></div></section>` : ""}
   <section class="section" style="padding-block:64px"><div class="wrap more-grid">
-    <div><h3>Einsatzgebiet</h3><p class="area-line">${TOWNS.join(" · ")}, das übrige Münsterland und das Ruhrgebiet</p><div class="other">${REGIONEN.map(r => `<a href="#${r.slug}">${PIN}${r.name}</a>`).join("")}</div>${RATGEBER.filter(a => a.to === l.slug).length ? `<h3 style="margin-top:12px">Passend dazu im Ratgeber</h3><ul class="rg-links">${RATGEBER.filter(a => a.to === l.slug).map(a => `<li><a href="#${a.slug}">${a.h1} →</a></li>`).join("")}</ul>` : ""}</div>
+    <div><h3>Einsatzgebiet</h3><p class="area-line">${TOWNS.join(" · ")}, das übrige Münsterland und das Ruhrgebiet</p><div class="other">${REGIONEN.map(r => `<a href="#${r.slug}">${PIN}${r.name}</a>`).join("")}</div>${RATGEBER.filter(a => a.to === l.slug).length ? `<h3 style="margin-top:12px">Passend dazu im Ratgeber</h3><ul class="rg-links">${RATGEBER.filter(a => a.to === l.slug).map(a => `<li><a href="#${a.slug}">${a.h1} →</a></li>`).join("")}</ul>` : ""}${clFor("to", l.slug).length ? `<h3 style="margin-top:12px">Kostenlose Checklisten</h3><ul class="rg-links">${clFor("to", l.slug).map(c => `<li><a href="${PDF_URL}${c.file}" download>${c.title} (PDF) →</a></li>`).join("")}</ul>` : ""}</div>
     <div><h3>Weitere Leistungen</h3><div class="other">${others}</div></div>
   </div></section>`;
 }
@@ -2064,6 +2208,7 @@ function renderPraxis() {
 }
 renderPraxis();
 document.getElementById("rg-list").innerHTML = RATGEBER.map(artCard).join("");
+renderChecklisten();
 document.getElementById("rg-home").innerHTML = RATGEBER.slice(0, 3).map(artCard).join("");
 document.getElementById("needs").innerHTML = NEEDS.map(n => {
   const l = LEISTUNGEN.find(x => x.slug === n.to);
@@ -2207,6 +2352,7 @@ function initRisse(t) {
 function applyReveal(scope) {
   initTools(scope);
   scope.querySelectorAll('[data-tool="risse"]').forEach(t => { if (!t.dataset.ready) { t.dataset.ready = "1"; initRisse(t); } });
+  scope.querySelectorAll('[data-tool="check"]').forEach(t => { if (!t.dataset.ready) { t.dataset.ready = "1"; initCheck(t); } });
   if (REDUCED || !io) return;
   scope.querySelectorAll(REVEAL).forEach(el => {
     if (el.classList.contains("reveal")) return;
@@ -2380,7 +2526,7 @@ document.getElementById("kontaktformular").addEventListener("submit", e => {
   if (!matchMedia("(prefers-reduced-motion: reduce)").matches) hero.addEventListener("pointermove", e => {
     if (e.pointerType !== "mouse") return;
     const r = hero.getBoundingClientRect(), dx = (e.clientX - r.left) / r.width - .5;
-    lays.forEach(([el, f]) => { el.style.transform = `translateX(${(-dx * f).toFixed(1)}px)`; });
+    lays.forEach(([el, f]) => { if (el) el.style.transform = `translateX(${(-dx * f).toFixed(1)}px)`; });
   });
 })();
 </script>
