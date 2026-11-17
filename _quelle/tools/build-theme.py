@@ -248,7 +248,7 @@ for f in os.listdir(os.path.join(here, "theme-php")):
 Image.open(os.path.join(pages_root, "og-image.jpg")).convert("RGB").resize((1200, 900)).save(os.path.join(TDIR, "screenshot.png"))
 
 gen = os.path.join(here, "generated")
-for sub in ("icons", "og"):
+for sub in ("icons", "og", "pdf"):
     shutil.copytree(os.path.join(gen, sub), os.path.join(TDIR, "assets", sub), dirs_exist_ok=True)
 json.dump({"name": "BSV Niewerth – Bau-Sachverständigenbüro", "short_name": "BSV Niewerth", "start_url": "/", "display": "browser",
            "background_color": "#0f1d2e", "theme_color": "#0f1d2e", "lang": "de",

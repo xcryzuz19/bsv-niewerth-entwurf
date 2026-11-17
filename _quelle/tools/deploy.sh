@@ -5,8 +5,12 @@
 set -e
 T=$(cd "$(dirname "$0")" && pwd); R=$(dirname "$(dirname "$T")"); B=${BUILD:-/tmp/bsv-build}
 node "$T/capture.js" "$R/_quelle/startseite.html" "$R/_quelle/capture.json"
-[ "$1" = "--icons" ] && node "$T/icons.js" "$R/_quelle/capture.json" "$B/bsv-niewerth" "$T/generated"
 python3 -I "$T/build-theme.py" "$R/_quelle/startseite.html" "$R/_quelle/capture.json" "$B"
+if [ "$1" = "--assets" ]; then   # Icons, Vorschaubilder und PDF-Checklisten neu erzeugen
+  node "$T/icons.js" "$R/_quelle/capture.json" "$B/bsv-niewerth" "$T/generated"
+  node "$T/pdfs.js" "$R/_quelle/startseite.html" "$B/bsv-niewerth" "$T/generated"
+  python3 -I "$T/build-theme.py" "$R/_quelle/startseite.html" "$R/_quelle/capture.json" "$B"
+fi
 cp "$B"/wp/* "$R/wp/"
 (cd "$R" && rm -rf img fonts && python3 -I _quelle/tools/build-pages.py _quelle/startseite.html index.html)
 (cd "$R" && git add -A && git commit -q -m "Website aktualisiert" -m "Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>" -m "Claude-Session: https://claude.ai/code/session_01Mx3ei1EwYhN1MS9w2UXGQr" && git push -q origin main) || true

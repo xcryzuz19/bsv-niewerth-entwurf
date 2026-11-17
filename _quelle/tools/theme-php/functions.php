@@ -85,6 +85,7 @@ add_action('wp_head', function () {
 	if ($desc) echo '<meta property="og:description" content="' . esc_attr($desc) . "\">\n";
 	if ($url) echo '<meta property="og:url" content="' . esc_url($url) . "\">\n";
 	echo '<meta property="og:image" content="' . esc_url($img) . '"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta property="og:image:alt" content="' . esc_attr($title) . '">' . "\n";
+	echo '<meta property="og:image:secure_url" content="' . esc_url($img) . '"><meta property="og:image:type" content="image/jpeg"><meta name="twitter:image" content="' . esc_url($img) . '"><meta name="twitter:title" content="' . esc_attr($title) . '">' . "\n";
 	echo '<meta name="twitter:card" content="summary_large_image">' . "\n";
 	echo '<script type="application/ld+json">' . bsv_data()['ld'] . "</script>\n";
 	if ($r && $r['ld'] && $r['ld'] !== '{}') echo '<script type="application/ld+json">' . $r['ld'] . "</script>\n";

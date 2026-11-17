@@ -299,8 +299,9 @@ body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-a
 /* Feste Leiste unten (Handy) */
 .callbar { display: none; }
 @media (max-width: 1000px) {
-  .callbar { display: grid; grid-template-columns: 1fr 1fr; position: fixed; left: 0; right: 0; bottom: 0; z-index: 25; background: rgb(15 29 46 / .97); backdrop-filter: blur(8px); border-top: 1px solid rgb(255 255 255 / .12); padding: 10px max(12px, env(safe-area-inset-right, 0px)) calc(10px + env(safe-area-inset-bottom, 0px)) max(12px, env(safe-area-inset-left, 0px)); gap: 10px; }
-  .callbar .btn { padding: .9em .5em; }
+  .callbar { display: grid; grid-template-columns: 1fr 1fr 1fr; position: fixed; left: 0; right: 0; bottom: 0; z-index: 25; background: rgb(15 29 46 / .97); backdrop-filter: blur(8px); border-top: 1px solid rgb(255 255 255 / .12); padding: 10px max(12px, env(safe-area-inset-right, 0px)) calc(10px + env(safe-area-inset-bottom, 0px)) max(12px, env(safe-area-inset-left, 0px)); gap: 10px; }
+  .callbar .btn { padding: .9em .4em; gap: .45em; }
+  @media (max-width: 380px) { .callbar { gap: 6px; } .callbar .btn { font-size: .8rem; } .callbar .btn svg { width: 16px; height: 16px; } }
   body { padding-bottom: 76px; }
 }
 
@@ -874,6 +875,41 @@ textarea { min-height: 140px; resize: vertical; }
 .tool-out span { color: #b6c4d5; font-size: .88rem; }
 .tool-note { color: #b6c4d5; font-size: .8rem; }
 @media (max-width: 520px) { .tool-grid { grid-template-columns: minmax(0, 1fr); } }
+/* WhatsApp */
+a.ccard--link { text-decoration: none; color: inherit; transition: border-color .2s, box-shadow .2s; }
+a.ccard--link:hover { border-color: var(--blue); box-shadow: var(--shadow); }
+.contact-band .kb-wa { display: flex; align-items: center; gap: 10px; margin-top: 16px; font-size: 1rem; }
+.contact-band .kb-wa svg { width: 22px; height: 22px; flex: none; stroke: var(--blue-light); fill: none; stroke-width: 1.8; }
+.contact-band .kb-wa a { color: #fff; font-weight: 600; }
+/* Ratgeber: Downloads */
+.art-actions { display: flex; flex-wrap: wrap; gap: 12px; }
+@media print { .art-actions { display: none !important; } }
+/* Riss-Tagebuch */
+.rt-form { display: grid; grid-template-columns: 150px minmax(0, 1fr) 120px auto; gap: 12px; align-items: end; }
+.tool .rt-form label { display: grid; gap: 6px; min-width: 0; }
+.tool input { min-width: 0; max-width: 100%; }
+.tool { min-width: 0; }
+.rt-form .btn { padding: .95em 1.2em; }
+.rt-list { display: grid; gap: 12px; }
+.rt-empty { color: #b6c4d5 !important; font-size: .95rem !important; }
+.rt-item { border: 1px solid rgb(255 255 255 / .16); border-left: 4px solid var(--blue-light); border-radius: var(--r); padding: 14px 16px; display: grid; gap: 8px; }
+.rt-item.up { border-left-color: #e5735f; } .rt-item.ok { border-left-color: #4cc38a; }
+.rt-head { display: flex; justify-content: space-between; align-items: center; gap: 12px; }
+.rt-head b { font-family: var(--font-head); }
+.rt-head svg { width: 120px; height: 28px; flex: none; } .rt-head polyline { fill: none; stroke: var(--blue-light); stroke-width: 3; stroke-linejoin: round; stroke-linecap: round; }
+.intro-text .rt-trend { color: #fff; font-size: .95rem; }
+.rt-item ul { list-style: none; padding: 0; margin: 0; display: grid; gap: 2px; font-size: .92rem; color: #d4deea; }
+.rt-item li { display: grid; grid-template-columns: 1fr auto 32px; gap: 12px; align-items: center; border-top: 1px dashed rgb(255 255 255 / .12); padding-top: 4px; }
+.rt-item li button { background: none; border: 0; color: #b6c4d5; font-size: 1.2rem; cursor: pointer; line-height: 1; }
+.rt-actions { display: flex; flex-wrap: wrap; gap: 10px 14px; align-items: center; }
+.rt-clear { background: none; border: 0; color: #b6c4d5; text-decoration: underline; cursor: pointer; font: inherit; font-size: .88rem; }
+@media (max-width: 700px) { .rt-form { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); } .rt-form label:nth-child(2) { grid-column: 1 / -1; order: -1; } .rt-form .btn { grid-column: 1 / -1; } }
+@media print {
+  body.print-tool * { visibility: hidden !important; }
+  body.print-tool [data-tool="risse"], body.print-tool [data-tool="risse"] * { visibility: visible !important; color: #000 !important; }
+  body.print-tool [data-tool="risse"] { position: absolute; left: 0; top: 0; width: 100%; background: #fff !important; }
+  body.print-tool .rt-form, body.print-tool .rt-actions, body.print-tool .rt-item li button { display: none !important; }
+}
 /* Anliegen-Karten (Startseite) */
 .needs { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; }
 .need { background: #fff; border: 1px solid var(--line); border-radius: var(--r); padding: 28px 26px 24px; display: grid; grid-template-rows: auto auto 1fr auto; gap: 12px; align-content: start; min-width: 0; transition: box-shadow .25s, transform .25s; }
@@ -1002,6 +1038,7 @@ main { overflow-x: clip; }
     <symbol id="i-check" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5" stroke-linecap="round" stroke-linejoin="round"/></symbol>
     <symbol id="i-phone" viewBox="0 0 24 24"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 005 5L15 13l5 2v4a2 2 0 01-2 2A16 16 0 013 6a2 2 0 012-2" stroke-linejoin="round"/></symbol>
     <symbol id="i-cal" viewBox="0 0 24 24"><rect x="3.5" y="5" width="17" height="15" rx="2"/><path d="M3.5 10h17M8 3v4M16 3v4"/></symbol>
+    <symbol id="i-wa" viewBox="0 0 24 24"><path d="M4.4 19.6l1.2-3.7a8.2 8.2 0 1 1 2.8 2.6z"/><path d="M9.2 8.2c.1 2.9 2.6 5.4 5.5 5.6l1-1.1 1.6.9-.5 1.6c-3.9.1-7.4-3.3-7.5-7.2l1.6-.5.8 1.6z" stroke-width="1.4"/></symbol>
     <symbol id="i-mail" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3.5 6.5L12 13l8.5-6.5"/></symbol>
     <symbol id="i-pin" viewBox="0 0 24 24"><path d="M12 21s-7-6.2-7-11.5A7 7 0 0119 9.5C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></symbol>
     <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.5 2.5"/></symbol>
@@ -1413,6 +1450,7 @@ main { overflow-x: clip; }
       <div class="wrap contact-grid">
         <div class="ccards">
           <div class="ccard"><span class="qi"><svg aria-hidden="true"><use href="#i-phone"/></svg></span><div><small>Telefon</small><b>0179 6933684</b></div></div>
+          <a class="ccard ccard--link" href="https://wa.me/491796933684?text=Hallo%20Herr%20Niewerth%2C%20ich%20habe%20eine%20Frage%20zu%20einem%20Bauschaden%3A%20" target="_blank" rel="noopener"><span class="qi"><svg aria-hidden="true"><use href="#i-wa"/></svg></span><div><small>WhatsApp, gern mit Fotos</small><b>0179 6933684</b></div></a>
           <div class="ccard"><span class="qi"><svg aria-hidden="true"><use href="#i-mail"/></svg></span><div><small>E-Mail</small><b>info@bsv-niewerth.de</b></div></div>
           <div class="ccard"><span class="qi"><svg aria-hidden="true"><use href="#i-pin"/></svg></span><div><small>Büro</small><b>Propst-Pricking-Str. 16, 46325 Borken</b></div></div>
           <div class="ccard"><span class="qi"><svg aria-hidden="true"><use href="#i-clock"/></svg></span><div><small>Erreichbarkeit</small><b>Mo–Fr 8–18 Uhr</b></div></div>
@@ -1468,11 +1506,13 @@ main { overflow-x: clip; }
       <p>Diese Website wird bei der IONOS SE, Elgendorfer Str. 57, 56410 Montabaur gehostet. Beim Aufruf der Seite verarbeitet der Hoster technisch notwendige Daten wie IP-Adresse, Datum und Uhrzeit, aufgerufene Seite und Browsertyp in Server-Logfiles. Rechtsgrundlage ist Art. 6 Abs. 1 lit. f DSGVO. Mit IONOS besteht ein Vertrag zur Auftragsverarbeitung.</p>
       <h2>3. Kontaktformular, E-Mail und Telefon</h2>
       <p>Wenn Sie mich kontaktieren, verarbeite ich Ihre Angaben (Name, Kontaktdaten, Nachricht, ggf. Fotos), um Ihre Anfrage zu bearbeiten. Rechtsgrundlage ist Art. 6 Abs. 1 lit. b DSGVO, wenn die Anfrage auf einen Auftrag zielt, sonst Art. 6 Abs. 1 lit. f DSGVO. Die Daten werden gelöscht, sobald sie nicht mehr erforderlich sind und keine gesetzlichen Aufbewahrungspflichten bestehen.</p>
-      <h2>4. Cookies und Analyse</h2>
-      <p>Diese Website setzt keine Analyse- oder Marketing-Cookies ein.</p>
-      <h2>5. Schriftarten</h2>
+      <h2>4. WhatsApp</h2>
+      <p>Auf dieser Website ist WhatsApp nicht eingebunden. Erst wenn Sie auf einen WhatsApp-Link tippen, öffnet sich WhatsApp. Schreiben Sie mir über WhatsApp, verarbeitet auch der Anbieter WhatsApp Ireland Limited, Merrion Road, Dublin 4, D04 X2K5, Irland, Ihre Daten nach dessen Datenschutzbestimmungen, dabei kann es zu einer Übermittlung in die USA kommen. Ich nutze Ihre Nachricht nur, um Ihre Anfrage zu bearbeiten. Rechtsgrundlage ist Art. 6 Abs. 1 lit. b DSGVO, wenn die Anfrage auf einen Auftrag zielt, sonst Art. 6 Abs. 1 lit. f DSGVO. Wenn Sie das nicht möchten, erreichen Sie mich auch per Telefon, E-Mail oder Kontaktformular.</p>
+      <h2>5. Cookies, Analyse und Speicherung im Browser</h2>
+      <p>Diese Website setzt keine Analyse- oder Marketing-Cookies ein. Für einzelne Funktionen speichert die Website Angaben nur lokal in Ihrem Browser: das gewählte Anliegen beim Wechsel zum Kontaktformular für die Dauer des Besuchs und die Einträge im Riss-Tagebuch, bis Sie sie löschen. Diese Angaben werden nicht an mich oder Dritte übertragen, solange Sie sie nicht selbst senden. Rechtsgrundlage ist § 25 Abs. 2 Nr. 2 TDDDG, weil die Speicherung für die von Ihnen genutzte Funktion erforderlich ist.</p>
+      <h2>6. Schriftarten</h2>
       <p>Die Schriftarten sind lokal auf dem Server eingebunden. Beim Aufruf der Seite wird keine Verbindung zu Servern von Google hergestellt.</p>
-      <h2>6. Ihre Rechte</h2>
+      <h2>7. Ihre Rechte</h2>
       <p>Sie haben das Recht auf Auskunft, Berichtigung, Löschung, Einschränkung der Verarbeitung, Datenübertragbarkeit und Widerspruch. Außerdem können Sie sich bei einer Aufsichtsbehörde beschweren, zum Beispiel bei der Landesbeauftragten für Datenschutz und Informationsfreiheit Nordrhein-Westfalen.</p>
       <p>Stand: November 2026</p>
     </div></section>
@@ -1483,7 +1523,7 @@ main { overflow-x: clip; }
 <section class="contact-band" id="kontaktband">
   <svg class="bigroof" viewBox="0 0 600 300" aria-hidden="true"><path d="M20 290 L300 40 L580 290"/></svg>
   <div class="wrap">
-    <div><h2 id="kb-h">Klarheit beginnt mit einem Gespräch.</h2><p id="kb-p">Schildern Sie mir Ihr Anliegen. Ich freue mich auf Ihre Anfrage.</p></div>
+    <div><h2 id="kb-h">Klarheit beginnt mit einem Gespräch.</h2><p id="kb-p">Schildern Sie mir Ihr Anliegen. Ich freue mich auf Ihre Anfrage.</p><p class="kb-wa"><svg aria-hidden="true"><use href="#i-wa"/></svg>Lieber per WhatsApp? <a href="https://wa.me/491796933684?text=Hallo%20Herr%20Niewerth%2C%20ich%20habe%20eine%20Frage%20zu%20einem%20Bauschaden%3A%20" target="_blank" rel="noopener">Schreiben Sie mir dort</a>, gern mit Fotos.</p></div>
     <div class="cboxes">
       <a class="cbox" href="tel:+491796933684"><svg aria-hidden="true"><use href="#i-phone"/></svg><div><b>0179 6933684</b><small>Persönlich für Sie da</small></div></a>
       <a class="cbox" href="#kontakt" id="kb-cta"><svg aria-hidden="true"><use href="#i-mail"/></svg><div><b id="kb-b">Anfrage senden</b><small id="kb-s">info@bsv-niewerth.de</small></div></a>
@@ -1512,6 +1552,7 @@ main { overflow-x: clip; }
 
 <div class="callbar">
   <a class="btn btn--outline-light" href="tel:+491796933684"><svg aria-hidden="true"><use href="#i-phone"/></svg>Anrufen</a>
+  <a class="btn btn--outline-light" href="https://wa.me/491796933684?text=Hallo%20Herr%20Niewerth%2C%20ich%20habe%20eine%20Frage%20zu%20einem%20Bauschaden%3A%20" target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#i-wa"/></svg>WhatsApp</a>
   <a class="btn btn--primary" href="#kontakt"><svg aria-hidden="true"><use href="#i-cal"/></svg>Termin</a>
 </div>
 
@@ -1885,7 +1926,7 @@ const RATGEBER = [
     ],
     faq: [["Womit entferne ich kleine Schimmelflächen?", "Für kleine Flächen auf glatten Oberflächen nennt das Umweltbundesamt zum Beispiel 70- bis 80-prozentigen Alkohol. Wichtiger ist aber, die Ursache zu beheben, sonst kommt der Schimmel wieder."], ["Hilft Anti-Schimmel-Farbe?", "Sie kann das Wachstum eine Zeit lang bremsen. Bleibt die Wand feucht, kommt der Schimmel trotzdem zurück. Zuerst muss die Ursache behoben werden."], ["Muss ich Schimmel dem Vermieter melden?", "Ja. Mieter sind verpflichtet, Mängel wie Schimmel unverzüglich anzuzeigen. Am besten schriftlich, mit Fotos und Datum."], ["Wer zahlt ein Schimmelgutachten?", "Das hängt vom Einzelfall ab. Oft ist das Ergebnis die Grundlage, um zu klären, wer für die Sanierung und die Kosten aufkommt."]] },
 
-  { slug: "ratgeber-risse-wand", to: "gebaeudeschaeden", min: 7,
+  { slug: "ratgeber-risse-wand", to: "gebaeudeschaeden", min: 7, tool: ["So beobachten Sie einen Riss", "risse"],
     seo: ["Risse in der Wand: Wann gefährlich? Setzungsriss erkennen", "Haarriss oder Setzungsriss? Woran Sie gefährliche Risse innen und außen erkennen, wie Sie sie beobachten und wann ein Gutachter kommen sollte."],
     h1: "Risse in der Wand: Wann sind sie gefährlich?",
     lead: "Fast jedes Haus hat Risse. Die meisten sind harmlos. Einige weisen aber auf Bewegungen im Gebäude hin, die man ernst nehmen sollte. Diese Hinweise helfen bei der ersten Einschätzung.",
@@ -1902,7 +1943,7 @@ const RATGEBER = [
     ],
     faq: [["Ab welcher Breite ist ein Riss bedenklich?", "Eine feste Grenze gibt es nicht. Wichtiger als die Breite sind Verlauf, Lage und ob sich der Riss verändert. Ein breiter, ruhender Riss kann harmloser sein als ein feiner, der wächst."], ["Kann ich Risse einfach zuspachteln?", "Bei ruhenden Putzrissen ja. Bewegt sich der Riss noch, reißt er wieder auf. Klären Sie deshalb vorher, ob er zur Ruhe gekommen ist."], ["Sind Risse im Neubau normal?", "Feine Risse durch Trocknen und erste Setzungen sind in den ersten Jahren häufig. Breite, schräge oder wachsende Risse sollten Sie dagegen ansehen lassen, solange noch Gewährleistung besteht."], ["Zahlt die Versicherung?", "Das hängt von Ursache und Vertrag ab. Viele Verträge schließen Setzungsschäden aus. Eine fachliche Dokumentation hilft bei der Klärung."]] },
 
-  { slug: "ratgeber-hauskauf-besichtigung", to: "hauskaufberatung", min: 8, print: true,
+  { slug: "ratgeber-hauskauf-besichtigung", to: "hauskaufberatung", min: 8, print: true, pdf: "BSV-Niewerth-Checkliste-Hausbesichtigung.pdf",
     seo: ["Hauskauf Besichtigung: Checkliste – worauf achten?", "Checkliste für die Hausbesichtigung: Keller, Dach, Fassade, Heizung, Unterlagen, die richtigen Fragen an den Verkäufer und wann ein Gutachter sinnvoll ist."],
     h1: "Hauskauf: Checkliste für die Besichtigung",
     lead: "Bei der Besichtigung zählt der erste Eindruck. Für Ihre Entscheidung zählt aber, was hinter Tapete, Laminat und frischer Farbe steckt. Mit dieser Checkliste gehen Sie gezielter durchs Haus.",
@@ -1935,7 +1976,7 @@ const RATGEBER = [
     ],
     faq: [["Wann sollte ich die Baubegleitung beauftragen?", "Am besten vor Baubeginn. Dann lassen sich die Prüftermine sinnvoll in den Bauablauf einplanen."], ["Darf ich einen Gutachter auf die Baustelle mitbringen?", "In der Regel ja. Regeln Sie den Zugang zur Baustelle und die Termine am besten schon im Bauvertrag."], ["Gilt das auch für Umbau und Sanierung?", "Ja. Auch bei Modernisierungen gibt es Bauteile, die später verdeckt sind, etwa Abdichtungen im Bad oder die Dämmung im Dach."], ["Kann ich Mängel auch selbst rügen?", "Ja. Wichtig ist, Mängel schriftlich und konkret zu benennen. Fotos und ein Protokoll des Sachverständigen helfen dabei."]] },
 
-  { slug: "ratgeber-bauabnahme", to: "bauueberwachung", min: 7, print: true,
+  { slug: "ratgeber-bauabnahme", to: "bauueberwachung", min: 7, print: true, pdf: "BSV-Niewerth-Checkliste-Bauabnahme.pdf",
     seo: ["Bauabnahme: Ablauf, Checkliste und Tipps vom Gutachter", "Was bei der Bauabnahme passiert, warum sie so wichtig ist, wie Sie sich vorbereiten und weshalb ein Sachverständiger dabei sein sollte."],
     h1: "Bauabnahme: So bereiten Sie sich richtig vor",
     lead: "Die Abnahme ist einer der wichtigsten Termine beim Bauen. Sie entscheidet mit darüber, wie gut Sie bei späteren Mängeln dastehen. Mit guter Vorbereitung gehen Sie entspannt hinein.",
@@ -2023,6 +2064,10 @@ const TOOLS = {
   <fieldset><legend>Draußen</legend><label>Temperatur in °C<input type="number" inputmode="decimal" name="ta" value="24" step="0.5"></label><label>Luftfeuchte in %<input type="number" inputmode="numeric" name="ha" value="60" min="1" max="100"></label></fieldset></div>
   <output class="tool-out" aria-live="polite"></output><small class="tool-note">Grobe Orientierung nach der absoluten Luftfeuchte. Sie ersetzt keine Messung vor Ort.</small></div>`
 };
+TOOLS.risse = `<div class="tool" data-tool="risse"><span class="kurz-k">Riss-Tagebuch</span><h3>Risse beobachten und festhalten</h3><p>Tragen Sie bei jeder Messung Datum, Stelle und Rissbreite ein. Das Tagebuch zeigt, ob sich ein Riss verändert. Ihre Einträge bleiben nur auf diesem Gerät gespeichert.</p>
+  <div class="rt-form"><label>Datum<input type="date" name="d"></label><label>Stelle<input name="o" placeholder="z. B. Wohnzimmer, über dem Fenster" list="rt-orte" autocomplete="off"></label><label>Breite in mm<input type="number" name="b" step="0.05" min="0" inputmode="decimal" placeholder="0,2"></label><button type="button" class="btn btn--primary" data-rt="add">Eintragen</button></div><datalist id="rt-orte"></datalist>
+  <div class="rt-list" aria-live="polite"></div>
+  <div class="rt-actions"><a class="btn btn--primary" href="#kontakt" data-thema="gebaeudeschaeden" data-label="Riss beurteilen lassen" data-rt="send">An André schicken</a><button type="button" class="btn btn--outline-light" data-rt="print">Drucken</button><button type="button" class="rt-clear" data-rt="clear">Alle Einträge löschen</button></div></div>`;
 const slugId = h => h.replace(/<[^>]+>/g, "").toLowerCase().replace(/ä/g, "ae").replace(/ö/g, "oe").replace(/ü/g, "ue").replace(/ß/g, "ss").replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
 function artikelPage(a) {
   const l = LEISTUNGEN.find(x => x.slug === a.to), c = CTA[a.to];
@@ -2040,7 +2085,7 @@ function artikelPage(a) {
   <section class="section"><div class="wrap intro-grid">
     <article class="intro-text article">
       <div class="kurz"><span class="kurz-k">Kurz gesagt</span><p>${a.kurz}</p></div>
-      ${a.print ? `<button type="button" class="btn btn--outline print-btn" data-print>Checkliste drucken</button>` : ""}
+      ${a.print ? `<div class="art-actions">${a.pdf ? `<a class="btn btn--primary" href="https://bsv-niewerth.de/wp-content/themes/bsv-niewerth/assets/pdf/${a.pdf}" download>${use("i-doc")}Checkliste als PDF</a>` : ""}<button type="button" class="btn btn--outline print-btn" data-print>Seite drucken</button></div>` : ""}
       <nav class="toc" aria-label="Inhalt"><b>Inhalt</b><ol>${a.secs.map(([h]) => `<li><a href="#${slugId(h)}" data-toc>${h}</a></li>`).join("")}</ol></nav>
       ${a.secs.map(([h, ps]) => `<div class="isec" id="${slugId(h)}"><h2>${h}</h2>${ps.map(para).join("")}</div>` + (a.tool && a.tool[0] === h ? TOOLS[a.tool[1]] : "")).join("")}
       <aside class="author" aria-label="Über den Autor"><span class="author-k">Über den Autor</span><b>André Niewerth</b><p>Sachverständiger für Schäden an Gebäuden (persCert TÜV Rheinland), Maurer- und Stahlbetonbauermeister und Geprüfter Betriebswirt (HwO). Seit seiner Maurerlehre 1997 am Bau, heute mit eigenem Sachverständigenbüro in Borken.</p><div class="author-links"><a href="#ueber-mich">Mehr über mich →</a><a href="https://www.certipedia.com/quality_marks/0217466933?locale=de" target="_blank" rel="noopener">Zertifikat beim TÜV prüfen →</a></div></aside>
@@ -2281,8 +2326,55 @@ function initTools(scope) {
     t.addEventListener("input", calc); calc();
   });
 }
+function initRisse(t) {
+  const KEY = "bsvRisse", f = new Intl.DateTimeFormat("de-DE", { day: "2-digit", month: "2-digit", year: "numeric" });
+  const load = () => { try { return JSON.parse(localStorage.getItem(KEY)) || []; } catch (_) { return []; } };
+  const save = d => { try { localStorage.setItem(KEY, JSON.stringify(d)); } catch (_) {} };
+  const mm = x => x.toFixed(2).replace(".", ",");
+  const dt = d => f.format(new Date(d + "T12:00:00"));
+  const esc = x => String(x).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" })[c]);
+  let data = load();
+  const q = n => t.querySelector(`[name="${n}"]`);
+  q("d").value = new Date().toISOString().slice(0, 10);
+  const render = () => {
+    const by = {}; data.forEach((e, i) => (by[e.o] = by[e.o] || []).push({ ...e, i }));
+    const list = t.querySelector(".rt-list"), send = t.querySelector('[data-rt="send"]');
+    t.querySelector("#rt-orte").innerHTML = Object.keys(by).map(o => `<option value="${esc(o)}">`).join("");
+    t.querySelector(".rt-actions").hidden = !data.length;
+    if (!data.length) { list.innerHTML = '<p class="rt-empty">Noch keine Einträge. Tipp: Messen Sie immer an derselben markierten Stelle.</p>'; return; }
+    let txt = "Mein Riss-Tagebuch:\n";
+    list.innerHTML = Object.entries(by).map(([o, es]) => {
+      es.sort((a, b) => a.d.localeCompare(b.d));
+      const first = es[0], last = es[es.length - 1], delta = last.b - first.b;
+      let cls = "", trend = "Erste Messung. Wiederholen Sie sie in einigen Wochen.";
+      if (es.length > 1) {
+        if (delta >= 0.05) { cls = "up"; trend = `Seit ${dt(first.d)} um ${mm(delta)} mm breiter geworden. Lassen Sie den Riss fachlich beurteilen.`; }
+        else if (delta <= -0.05) { trend = `Seit ${dt(first.d)} um ${mm(-delta)} mm schmaler gemessen. Prüfen Sie, ob immer an derselben Stelle gemessen wurde.`; }
+        else { cls = "ok"; trend = `Seit ${dt(first.d)} unverändert.`; }
+      }
+      txt += `\n${o}:\n` + es.map(e => `  ${dt(e.d)}: ${mm(e.b)} mm`).join("\n") + "\n";
+      const max = Math.max(...es.map(e => e.b), 0.1), w = 220, h = 46;
+      const pts = es.map((e, k) => `${es.length > 1 ? (k / (es.length - 1) * w).toFixed(1) : w / 2},${(h - 4 - e.b / max * (h - 10)).toFixed(1)}`).join(" ");
+      return `<div class="rt-item ${cls}"><div class="rt-head"><b>${esc(o)}</b><svg viewBox="0 0 ${w} ${h}" aria-hidden="true"><polyline points="${pts}"/></svg></div><p class="rt-trend">${trend}</p><ul>${es.map(e => `<li><span>${dt(e.d)}</span><span>${mm(e.b)} mm</span><button type="button" data-rt="del" data-i="${e.i}" aria-label="Eintrag löschen">×</button></li>`).join("")}</ul></div>`;
+    }).join("");
+    send.dataset.msg = txt + "\nBitte um eine Einschätzung.";
+  };
+  t.addEventListener("click", e => {
+    const b = e.target.closest("[data-rt]"); if (!b) return;
+    const a = b.dataset.rt;
+    if (a === "add") {
+      const d = q("d").value, o = q("o").value.trim(), w = parseFloat(String(q("b").value).replace(",", "."));
+      if (!d || !o || isNaN(w) || w < 0) { (!o ? q("o") : !d ? q("d") : q("b")).focus(); return; }
+      data.push({ d, o, b: w }); save(data); q("b").value = ""; render();
+    } else if (a === "del") { data.splice(+b.dataset.i, 1); save(data); render(); }
+    else if (a === "clear") { if (confirm("Alle Einträge im Riss-Tagebuch löschen?")) { data = []; save(data); render(); } }
+    else if (a === "print") { document.body.classList.add("print-tool"); window.print(); setTimeout(() => document.body.classList.remove("print-tool"), 500); }
+  });
+  render();
+}
 function applyReveal(scope) {
   initTools(scope);
+  scope.querySelectorAll('[data-tool="risse"]').forEach(t => { if (!t.dataset.ready) { t.dataset.ready = "1"; initRisse(t); } });
   if (REDUCED || !io) return;
   scope.querySelectorAll(REVEAL).forEach(el => {
     if (el.classList.contains("reveal")) return;
@@ -2385,12 +2477,13 @@ function applyAnliegen() {
   h.textContent = a.label || c[0] || "Ihre Anfrage";
   anl.classList.add("on");
   msg.placeholder = a.hint || c[3] || MSG_DEFAULT;
+  if (a.msg) msg.value = a.msg;
   const r = document.querySelector(`#f-chips input[data-slug="${a.thema}"]`); if (r) r.checked = true;
   return true;
 }
 document.addEventListener("click", e => {
   const a = e.target.closest("a[data-thema]"); if (!a) { if (e.target.closest('a[href="#kontakt"]')) pendingAnliegen = null; return; }
-  pendingAnliegen = { thema: a.dataset.thema, label: a.dataset.label, hint: a.dataset.hint };
+  pendingAnliegen = { thema: a.dataset.thema, label: a.dataset.label, hint: a.dataset.hint, msg: a.dataset.msg };
   if ((location.hash.slice(1) || "start") === "kontakt") { e.preventDefault(); e.stopPropagation(); applyAnliegen(); document.getElementById("kontaktformular").scrollIntoView({ behavior: REDUCED ? "auto" : "smooth" }); }
 }, true);
 /* Kontaktband passt sich der Leistungsseite an */
