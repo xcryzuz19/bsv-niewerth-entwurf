@@ -187,7 +187,10 @@ routes = {}
 for k, v in R.items():
     routes[k] = {"page": v["page"], "title": v["title"], "desc": v["desc"], "ld": v["ld"], "nav": v["nav"], "kb": v["kb"], "url": URLS[k]}
 hero = re.search(r'"hero": \{"src": "([^"]+)"', js)
-json.dump({"routes": routes, "ld": cap["chrome"]["ldStatic"].strip(), "urls": URLS, "hero": hero.group(1) if hero else ""}, open(os.path.join(TDIR, "inc/routes.json"), "w", encoding="utf-8"), ensure_ascii=False)
+ldb = json.loads(cap["chrome"]["ldStatic"])
+ldb["logo"] = "https://bsv-niewerth.de" + ASSET_URL + "icons/icon-512.png"
+ldb["image"] = "https://bsv-niewerth.de" + ASSET_URL + "og/start.jpg"
+json.dump({"routes": routes, "ld": json.dumps(ldb, ensure_ascii=False), "urls": URLS, "hero": hero.group(1) if hero else ""}, open(os.path.join(TDIR, "inc/routes.json"), "w", encoding="utf-8"), ensure_ascii=False)
 
 # ---------- Rahmen (Kopf/Fuß) ----------
 ch = {k: fix(v) for k, v in cap["chrome"].items() if k != "ldStatic"}
@@ -206,8 +209,6 @@ header = f'''<!doctype html>
 <meta charset="<?php bloginfo('charset'); ?>">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#0f1d2e">
-{favicon}
-<link rel="apple-touch-icon" href="<?php echo esc_url(get_template_directory_uri() . '/assets/apple-touch-icon.png'); ?>">
 <script>(function(){{var r=document.documentElement,n=null;try{{n=sessionStorage.getItem("bsvNav");sessionStorage.removeItem("bsvNav")}}catch(e){{}}if(n&&!matchMedia("(prefers-reduced-motion: reduce)").matches)r.classList.add("cu-arrive");<?php if (bsv_route_key() === 'start') : ?>if(!n)r.classList.add("intro-on");<?php endif; ?>}})();</script>
 <?php wp_head(); ?>
 </head>
@@ -246,10 +247,20 @@ for f in os.listdir(os.path.join(here, "theme-php")):
     open(os.path.join(TDIR, f), "w", encoding="utf-8").write(t)
 Image.open(os.path.join(pages_root, "og-image.jpg")).convert("RGB").resize((1200, 900)).save(os.path.join(TDIR, "screenshot.png"))
 
+gen = os.path.join(here, "generated")
+for sub in ("icons", "og"):
+    shutil.copytree(os.path.join(gen, sub), os.path.join(TDIR, "assets", sub), dirs_exist_ok=True)
+json.dump({"name": "BSV Niewerth – Bau-Sachverständigenbüro", "short_name": "BSV Niewerth", "start_url": "/", "display": "browser",
+           "background_color": "#0f1d2e", "theme_color": "#0f1d2e", "lang": "de",
+           "icons": [{"src": "icon-192.png", "sizes": "192x192", "type": "image/png"}, {"src": "icon-512.png", "sizes": "512x512", "type": "image/png"},
+                     {"src": "icon-maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable"}]},
+          open(os.path.join(TDIR, "assets", "icons", "site.webmanifest"), "w", encoding="utf-8"), ensure_ascii=False)
 zp = os.path.join(OUT, "wp", THEME + ".zip")
 with zipfile.ZipFile(zp, "w", zipfile.ZIP_DEFLATED) as z:
     for root, _, files in os.walk(TDIR):
         for f in files:
             p = os.path.join(root, f)
             z.write(p, os.path.relpath(p, OUT))
+import hashlib as _h
+open(os.path.join(OUT, "wp", THEME + ".sha256"), "w").write(_h.sha256(open(zp, "rb").read()).hexdigest())
 print("Theme", VERSION, "->", zp, os.path.getsize(zp) // 1024, "KB;", len(pages), "Seiten")

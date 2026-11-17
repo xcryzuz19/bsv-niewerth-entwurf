@@ -76,7 +76,7 @@ add_action('wp_head', function () {
 	$desc = $r ? $r['desc'] : (is_singular() ? wp_strip_all_tags(get_the_excerpt()) : get_bloginfo('description'));
 	$title = $r ? $r['title'] : wp_get_document_title();
 	$url = is_front_page() ? home_url('/') : (is_singular() ? get_permalink() : '');
-	$img = get_template_directory_uri() . '/assets/og-image.jpg';
+	$img = bsv_og_image();
 	if ($desc) echo '<meta name="description" content="' . esc_attr($desc) . "\">\n";
 	echo '<meta property="og:type" content="website">' . "\n";
 	echo '<meta property="og:locale" content="de_DE">' . "\n";
@@ -84,7 +84,7 @@ add_action('wp_head', function () {
 	echo '<meta property="og:title" content="' . esc_attr($title) . "\">\n";
 	if ($desc) echo '<meta property="og:description" content="' . esc_attr($desc) . "\">\n";
 	if ($url) echo '<meta property="og:url" content="' . esc_url($url) . "\">\n";
-	echo '<meta property="og:image" content="' . esc_url($img) . '"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">' . "\n";
+	echo '<meta property="og:image" content="' . esc_url($img) . '"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta property="og:image:alt" content="' . esc_attr($title) . '">' . "\n";
 	echo '<meta name="twitter:card" content="summary_large_image">' . "\n";
 	echo '<script type="application/ld+json">' . bsv_data()['ld'] . "</script>\n";
 	if ($r && $r['ld'] && $r['ld'] !== '{}') echo '<script type="application/ld+json">' . $r['ld'] . "</script>\n";
@@ -205,3 +205,49 @@ add_action('after_switch_theme', function () {
 	if (!get_option('bsv_freigegeben')) update_option('blog_public', 0);
 	flush_rewrite_rules();
 });
+
+/* Icons für Browser-Tab, Handy-Startbildschirm und Web-App (eigene Ausgabe statt WordPress-Website-Icon) */
+remove_action('wp_head', 'wp_site_icon', 99);
+add_action('wp_head', function () {
+	$i = get_template_directory_uri() . '/assets/icons/';
+	echo '<link rel="icon" href="' . esc_url($i . 'favicon.ico') . '" sizes="48x48">' . "\n";
+	echo '<link rel="icon" href="' . esc_url($i . 'favicon.svg') . '" type="image/svg+xml">' . "\n";
+	echo '<link rel="apple-touch-icon" href="' . esc_url($i . 'apple-touch-icon.png') . '">' . "\n";
+	echo '<link rel="manifest" href="' . esc_url($i . 'site.webmanifest') . '">' . "\n";
+	echo '<meta name="apple-mobile-web-app-title" content="BSV Niewerth">' . "\n";
+}, 2);
+
+/* Vorschaubild je Seite für WhatsApp, Facebook, LinkedIn … */
+function bsv_og_image() {
+	$k = bsv_route_key();
+	if ($k && file_exists(__DIR__ . '/assets/og/' . $k . '.jpg')) return get_template_directory_uri() . '/assets/og/' . $k . '.jpg';
+	return get_template_directory_uri() . '/assets/og/start.jpg';
+}
+
+/* Theme-Aktualisierung aus dem GitHub-Repository des Projekts (nur für Administratoren, mit Prüfsumme) */
+add_action('rest_api_init', function () {
+	register_rest_route('bsv/v1', '/update', [
+		'methods' => 'POST',
+		'permission_callback' => function () { return current_user_can('update_themes') && current_user_can('install_themes'); },
+		'callback' => 'bsv_self_update',
+	]);
+});
+function bsv_self_update(WP_REST_Request $req) {
+	$sha = strtolower((string) $req->get_param('sha256'));
+	if (!preg_match('/^[a-f0-9]{64}$/', $sha)) return new WP_Error('bsv_sha', 'Prüfsumme fehlt.', ['status' => 400]);
+	require_once ABSPATH . 'wp-admin/includes/file.php';
+	require_once ABSPATH . 'wp-admin/includes/misc.php';
+	require_once ABSPATH . 'wp-admin/includes/theme.php';
+	require_once ABSPATH . 'wp-admin/includes/class-wp-upgrader.php';
+	$tmp = download_url('https://raw.githubusercontent.com/xcryzuz19/bsv-niewerth-entwurf/main/wp/bsv-niewerth.zip', 120);
+	if (is_wp_error($tmp)) return $tmp;
+	if (!hash_equals($sha, hash_file('sha256', $tmp))) { @unlink($tmp); return new WP_Error('bsv_sha', 'Prüfsumme stimmt nicht, Update abgebrochen.', ['status' => 409]); }
+	$skin = new WP_Ajax_Upgrader_Skin();
+	$up = new Theme_Upgrader($skin);
+	$res = $up->install($tmp, ['overwrite_package' => true]);
+	@unlink($tmp);
+	if (is_wp_error($res)) return $res;
+	if (!$res) return new WP_Error('bsv_update', implode(' ', $skin->get_error_messages()) ?: 'Update fehlgeschlagen.', ['status' => 500]);
+	wp_clean_themes_cache();
+	return ['ok' => true, 'version' => wp_get_theme('bsv-niewerth')->get('Version')];
+}
