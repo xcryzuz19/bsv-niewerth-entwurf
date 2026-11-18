@@ -253,3 +253,63 @@ function bsv_self_update(WP_REST_Request $req) {
 	if (function_exists('wp_cache_clear_cache')) wp_cache_clear_cache();
 	return ['ok' => true, 'version' => wp_get_theme('bsv-niewerth')->get('Version')];
 }
+
+/* ---------- Zugangsschutz „Im Aufbau“ ----------
+   Ein-/ausschalten und Passwort ändern: Einstellungen → Lesen. Angemeldete Nutzer sehen die Seite immer. */
+function bsv_zugang_hash($v) {
+	$v = trim((string) $v);
+	if ($v === '') return get_option('bsv_zugang_passwort', '');           // leer = unverändert
+	if (strpos($v, '$2y$') === 0 || strpos($v, '$argon') === 0) return $v; // schon verschlüsselt
+	return password_hash($v, PASSWORD_DEFAULT);
+}
+add_action('init', function () {
+	register_setting('reading', 'bsv_zugang_aktiv', ['type' => 'boolean', 'default' => false, 'show_in_rest' => true, 'sanitize_callback' => 'rest_sanitize_boolean']);
+	register_setting('reading', 'bsv_zugang_passwort', ['type' => 'string', 'default' => '', 'show_in_rest' => true, 'sanitize_callback' => 'bsv_zugang_hash']);
+});
+add_action('admin_init', function () {
+	add_settings_section('bsv_zugang', 'Website im Aufbau', function () {
+		echo '<p>Solange der Schutz aktiv ist, sehen Besucher nur die Seite „Im Aufbau“ mit Logo und Kontaktdaten. Mit dem Passwort ist die ganze Website sichtbar. Angemeldete Nutzer sehen sie immer.</p>';
+	}, 'reading');
+	add_settings_field('bsv_zugang_aktiv', 'Zugangsschutz', function () {
+		echo '<label><input type="checkbox" name="bsv_zugang_aktiv" value="1" ' . checked(get_option('bsv_zugang_aktiv'), true, false) . '> Website ist im Aufbau und nur mit Passwort sichtbar</label>';
+	}, 'reading', 'bsv_zugang');
+	add_settings_field('bsv_zugang_passwort', 'Neues Passwort', function () {
+		echo '<input type="text" name="bsv_zugang_passwort" value="" autocomplete="new-password" class="regular-text"><p class="description">Leer lassen, um das bisherige Passwort zu behalten.</p>';
+	}, 'reading', 'bsv_zugang');
+});
+add_action('update_option_bsv_zugang_aktiv', function () { if (function_exists('wp_cache_clear_cache')) wp_cache_clear_cache(); });
+add_action('update_option_bsv_zugang_passwort', function () { if (function_exists('wp_cache_clear_cache')) wp_cache_clear_cache(); });
+
+function bsv_zugang_token() {
+	return hash_hmac('sha256', (string) get_option('bsv_zugang_passwort', ''), wp_salt('auth'));
+}
+function bsv_zugang_ok() {
+	if (!get_option('bsv_zugang_aktiv') || !get_option('bsv_zugang_passwort')) return true;
+	if (is_user_logged_in()) return true;
+	return isset($_COOKIE['bsv_zugang']) && hash_equals(bsv_zugang_token(), (string) $_COOKIE['bsv_zugang']);
+}
+add_action('template_redirect', function () {
+	if (!get_option('bsv_zugang_aktiv') || !get_option('bsv_zugang_passwort')) return;
+	if (!defined('DONOTCACHEPAGE')) define('DONOTCACHEPAGE', true);   // nichts zwischenspeichern, solange der Schutz aktiv ist
+	nocache_headers();
+	$fehler = '';
+	if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['bsv_zugang_pw'])) {
+		$ip = isset($_SERVER['REMOTE_ADDR']) ? $_SERVER['REMOTE_ADDR'] : '';
+		$key = 'bsv_zg_' . md5($ip);
+		$n = (int) get_transient($key);
+		if ($n >= 10) {
+			$fehler = 'Zu viele Versuche. Bitte versuchen Sie es später noch einmal.';
+		} elseif (password_verify(wp_unslash($_POST['bsv_zugang_pw']), get_option('bsv_zugang_passwort'))) {
+			setcookie('bsv_zugang', bsv_zugang_token(), ['expires' => time() + 30 * DAY_IN_SECONDS, 'path' => COOKIEPATH ?: '/', 'domain' => COOKIE_DOMAIN, 'secure' => is_ssl(), 'httponly' => true, 'samesite' => 'Lax']);
+			wp_safe_redirect(remove_query_arg('zugang'));
+			exit;
+		} else {
+			set_transient($key, $n + 1, HOUR_IN_SECONDS);
+			$fehler = 'Das Passwort stimmt nicht.';
+		}
+	}
+	if (bsv_zugang_ok()) return;
+	header('X-Robots-Tag: noindex, nofollow');
+	include __DIR__ . '/zugang.php';
+	exit;
+}, 0);

@@ -244,6 +244,8 @@ for f in ("apple-touch-icon.png", "og-image.jpg"):
     shutil.copy(os.path.join(pages_root, f), os.path.join(TDIR, "assets", f))
 for f in os.listdir(os.path.join(here, "theme-php")):
     t = open(os.path.join(here, "theme-php", f), encoding="utf-8").read().replace("{{VERSION}}", VERSION)
+    if "{{BRAND}}" in t:
+        t = t.replace("{{BRAND}}", re.search(r'<a class="brand"[\s\S]*?</a>', ch["header"]).group(0).replace('<a class="brand"', '<span class="brand"').replace("</a>", "</span>"))
     open(os.path.join(TDIR, f), "w", encoding="utf-8").write(t)
 Image.open(os.path.join(pages_root, "og-image.jpg")).convert("RGB").resize((1200, 900)).save(os.path.join(TDIR, "screenshot.png"))
 
