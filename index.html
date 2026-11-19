@@ -485,6 +485,7 @@ body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-a
 .proto-top { background: var(--navy); color: #fff; padding: 18px 26px; display: grid; grid-template-columns: auto minmax(0, 1fr); column-gap: 16px; align-items: baseline; }
 .proto-top span { font-family: var(--font-head); font-size: .72rem; font-weight: 700; letter-spacing: .18em; text-transform: uppercase; color: var(--blue-light); }
 .proto-top b { font-family: var(--font-head); font-size: 1.05rem; }
+@media (max-width: 520px) { .proto-top { grid-template-columns: minmax(0, 1fr); row-gap: 2px; } }
 .proto-top small { grid-column: 1 / -1; color: var(--on-navy-muted); font-size: .8rem; margin-top: 2px; }
 .proto-list { list-style: none; padding: 6px 26px; margin: 0; }
 .proto-list li { display: grid; grid-template-columns: 34px minmax(0, 1fr); gap: 16px; align-items: center; padding: 16px 0; border-bottom: 1px dashed var(--line); }
@@ -2802,6 +2803,23 @@ function applyPhotos(scope, heroOnly) {
 }
 applyPhotos(document, document.documentElement.classList.contains("intro-on"));
 
+/* Trennhilfe: lange Wörter nur an Wortfugen umbrechen (Fenster-ecken statt Fenste-recken).
+   Unsichtbar, solange das Wort in die Zeile passt. */
+const SHY = (() => {
+  const L = "a-zäöüß", list = 'Bau|sach|verständig Sach|verständigen|büro Sach|verständig Stahl|beton|bauer|meister Sanierungs| Wohnungs|kauf|beratung Feuchte|mess|gerät Außen|fenster|bank Ausführungs| Versicherungs| Toiletten|spülung Salz|aus|blühung Kalk|aus|blühung Rückstau|sicherung Lüftungs|protokoll Heizungs| Heiz|körper|anschl Förder|möglichkeit Förder|mittel|beratung Datenschutz|erklärung Datenschutz|bestimmung Auseinander|setzung Wirtschaft|lichkeit Verbrauchs|ausweis Unterscheidungs|frage Temperatur| Situations|bezogen Sicherheits|ventil Objekt|überwachung Oberflächen| Nachbesserungs|vorschl Verbesserungs|vorschl Mehr|familien|häus Mehr|familien|haus Ein|familien|häus Ein|familien|haus Leitungs|wasser|versicherung Inhalts|verzeichnis Haupt|überschrift Feuchtigkeits| Berufs|bezeichnung Bauteil| Bau|streitigkeit Baugrund|gutachten Wasser|anschl Ausdehnungs|gefäß Abwasser| Abnahme|begleitung Zustands|kontrolle Verhandlungs|basis Verbraucher|streit|beilegung Verbraucher|schlichtungs|stelle Ursachen|forschung Untersuchungs|umfang Umsetzungs|kontrolle Trockenbau|wänd Tritt|schall|dämmung Trink|wasser|leitung Sättigungs|dampf|druck Streit|beilegungs|verfahren Spezial|kenntnis Sicherungs|kasten Schluss|folgerung Schlichtungs|stelle Schimmel| Schadens| Rohr|durchführung Regulierungs|verfahren Rand|dämm|streifen Qualitäts| Programm|voraussetzung Planungs|unterlagen Mängel|ansprüch Miss|verständnis Meister|prüfungs|verordnung Luft|undichtigkeit Luftdichtheits|schicht Leistungs|verzeichnis Lebensmittel|farbe Landes|beauftragt Kauf|entscheidung Interessen|konflikt Informations|freiheit Immobilien| Hausrat|versicherung Handwerks|betrieb Gutachten|erstellung General|unternehmer Gemeinschafts|eigentum Foto|dokumentation Fortbildungs|abschluss Fenster|anschl Fenster|ecke Fenster|laibung Fenster|rahmen Fenster|bänk Erhaltungs|rücklage Entwässerungs|öffnung Entscheidungs| Entfernungs| Elektro|installation Einspar|potenzial Eigentümer|versammlung Eigentümer|verband Eigentums|wohnung Daten|übertragbarkeit Dach|entwässerung Besichtigungs|termin Berück|sichtigung Bergbau|unternehmen Baustellen| Bauschadens|gutachten Bauherren|begleitung Bau|beschreibung Auftrags|verarbeitung Aufsichts|behörde Aufbewahrungs|pflicht Arbeiter|siedlung Gebäude|schäden Energie|beratung Energie|ausweis Energie|effizienz Leckage|ortung Sockel|abdichtung Feuchte|schäden Keller|abdichtung Kondens|wasser Wärme|brücke Wärme|bild Dach|schräge Wasser|schäden Wasser|schaden Bau|begleitung Bau|überwachung Bau|abnahme Bau|leitung Haus|kauf|beratung'.split(/\s+/).sort((a, b) => b.length - a.length);
+  const rules = list.map(w => { const plain = w.replace(/\|/g, ""), open = w.endsWith("|");
+    const src = "[" + plain[0].toUpperCase() + plain[0].toLowerCase() + "]" + plain.slice(1).replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+    return [new RegExp(src + (open ? "(?=[" + L + "]{4})" : "(?=[" + L + "]*)"), "g"), m => m[0] + w.slice(1).replace(/\|$/, "\u00ad").replace(/\|/g, "\u00ad")]; });
+  const skip = /^(SCRIPT|STYLE|TEXTAREA|TITLE|OPTION|NOSCRIPT)$/;
+  function run(root) {
+    const tw = document.createTreeWalker(root, NodeFilter.SHOW_TEXT); let n;
+    while (n = tw.nextNode()) { const t = n.data; if (t.length < 10 || !/[A-Za-zÄÖÜäöüß]{12}/.test(t) || skip.test(n.parentNode.nodeName)) continue;
+      let u = t; for (const [re, f] of rules) u = u.replace(re, f); if (u !== t) n.data = u; }
+  }
+  run(document.body);
+  new MutationObserver(ms => ms.forEach(m => m.addedNodes.forEach(x => { if (x.nodeType === 1) run(x); else if (x.nodeType === 3 && x.parentNode) run(x.parentNode); }))).observe(document.body, { childList: true, subtree: true });
+  return run;
+})();
 /* Seitenwechsel (in WordPress echte Seiten) */
 function swapPage() {
   const id = location.hash.slice(1) || "start";
